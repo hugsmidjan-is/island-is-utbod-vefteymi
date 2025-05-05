@@ -1,5 +1,11 @@
 import cn from 'classnames'
-import React, { forwardRef, useLayoutEffect, useRef, useState } from 'react'
+import React, {
+  forwardRef,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react'
 import { VisuallyHidden } from 'reakit'
 import { resolveResponsiveProp } from '../../utils/responsiveProp'
 import { Box } from '../Box/Box'
@@ -89,7 +95,7 @@ export const Input = forwardRef(
       ? backgroundColor.map(mapBlue)
       : mapBlue(backgroundColor as InputBackgroundColor)
 
-    useLayoutEffect(() => {
+    useEffect(() => {
       const input = inputRef.current
 
       if (autoExpand?.on && input) {

@@ -100,6 +100,7 @@ export const textInnerContainerSubpage = style({
 export const headerImage = style({
   width: '100%',
   maxHeight: '100%',
+
   ...themeUtils.responsiveStyle({
     xs: {
       order: 0,
