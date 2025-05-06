@@ -66,6 +66,7 @@ import SidebarLayout from '@island.is/web/screens/Layouts/SidebarLayout'
 import { getBackgroundStyle } from '@island.is/web/utils/organization'
 
 import { LatestNewsCardConnectedComponent } from '../LatestNewsCardConnectedComponent'
+import { AlthingiFooter } from './Themes/AlthingiTheme'
 import { DigitalIcelandFooter } from './Themes/DigitalIcelandTheme/DigitalIcelandFooter'
 import { FiskistofaDefaultHeader } from './Themes/FiskistofaTheme'
 import { FiskistofaFooter } from './Themes/FiskistofaTheme'
@@ -813,6 +814,16 @@ export const OrganizationFooter: React.FC<
             links={n('digitalIcelandFooterLinks', [])}
           />
         </GridContainer>
+      )
+      break
+
+    case 'althingi':
+      OrganizationFooterComponent = (
+        <AlthingiFooter
+          footerItems={organization.footerItems}
+          namespace={namespace}
+          organizationSlug={organization.slug}
+        />
       )
       break
     default: {

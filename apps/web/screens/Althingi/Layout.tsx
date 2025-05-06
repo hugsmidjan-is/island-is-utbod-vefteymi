@@ -1,20 +1,25 @@
 import React from 'react'
+import { useWindowSize } from 'react-use'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
 import {
   Box,
+  Breadcrumbs,
+  Button,
   GridColumn,
   GridContainer,
   GridRow,
+  InfoCardGrid,
   Link,
+  LinkV2,
   Navigation,
   NavigationItem,
   ProfileCard,
   Stack,
   Text,
 } from '@island.is/island-ui/core'
-import { shouldLinkBeAnAnchorTag } from '@island.is/shared/utils'
+import { theme } from '@island.is/island-ui/theme'
 import {
   DefaultHeader,
   HeadWithSocialSharing,
@@ -22,6 +27,7 @@ import {
   Webreader,
 } from '@island.is/web/components'
 
+import { mockInfoCards, OrganizationMock } from '../../utils/mockData'
 import SidebarLayout from '../Layouts/SidebarLayout'
 
 interface LayoutProps {
@@ -31,6 +37,8 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ title, children }) => {
   const router = useRouter()
+  const { width } = useWindowSize()
+  const isMobile = width < theme.breakpoints.sm
 
   const SecondaryMenu = ({
     title,
@@ -65,6 +73,7 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
       </Stack>
     </Box>
   )
+
   return (
     <>
       <HeadWithSocialSharing
@@ -93,31 +102,38 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
         sidebarContent={
           <Box>
             <Stack space={3}>
-              {/* {backLink && (
-                <Box display={['none', 'none', 'block']} printHidden>
-                  <LinkV2 href={backLink.url}>
-                    <Button
-                      preTextIcon="arrowBack"
-                      preTextIconType="filled"
-                      size="small"
-                      type="button"
-                      variant="text"
-                      truncate
-                      unfocusable
-                    >
-                      {backLink.text}
-                    </Button>
-                  </LinkV2>
-                </Box>
-              )} */}
               <Navigation
                 baseId="pageNav"
                 items={[
                   {
+                    title: 'Þingfundir og mál',
+                    href: '/s/althingi',
+                    active: router.pathname === '/s/althingi',
+                  },
+                  {
                     title: 'Þingmenn',
                     href: '/s/althingi/thingmenn',
-                    active: router.pathname === '/s/althingi/thingmenn',
                     items: [{ title: 'Alþingismenn' }],
+                  },
+                  {
+                    title: 'Nefndir',
+                    href: '/s/althingi',
+                  },
+                  {
+                    title: 'Alþjóðastarf',
+                    href: '/s/althingi',
+                  },
+                  {
+                    title: 'Lagasafn',
+                    href: '/s/althingi',
+                  },
+                  {
+                    title: 'Ályktanir Alþingis',
+                    href: '/s/althingi',
+                  },
+                  {
+                    title: 'Um Alþingi',
+                    href: '/s/althingi',
                   },
                   {
                     title: 'Þingmál',
@@ -133,9 +149,9 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
 
             <>
               <SecondaryMenu
-                title={'SECONDARY MENU'}
+                title={'Tengt efni'}
                 items={[
-                  { title: 'Link 1', href: '/link1' },
+                  { title: 'Lagafrumvörp', href: '/link1' },
                   { title: 'Link 2', href: '/link2' },
                 ]}
               />
@@ -153,59 +169,53 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
                 size="default"
               />
             </>
-
-            {<Box>SIDEBAR CONTENT</Box>}
           </Box>
         }
       >
-        {/* {isMobile && (
-            <Box className={styles.menuStyle}>
-              {showExternalLinks && (
-                <OrganizationExternalLinks
-                  organizationPage={organizationPage}
-                  showOnMobile={true}
-                />
-              )}
-              <Box marginY={2}>
-                <Navigation
-                  baseId="pageNavMobile"
-                  isMenuDialog={true}
-                  items={navigationData.items}
-                  title={navigationData.title}
-                  activeItemTitle={activeNavigationItemTitle}
-                  renderLink={(link, item) => {
-                    return item?.href ? (
-                      <NextLink href={item?.href} legacyBehavior>
-                        {link}
-                      </NextLink>
-                    ) : (
-                      link
-                    )
-                  }}
-                />
-              </Box>
-              {organizationPage.secondaryMenu && secondaryNavList.length > 0 && (
-                <Box marginY={2}>
-                  <Navigation
-                    baseId="secondaryNav"
-                    colorScheme="purple"
-                    isMenuDialog={true}
-                    title={organizationPage.secondaryMenu.name}
-                    items={secondaryNavList}
-                    renderLink={(link, item) => {
-                      return item?.href ? (
-                        <NextLink href={item?.href} legacyBehavior>
-                          {link}
-                        </NextLink>
-                      ) : (
-                        link
-                      )
-                    }}
-                  />
-                </Box>
-              )}
+        {isMobile && (
+          <Box position="relative" zIndex={90}>
+            <Box marginY={2}>
+              <Navigation
+                baseId="pageNavMobile"
+                isMenuDialog={true}
+                items={[{ title: 'Link 1', href: '/link1' }]}
+                title={'Efnisyfirlit'}
+                activeItemTitle={'Valið efni'}
+                renderLink={(link, item) => {
+                  return item?.href ? (
+                    <NextLink href={item?.href} legacyBehavior>
+                      {link}
+                    </NextLink>
+                  ) : (
+                    link
+                  )
+                }}
+              />
             </Box>
-          )} */}
+
+            <Box marginY={2}>
+              <Navigation
+                baseId="secondaryNav"
+                colorScheme="purple"
+                isMenuDialog={true}
+                title={'Tengt efni'}
+                items={[
+                  { title: 'Link 1', href: '/link1' },
+                  { title: 'Link 2', href: '/link2' },
+                ]}
+                renderLink={(link, item) => {
+                  return item?.href ? (
+                    <NextLink href={item?.href} legacyBehavior>
+                      {link}
+                    </NextLink>
+                  ) : (
+                    link
+                  )
+                }}
+              />
+            </Box>
+          </Box>
+        )}
 
         {/* <GridContainer>
           <GridRow>
@@ -260,17 +270,42 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
         <GridContainer>
           <GridRow>
             <GridColumn span={['9/9', '9/9', '7/9']} offset={['0', '0', '1/9']}>
-              <Box className="rs_read">
-                <Webreader
-                  marginTop={0}
-                  marginBottom={0}
-                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-ignore make web strict
-                  readId={null}
-                  readClass="rs_read"
-                />
-                {children}
-              </Box>
+              <Stack space={3}>
+                <Box display="flex" justifyContent="spaceBetween">
+                  <Breadcrumbs
+                    items={[
+                      {
+                        title: 'Ísland.is',
+                        href: '/',
+                      },
+                      {
+                        title: 'Alþingi',
+                        href: '/s/althingi',
+                        isCurrentPage: true,
+                      },
+                    ]}
+                  />
+                  <Button
+                    icon="open"
+                    iconType="outline"
+                    size="medium"
+                    onClick={() => router.push('/s/althingi/thingmal')}
+                  >
+                    Þingmál
+                  </Button>
+                </Box>
+                <Box className="rs_read">
+                  <Webreader
+                    marginTop={0}
+                    marginBottom={0}
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore make web strict
+                    readId={null}
+                    readClass="rs_read"
+                  />
+                  {children}
+                </Box>
+              </Stack>
             </GridColumn>
           </GridRow>
         </GridContainer>
@@ -301,13 +336,36 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
           </Box>
         )} */}
       </SidebarLayout>
+      {
+        <Box className="rs_read" background="blue100" width="full" padding={6}>
+          {'MAIN CONTENT??'}
+          <Box width="full" display={'flex'} justifyContent={'spaceBetween'}>
+            <Text>{'Á döfinni'}</Text>
+            <LinkV2
+              href={'/s/althingi/frettir'}
+              underline="small"
+              underlineVisibility="hover"
+              color="blue400"
+            >
+              {'Sjá fleiri'}
+            </LinkV2>
+          </Box>
+          <Box>
+            <InfoCardGrid
+              cards={mockInfoCards}
+              variant="detailed"
+              cardsBorder="backgroundBrandLighter"
+            />
+          </Box>
+        </Box>
+      }
+      {/* Á döfinni */}
 
-      {<Box className="rs_read">{'MAIN CONTENT??'}</Box>}
       <Box className="rs_read" marginTop="auto">
         <OrganizationFooter
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore make web strict
-          organizations={[]}
+          organizations={[OrganizationMock]}
           force={true}
         />
       </Box>

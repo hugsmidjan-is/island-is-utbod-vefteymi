@@ -86,4 +86,5 @@ export default withMainLayout(
     CustomPageUniqueIdentifier.OfficialJournalOfIceland,
     Frontpage,
   ),
+  { showFooter: false },
 )
