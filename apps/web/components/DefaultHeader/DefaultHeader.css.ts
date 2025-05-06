@@ -12,6 +12,7 @@ export const gridContainer = style({
       gridTemplateColumns: '65fr 35fr',
     },
   }),
+  background: 'linear-gradient(180deg, #3D6BA2 0%, #315584 100%)',
 })
 
 export const gridContainerSubpage = style({
@@ -100,6 +101,8 @@ export const textInnerContainerSubpage = style({
 export const headerImage = style({
   width: '100%',
   maxHeight: '100%',
+  display: 'flex',
+  alignItems: 'flexEnd',
 
   ...themeUtils.responsiveStyle({
     xs: {

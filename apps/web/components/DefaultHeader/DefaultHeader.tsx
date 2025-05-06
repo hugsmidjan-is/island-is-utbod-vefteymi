@@ -104,6 +104,7 @@ export const DefaultHeader: React.FC<
         style={{
           background:
             isMobile || isSubpage ? mobileBackground || background : background,
+          //background: 'linearGradient(180deg, #3D6BA2 0%, #315584 100%))',
         }}
       >
         <div
@@ -186,19 +187,21 @@ export const DefaultHeader: React.FC<
             </div>
           </div>
           {imageProvided && !isSubpage && (
-            <Hidden below="lg">
-              <img
-                style={{
-                  padding: imagePadding,
-                  objectFit: imageObjectFit,
-                  objectPosition: imageObjectPosition,
-                  height: imageIsFullHeight ? '100%' : undefined,
-                }}
-                className={styles.headerImage}
-                src={image}
-                alt=""
-              />
-            </Hidden>
+            <Box display={'flex'} alignItems={'flexEnd'}>
+              <Hidden below="lg">
+                <img
+                  style={{
+                    padding: imagePadding,
+                    paddingBottom: 0,
+                    objectFit: imageObjectFit,
+                    objectPosition: imageObjectPosition,
+                  }}
+                  className={styles.headerImage}
+                  src={image}
+                  alt=""
+                />
+              </Hidden>
+            </Box>
           )}
         </div>
       </div>
