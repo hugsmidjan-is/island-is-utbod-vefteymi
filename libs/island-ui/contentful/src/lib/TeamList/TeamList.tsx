@@ -7,6 +7,7 @@ import {
   GridColumn,
   GridRow,
   Inline,
+  LinkV2,
   ProfileCard,
   Stack,
   Text,
@@ -30,13 +31,14 @@ export interface TeamListProps {
     imageOnSelect?: { url: string } | null
 
     /** Fields below are only visible if variant is set to "accordion" */
-    intro?: SliceType[] | null
+    intro?: string | null
     email?: string
     phone?: string
     tagGroups?: {
       groupLabel: string
       tagLabels: string[]
     }[]
+    link?: string
   }[]
 }
 
@@ -202,7 +204,10 @@ const TeamMemberAccordionList = ({
                     </Inline>
                   ))}
 
-                  <Text as="div">{richText(member.intro ?? [])}</Text>
+                  <Text as="div">{member.intro}</Text>
+                  {member.link && (
+                    <LinkV2 href={'/s/althingi/thingmenn/'}></LinkV2>
+                  )}
                 </Stack>
               </GridColumn>
             </GridRow>

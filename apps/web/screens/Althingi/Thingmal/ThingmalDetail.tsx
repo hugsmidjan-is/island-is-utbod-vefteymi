@@ -14,7 +14,7 @@ import {
 import { theme } from '@island.is/island-ui/theme'
 import { CustomPageUniqueIdentifier } from '@island.is/shared/types'
 import { withMainLayout } from '@island.is/web/layouts/main'
-import { mockInfoStaffCards } from '@island.is/web/utils/mockData'
+import { mockInfoStaffCards, paths } from '@island.is/web/utils/mockData'
 
 import {
   CustomScreen,
@@ -22,35 +22,24 @@ import {
 } from '../../CustomPage/CustomPageWrapper'
 import Layout from '../Layout'
 
-const Thingmenn: CustomScreen<ThingmennProps> = ({ title }) => {
+const ThingmalDetail: CustomScreen<ThingmalDetailProps> = ({ title }) => {
   const { width } = useWindowSize()
   const isMobile = width < theme.breakpoints.md
   const [searchInput, setSearchInput] = React.useState<string>('')
-  const [filteredCards, setFilteredCards] = React.useState<
-    Array<InfoCardItemProps> | undefined
-  >(undefined)
-
-  useEffect(() => {
-    if (!searchInput) {
-      setFilteredCards(mockInfoStaffCards)
-    } else {
-      setFilteredCards(
-        mockInfoStaffCards.filter((card) =>
-          card.title.toLowerCase().includes(searchInput.toLowerCase()),
-        ),
-      )
-    }
-  }, [searchInput])
 
   return (
     <Layout
       title={title}
       breadcrumbs={[
         {
-          title: 'Alþingismenn',
-          href: '/s/althingi/thingmenn',
-          isCurrentPage: true,
-          isTag: true,
+          title: 'Þingstörf',
+          href: paths.thingstorf,
+          isCurrentPage: false,
+        },
+        {
+          title: 'Þingmál',
+          href: paths.thingmal,
+          isCurrentPage: false,
         },
       ]}
     >
@@ -122,30 +111,23 @@ const Thingmenn: CustomScreen<ThingmennProps> = ({ title }) => {
           ]}
         />
       </Filter>
-      <Box marginY={3} />
-      <InfoCardGrid
-        cards={filteredCards ?? mockInfoStaffCards}
-        cardsBorder="blue200"
-        variant="detailed"
-        columns={1}
-      />
     </Layout>
   )
 }
 
-interface ThingmennProps {
+interface ThingmalDetailProps {
   title: string
 }
 
-Thingmenn.getProps = async () => {
+ThingmalDetail.getProps = async () => {
   return {
-    title: 'Þingmenn',
+    title: 'Þingmál',
   }
 }
 
 export default withMainLayout(
   withCustomPageWrapper(
     CustomPageUniqueIdentifier.OfficialJournalOfIceland,
-    Thingmenn,
+    ThingmalDetail,
   ),
 )

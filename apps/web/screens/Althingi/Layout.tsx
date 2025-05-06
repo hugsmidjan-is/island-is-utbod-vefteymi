@@ -5,18 +5,22 @@ import { useRouter } from 'next/router'
 
 import {
   Box,
+  BreadCrumbItem,
   Breadcrumbs,
   Button,
   GridColumn,
   GridContainer,
   GridRow,
+  Icon,
   InfoCardGrid,
+  Inline,
   Link,
   LinkV2,
   Navigation,
   NavigationItem,
   ProfileCard,
   Stack,
+  Tag,
   Text,
 } from '@island.is/island-ui/core'
 import { theme } from '@island.is/island-ui/theme'
@@ -27,19 +31,81 @@ import {
   Webreader,
 } from '@island.is/web/components'
 
-import { mockInfoCards, OrganizationMock } from '../../utils/mockData'
+import { mockInfoCards, OrganizationMock, paths } from '../../utils/mockData'
 import SidebarLayout from '../Layouts/SidebarLayout'
-
+import * as styles from './Layout.css'
 interface LayoutProps {
   title: string
   children: React.ReactNode
+  mainLayout?: React.ReactNode
+  sidebar?: React.ReactNode
+  breadcrumbs?: BreadCrumbItem[]
 }
 
-const Layout: React.FC<LayoutProps> = ({ title, children }) => {
+const Layout: React.FC<LayoutProps> = ({
+  title,
+  children,
+  mainLayout,
+  breadcrumbs,
+  sidebar,
+}) => {
   const router = useRouter()
   const { width } = useWindowSize()
-  const isMobile = width < theme.breakpoints.sm
+  const isMobile = width < theme.breakpoints.md
+  const navigationItems = [
+    {
+      title: 'Þingstörf',
+      href: paths.thingstorf,
+      active: router.pathname === paths.thingstorf,
+      items: [
+        {
+          title: 'Þingfundir og ræður',
+          href: paths.thingfundir,
+          active: router.pathname === paths.thingfundir,
+        },
+        {
+          title: 'Þingmál',
+          href: paths.thingmal,
+          active: router.pathname === paths.thingmal,
+        },
+        { title: 'Nefndir' },
+        { title: 'Mál í umsagnarferli' },
+        { title: 'Tilkynningar um þingstörf' },
+        { title: 'Samantektir' },
+      ],
+    },
+    {
+      title: 'Þingmenn',
+      href: paths.thingmenn,
+      active: router.pathname === paths.thingmenn,
+      items: [
+        { title: 'Alþingismenn', active: true },
+        { title: 'Aðstoðarmenn' },
+        { title: 'Ríkisstjórn' },
+        { title: 'Forsetar Alþingis' },
+        { title: 'Þingflokkar' },
+        { title: 'Tilkynningar' },
+        { title: 'Hagsmunir og starfskjör' },
+        { title: 'Alþingismannatal' },
+        { title: 'Sögulegur fróðleikur' },
+        { title: 'Þingtímabil og kosningar' },
+      ],
+    },
+    {
+      title: 'Lagasafn',
+      href: paths.home,
+    },
+    {
+      title: 'Um Alþingi',
+      href: paths.home,
+    },
+  ]
 
+  const secondaryNavItems = [
+    { title: 'Lagafrumvörp', href: '/link1' },
+    { title: 'Umsagnagátt', href: '/link2' },
+    { title: 'Handbækur', href: '/link3' },
+  ]
   const SecondaryMenu = ({
     title,
     items,
@@ -86,11 +152,13 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
       ></HeadWithSocialSharing>
       <Box>
         <DefaultHeader
-          title={title}
+          title={'Alþingi'}
           titleColor="white"
-          image={'/assets/althingi.svg'}
-          background="#174C97"
-          isSubpage={false}
+          image={'/assets/althingi-new-logo.svg'}
+          background="linear-gradient(180deg, #3D6BA2 0%, #315584 100%);"
+          imagePadding="20px"
+          logoHref="/s/althingi"
+          isSubpage={router.pathname !== '/s/althingi'}
           logo="https://www.althingi.is/skin/basic9k/i/sitelogo-new.svg"
         />
       </Box>
@@ -100,87 +168,49 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
         isSticky={false}
         fullWidthContent={true}
         sidebarContent={
-          <Box>
-            <Stack space={3}>
-              <Navigation
-                baseId="pageNav"
-                items={[
-                  {
-                    title: 'Þingfundir og mál',
-                    href: '/s/althingi',
-                    active: router.pathname === '/s/althingi',
-                  },
-                  {
-                    title: 'Þingmenn',
-                    href: '/s/althingi/thingmenn',
-                    items: [{ title: 'Alþingismenn' }],
-                  },
-                  {
-                    title: 'Nefndir',
-                    href: '/s/althingi',
-                  },
-                  {
-                    title: 'Alþjóðastarf',
-                    href: '/s/althingi',
-                  },
-                  {
-                    title: 'Lagasafn',
-                    href: '/s/althingi',
-                  },
-                  {
-                    title: 'Ályktanir Alþingis',
-                    href: '/s/althingi',
-                  },
-                  {
-                    title: 'Um Alþingi',
-                    href: '/s/althingi',
-                  },
-                  {
-                    title: 'Þingmál',
-                    href: '/s/althingi/thingmal',
-                    active: router.pathname === '/s/althingi/thingmal',
-                    items: [{ title: 'Alþingismál' }],
-                  },
-                ]}
-                title="Efnisyfirlit"
-                activeItemTitle="ACTIVE TITLE"
-              />
-            </Stack>
+          sidebar || (
+            <Box>
+              <Stack space={3}>
+                <Navigation
+                  baseId="pageNav"
+                  items={navigationItems}
+                  title="Efnisyfirlit"
+                  activeItemTitle="ACTIVE TITLE"
+                />
+              </Stack>
 
-            <>
-              <SecondaryMenu
-                title={'Tengt efni'}
-                items={[
-                  { title: 'Lagafrumvörp', href: '/link1' },
-                  { title: 'Link 2', href: '/link2' },
-                ]}
-              />
+              <>
+                <SecondaryMenu title={'Tengt efni'} items={secondaryNavItems} />
 
-              <ProfileCard
-                key={'card.id'}
-                title={'card.title'}
-                description={'card.contentString'}
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore make web strict
-                link={'https://althingi.is'}
-                image={
-                  'https://www.althingi.is/skin/basic9k/i/sitelogo-new.svg'
-                }
-                size="default"
-              />
-            </>
-          </Box>
+                <ProfileCard
+                  key={'card.id'}
+                  title={'card.title'}
+                  description={'card.contentString'}
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore make web strict
+                  link={'https://althingi.is'}
+                  image={
+                    'https://www.althingi.is/skin/basic9k/i/sitelogo-new.svg'
+                  }
+                  size="default"
+                />
+              </>
+            </Box>
+          )
         }
       >
-        {isMobile && (
+        {isMobile && !sidebar && (
           <Box position="relative" zIndex={90}>
             <Box marginY={2}>
               <Navigation
                 baseId="pageNavMobile"
                 isMenuDialog={true}
-                items={[{ title: 'Link 1', href: '/link1' }]}
+                items={navigationItems}
                 title={'Efnisyfirlit'}
-                activeItemTitle={'Valið efni'}
+                activeItemTitle={
+                  navigationItems.find((item) => item.href === router.pathname)
+                    ?.title
+                }
                 renderLink={(link, item) => {
                   return item?.href ? (
                     <NextLink href={item?.href} legacyBehavior>
@@ -199,10 +229,7 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
                 colorScheme="purple"
                 isMenuDialog={true}
                 title={'Tengt efni'}
-                items={[
-                  { title: 'Link 1', href: '/link1' },
-                  { title: 'Link 2', href: '/link2' },
-                ]}
+                items={secondaryNavItems}
                 renderLink={(link, item) => {
                   return item?.href ? (
                     <NextLink href={item?.href} legacyBehavior>
@@ -216,54 +243,6 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
             </Box>
           </Box>
         )}
-
-        {/* <GridContainer>
-          <GridRow>
-            <GridColumn span={'9/9'} offset={'0'}>
-              {showExternalLinks && (
-                <OrganizationExternalLinks
-                  organizationPage={organizationPage}
-                  showOnMobile={false}
-                />
-              )}
-              {breadcrumbItems && (
-                <Breadcrumbs
-                  items={breadcrumbItems ?? []}
-                  renderLink={(link, item) => {
-                    return item?.href ? (
-                      <NextLink href={item?.href} legacyBehavior>
-                        {link}
-                      </NextLink>
-                    ) : (
-                      link
-                    )
-                  }}
-                />
-              )}
-
-              {showReadSpeaker && (
-                <Webreader
-                  marginTop={breadcrumbItems?.length ? 3 : 0}
-                  marginBottom={breadcrumbItems?.length ? 0 : 3}
-                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-ignore make web strict
-                  readId={null}
-                  readClass="rs_read"
-                />
-              )}
-
-              {pageDescription && (
-                <Box
-                  className="rs_read"
-                  paddingTop={[2, 2, breadcrumbItems ? 5 : 0]}
-                  paddingBottom={SLICE_SPACING}
-                >
-                  <Text variant="default">{pageDescription}</Text>
-                </Box>
-              )}
-            </GridColumn>
-          </GridRow>
-        </GridContainer> */}
 
         {/* {isMobile && sidebarContent} */}
 
@@ -280,19 +259,33 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
                       },
                       {
                         title: 'Alþingi',
-                        href: '/s/althingi',
+                        href: paths.home,
                         isCurrentPage: true,
                       },
+                      ...(breadcrumbs || []),
                     ]}
                   />
-                  <Button
-                    icon="open"
-                    iconType="outline"
-                    size="medium"
-                    onClick={() => router.push('/s/althingi/thingmal')}
-                  >
-                    Þingmál
-                  </Button>
+                  {router.pathname === paths.home && (
+                    <Inline space={2}>
+                      <Button
+                        variant="ghost"
+                        icon="open"
+                        iconType="outline"
+                        size="medium"
+                        onClick={() => router.push(paths.thingmal)}
+                      >
+                        Umsagnagátt
+                      </Button>
+                      <Button
+                        icon="open"
+                        iconType="outline"
+                        size="medium"
+                        onClick={() => router.push(paths.thingmal)}
+                      >
+                        Lagasafn
+                      </Button>
+                    </Inline>
+                  )}
                 </Box>
                 <Box className="rs_read">
                   <Webreader
@@ -309,57 +302,9 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
             </GridColumn>
           </GridRow>
         </GridContainer>
-
-        {/* {isMobile && !isSubpage && sidebarCards.length > 0 && (
-          <Box marginY={4}>
-            <Stack space={3}>
-              {sidebarCards.map((card) => {
-                if (card.__typename === 'SidebarCard') {
-                  return (
-                    <ProfileCard
-                      key={card.id}
-                      title={card.title}
-                      description={card.contentString}
-                      link={card.link ?? undefined}
-                      size="small"
-                    />
-                  )
-                }
-
-                if (card.__typename === 'ConnectedComponent') {
-                  return renderConnectedComponent(card)
-                }
-
-                return null
-              })}
-            </Stack>
-          </Box>
-        )} */}
       </SidebarLayout>
-      {
-        <Box className="rs_read" background="blue100" width="full" padding={6}>
-          {'MAIN CONTENT??'}
-          <Box width="full" display={'flex'} justifyContent={'spaceBetween'}>
-            <Text>{'Á döfinni'}</Text>
-            <LinkV2
-              href={'/s/althingi/frettir'}
-              underline="small"
-              underlineVisibility="hover"
-              color="blue400"
-            >
-              {'Sjá fleiri'}
-            </LinkV2>
-          </Box>
-          <Box>
-            <InfoCardGrid
-              cards={mockInfoCards}
-              variant="detailed"
-              cardsBorder="backgroundBrandLighter"
-            />
-          </Box>
-        </Box>
-      }
-      {/* Á döfinni */}
+
+      {mainLayout}
 
       <Box className="rs_read" marginTop="auto">
         <OrganizationFooter

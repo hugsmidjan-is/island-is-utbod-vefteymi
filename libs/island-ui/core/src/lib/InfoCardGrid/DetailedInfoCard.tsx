@@ -98,7 +98,7 @@ export const DetailedInfoCard = ({
             }
             return (
               <Tag
-                outlined
+                outlined={tag.outlined}
                 key={`${tag.label}-${index}`}
                 disabled
                 variant={tag.variant}

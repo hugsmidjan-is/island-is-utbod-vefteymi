@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useWindowSize } from 'react-use'
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { InfoCardItemProps } from 'libs/island-ui/core/src/lib/InfoCardGrid/InfoCardGrid'
 import { parseAsInteger, useQueryState } from 'next-usequerystate'
 
 import {
@@ -13,45 +15,80 @@ import {
 } from '@island.is/island-ui/core'
 import { theme } from '@island.is/island-ui/theme'
 import { CustomPageUniqueIdentifier } from '@island.is/shared/types'
+import { AlthingiFooter, DefaultHeader } from '@island.is/web/components'
 import { withMainLayout } from '@island.is/web/layouts/main'
+import {
+  mockInfoCaseCards,
+  OrganizationMock,
+  searchItems,
+} from '@island.is/web/utils/mockData'
 
 import {
   CustomScreen,
   withCustomPageWrapper,
 } from '../../CustomPage/CustomPageWrapper'
 import SidebarLayout from '../../Layouts/SidebarLayout'
+import GridView from '../components/GridView/GridView'
+import ListView from '../components/ListView/ListView'
 import {
   SearchFilter,
   SearchState,
 } from '../components/SearchFilter/SearchFilter'
 import SearchHeader from '../components/SearchHeader/SearchHeader'
-import GridView from '../components/GridView/GridView'
-import ListView from '../components/ListView/ListView'
-import { searchItems } from '@island.is/web/utils/mockData'
 
 const Thingmal: CustomScreen<ThingmalProps> = () => {
   const { width } = useWindowSize()
   const [isGridLayout, setIsGridLayout] = useState(true)
+  const [filteredCards, setFilteredCards] = React.useState<
+    Array<InfoCardItemProps> | undefined
+  >(undefined)
 
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
   const [query, setQuery] = useQueryState('query')
+
   const isTablet = width <= theme.breakpoints.lg
+
+  useEffect(() => {
+    if (!query) {
+      setFilteredCards(mockInfoCaseCards)
+    } else {
+      setFilteredCards(
+        mockInfoCaseCards.filter((card) =>
+          card.title.toLowerCase().includes(query.toLowerCase()),
+        ),
+      )
+    }
+  }, [query])
+
+  const totalCards = filteredCards?.length ?? mockInfoCaseCards.length
   return (
     <Box>
+      <Box>
+        <DefaultHeader
+          title={'Alþingi'}
+          titleColor="white"
+          image={'/assets/althingi-new-logo.svg'}
+          background="#174C97"
+          imagePadding="20px"
+          logoHref="/s/althingi"
+          isSubpage
+          logo="https://www.althingi.is/skin/basic9k/i/sitelogo-new.svg"
+        />
+      </Box>
       <SearchHeader
         title={''}
         onSearch={function (query: string): void {
           throw new Error('Function not implemented.')
         }}
       />
-      <Box background="blue100" marginY={isTablet ? 6 : 8}>
-        {!isTablet && (
+      <Box background="dark100" marginY={isTablet ? 6 : 8}>
+        {
           <SidebarLayout
             fullWidthContent={true}
             sidebarContent={
               <Stack space={3}>
                 <Text variant="h4" as="h4" paddingY={1}>
-                  {'Leit'}
+                  {'Leit og síun'}
                 </Text>
                 <FilterInput
                   name="query"
@@ -60,29 +97,31 @@ const Thingmal: CustomScreen<ThingmalProps> = () => {
                   onChange={(option) => setQuery(option)}
                 />
                 <SearchFilter
-                  onSearchUpdate={function (
-                    categoryId: keyof SearchState,
-                    values?: Array<string>,
-                  ): void {
-                    throw new Error('Function not implemented.')
+                  onSearchUpdate={() => {
+                    setFilteredCards(
+                      mockInfoCaseCards.filter((card) =>
+                        card.tags?.some((tag) => tag?.label === 'Lagafrumvarp'),
+                      ),
+                    )
                   }}
-                  onReset={function (): void {
-                    throw new Error('Function not implemented.')
-                  }}
+                  searchState={{}}
+                  onReset={() => setFilteredCards(mockInfoCaseCards)}
                   tags={[]}
                   url={''}
                 />
               </Stack>
             }
           >
-            <Box marginLeft={7}>
+            <Box marginLeft={[0, 0, 0, 7]}>
               <Box
                 marginBottom={3}
                 display="flex"
                 justifyContent="spaceBetween"
               >
                 <Box display="flex" alignItems="center">
-                  <Text>{'X færslur fundust'}</Text>
+                  <Text fontWeight="medium">{filteredCards?.length}</Text>{' '}
+                  <Box marginRight={1}></Box>
+                  <Text>{'færslur fundust'}</Text>
                 </Box>
                 <Button
                   variant="utility"
@@ -96,7 +135,11 @@ const Thingmal: CustomScreen<ThingmalProps> = () => {
                 </Button>
               </Box>
               {isGridLayout ? (
-                <GridView data={searchItems} />
+                <InfoCardGrid
+                  columns={1}
+                  cards={filteredCards ?? mockInfoCaseCards}
+                  variant="detailed"
+                />
               ) : (
                 <ListView data={searchItems} />
               )}
@@ -107,8 +150,8 @@ const Thingmal: CustomScreen<ThingmalProps> = () => {
                 variant="purple"
                 page={page}
                 itemsPerPage={8}
-                totalItems={200}
-                totalPages={200 / 8}
+                totalItems={totalCards}
+                totalPages={totalCards / 8}
                 renderLink={(page, className, children) => (
                   <Box
                     cursor="pointer"
@@ -123,8 +166,8 @@ const Thingmal: CustomScreen<ThingmalProps> = () => {
               />
             </Box>
           </SidebarLayout>
-        )}
-        {isTablet && (
+        }
+        {/* {isTablet && (
           <Box margin={3} paddingTop={3}>
             <Text fontWeight="semiBold">{'leita'}</Text>
             <Box marginTop={2} style={{ maxWidth: '475px' }}>
@@ -197,8 +240,12 @@ const Thingmal: CustomScreen<ThingmalProps> = () => {
               />
             </Box>
           </Box>
-        )}
+        )} */}
       </Box>
+      <AlthingiFooter
+        footerItems={OrganizationMock.footerItems}
+        organizationSlug={OrganizationMock.slug}
+      />
     </Box>
   )
 }
@@ -214,7 +261,10 @@ Thingmal.getProps = async () => {
     title: 'Alþingi',
   }
 }
-
 export default withMainLayout(
-  withCustomPageWrapper(CustomPageUniqueIdentifier.Grants, Thingmal),
+  withCustomPageWrapper(
+    CustomPageUniqueIdentifier.OfficialJournalOfIceland,
+    Thingmal,
+  ),
+  { showFooter: false, showHeader: true },
 )

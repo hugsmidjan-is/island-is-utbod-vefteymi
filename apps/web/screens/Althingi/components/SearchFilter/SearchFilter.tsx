@@ -9,6 +9,7 @@ import {
 } from '@island.is/island-ui/core'
 import { isDefined } from '@island.is/shared/utils'
 import { GenericTag } from '@island.is/web/graphql/schema'
+import { useState } from 'react'
 
 export interface SearchState {
   status?: 'open' | 'closed' // Staða
@@ -50,6 +51,7 @@ export const SearchFilter = ({
     ),
   }
 
+  const [isChecked, setIsChecked] = useState(false)
   return (
     <Box
       component="form"
@@ -75,16 +77,56 @@ export const SearchFilter = ({
         <Box background="white" borderRadius="large">
           <FilterMultiChoice
             labelClear={'clearFilters'}
+            singleExpand={false}
             onChange={({ categoryId, selected }) => {
+              setIsChecked(true)
               onSearchUpdate(
                 categoryId as keyof SearchState,
                 selected.length ? selected : undefined,
               )
             }}
             onClear={(categoryId) => {
+              setIsChecked(false)
               onSearchUpdate(categoryId as keyof SearchState, undefined)
             }}
             categories={[
+              sortedFilters.categories
+                ? {
+                    id: 'type',
+                    label: 'Tegund',
+                    selected: isChecked ? ['lagafrumvorp'] : [],
+                    filters: [
+                      {
+                        value: 'lagafumvorp',
+                        label: 'Lagafrumvörp',
+                      },
+                      {
+                        value: 'type2',
+                        label: 'Þingsályktunartillögur',
+                      },
+                      {
+                        value: 'type2',
+                        label: 'Fyrirspurnir',
+                      },
+                      {
+                        value: 'type2',
+                        label: 'Skýrslur, álit og beiðnir',
+                      },
+                      {
+                        value: 'type2',
+                        label: 'Sérstakar umræður',
+                      },
+                      {
+                        value: 'type2',
+                        label: 'Staða mála',
+                      },
+                      {
+                        value: 'type2',
+                        label: 'Þingmál',
+                      },
+                    ],
+                  }
+                : undefined,
               {
                 id: 'status',
                 label: 'Staða',
@@ -103,24 +145,6 @@ export const SearchFilter = ({
                   },
                 ],
               },
-
-              sortedFilters.categories
-                ? {
-                    id: 'type',
-                    label: 'Tegund',
-                    selected: searchState?.['type'] ?? [],
-                    filters: [
-                      {
-                        value: 'type1',
-                        label: 'Tegund 1',
-                      },
-                      {
-                        value: 'type2',
-                        label: 'Tegund 2',
-                      },
-                    ],
-                  }
-                : undefined,
               {
                 id: 'category',
                 label: 'Efnisflokkar',

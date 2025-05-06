@@ -16,8 +16,6 @@ const GridCard: React.FC<GridCardProps> = ({ item }) => {
       background={'white'}
       padding={3}
       borderRadius="large"
-      border="standard"
-      borderColor="blue200"
     >
       <Box display="flex">
         <Text variant="eyebrow" color="blueberry400">
@@ -42,8 +40,13 @@ const GridCard: React.FC<GridCardProps> = ({ item }) => {
       >
         <Box display="flex" rowGap={1} columnGap={1} flexWrap="wrap">
           {item.tags?.map((tag) => (
-            <Tag key={tag} variant="blue" outlined disabled>
-              {tag}
+            <Tag
+              key={tag.label}
+              variant={tag.color}
+              outlined={tag.outlined}
+              disabled
+            >
+              {tag.label}
             </Tag>
           ))}
         </Box>

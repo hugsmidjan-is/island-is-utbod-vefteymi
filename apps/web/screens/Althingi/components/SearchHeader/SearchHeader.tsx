@@ -1,17 +1,20 @@
+import React from 'react'
+
 import {
+  Box,
+  Breadcrumbs,
+  Button,
+  GridColumn,
   GridContainer,
   GridRow,
-  GridColumn,
-  Box,
+  Icon,
+  LinkV2,
   Text,
-  Inline,
-  Input,
-  Tag,
-  Breadcrumbs,
 } from '@island.is/island-ui/core'
 import { Webreader } from '@island.is/web/components'
-import React from 'react'
+
 import * as styles from './SearchHeader.css'
+import { paths } from '@island.is/web/utils/mockData'
 
 interface SearchHeaderProps {
   title: string
@@ -24,36 +27,45 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ title, onSearch }) => {
   }
 
   return (
-    <Box>
+    <Box paddingTop={[6, 6, 6, 8, 8]}>
       <GridContainer>
         <GridRow>
           <GridColumn span={['0', '0', '2/6', '3/12', '3/12']} hiddenBelow="md">
-            <Box
-              display="flex"
-              height="full"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <img
+            <Box display="flex" height="full">
+              {/* <img
                 src={'/assets/files.svg'}
                 className={styles.image}
                 alt={'illustration of woman holding files'}
-              />
+              /> */}
+
+              <LinkV2 href={paths.home}>
+                <Button
+                  preTextIcon="arrowBack"
+                  preTextIconType="filled"
+                  size="small"
+                  type="button"
+                  variant="text"
+                  truncate
+                >
+                  {'Til baka'}
+                </Button>
+              </LinkV2>
             </Box>
           </GridColumn>
-          <GridColumn
-            paddingTop={[6, 6, 6, 8, 8]}
-            span={['1/1', '1/1', '4/6', '7/12', '7/12']}
-          >
+          <GridColumn span={['1/1', '1/1', '4/6', '7/12', '7/12']}>
             <Breadcrumbs
               items={[
                 { title: 'Ísland.is', href: '/' },
-                { title: 'Alþingi', href: '/s/althingi' },
-                { title: 'Þingmál', href: '/s/althingi/thingmal' },
+                { title: 'Alþingi', href: paths.home },
+                {
+                  title: 'Þingstörf',
+                  href: paths.thingstorf,
+                  isCurrentPage: true,
+                },
               ]}
             />
             <Text as="h1" variant="h1" marginY={2}>
-              {'Titill'}
+              {'Þingmál'}
             </Text>
             <Text variant="intro">
               {

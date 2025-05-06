@@ -1,71 +1,394 @@
 import React from 'react'
+import { useWindowSize } from 'react-use'
 
 import {
-  ActionCard,
   Box,
+  Button,
+  CategoryCard,
   Divider,
+  GridColumn,
+  GridContainer,
+  GridRow,
+  InfoCardGrid,
+  LinkV2,
   Stack,
+  Tag,
   Text,
 } from '@island.is/island-ui/core'
+import { theme } from '@island.is/island-ui/theme'
 import { SLICE_SPACING } from '@island.is/web/constants'
 import { CustomPageUniqueIdentifier } from '@island.is/web/graphql/schema'
 import { withMainLayout } from '@island.is/web/layouts/main'
+import { mockInfoCards, paths } from '@island.is/web/utils/mockData'
 
 import {
   CustomScreen,
   withCustomPageWrapper,
 } from '../../CustomPage/CustomPageWrapper'
-import { CTA } from '../components/CTA'
 import Layout from '../Layout'
+import * as styles from './Frontpage.css'
 
 const Frontpage: CustomScreen<FrontpageProps> = ({ title }) => {
+  const { width } = useWindowSize()
+  const isMobile = width < theme.breakpoints.md
   return (
-    <Layout title={title}>
+    <Layout
+      title={title}
+      mainLayout={
+        <>
+          {/* Á döfinni */}
+          <Box
+            className="rs_read"
+            background="blue100"
+            width="full"
+            padding={6}
+          >
+            <Box width="full" display={'flex'} justifyContent={'spaceBetween'}>
+              <Text variant="h4">{'Á döfinni'}</Text>
+              <Box display="flex" justifyContent="center">
+                <LinkV2 href={'/s/althingi'}>
+                  <Button
+                    icon="arrowForward"
+                    iconType="filled"
+                    size="small"
+                    type="button"
+                    variant="text"
+                    truncate
+                  >
+                    {'Sjá allt'}
+                  </Button>
+                </LinkV2>
+              </Box>
+            </Box>
+            <Box
+              display="flex"
+              flexWrap={'wrap'}
+              rowGap={1}
+              columnGap={1}
+              marginTop={3}
+              marginBottom={3}
+            >
+              <Tag
+                disabled={true}
+                variant="blue"
+                outlined={false}
+                active
+                href="/s/althingi"
+              >
+                {'Allt'}
+              </Tag>
+              <Tag
+                variant="white"
+                outlined={true}
+                whiteBackground
+                href="/s/althingi"
+              >
+                {'Tilkynningar'}
+              </Tag>
+              <Tag
+                variant="white"
+                outlined={true}
+                whiteBackground
+                href="/s/althingi"
+              >
+                {'Lög og ályktanir'}
+              </Tag>
+              <Tag
+                variant="white"
+                outlined={true}
+                whiteBackground
+                href="/s/althingi"
+              >
+                {'Ræður'}
+              </Tag>
+              <Tag
+                variant="white"
+                outlined={true}
+                whiteBackground
+                href="/s/althingi"
+              >
+                {'Þingskjöl'}
+              </Tag>
+              <Tag
+                variant="white"
+                outlined={true}
+                whiteBackground
+                href="/s/althingi"
+              >
+                {'Erindi'}
+              </Tag>
+            </Box>
+            <Box>
+              <InfoCardGrid
+                cards={mockInfoCards}
+                variant="detailed"
+                columns={isMobile ? 1 : 3}
+              />
+            </Box>
+          </Box>
+          {/* Senda inn umsögn */}
+          <Box>
+            <GridContainer>
+              <GridRow className={styles.gridRow}>
+                <GridColumn
+                  offset={['0', '0', '1/12']}
+                  span={['3/12', '3/12', '3/12']}
+                >
+                  <Box>
+                    <img
+                      src={'/assets/files.svg'}
+                      alt={'Alþingi'}
+                      width={100}
+                      height={100}
+                      className={styles.image}
+                    />
+                  </Box>
+                </GridColumn>
+                <GridColumn
+                  offset={['0', '0', '0']}
+                  span={['9/12', '7/12', '7/12']}
+                >
+                  <Box marginBottom={2}>
+                    <Text variant="h2" marginBottom={2}>
+                      Senda inn umsögn
+                    </Text>
+                    <Text>
+                      Etiam odio elementum eu libero velit quis. Semper turpis
+                      suspendisse ultrices ut nibh hendrerit malesuada urna.
+                      Duis praesent ut sem non et augue pretium turpis.
+                    </Text>
+                  </Box>
+                  <Stack space={2}>
+                    <Box>
+                      <Button
+                        variant="text"
+                        icon="arrowForward"
+                        iconType="outline"
+                        size="medium"
+                      >
+                        Mál í umsagnarferli
+                      </Button>
+                    </Box>
+                    <Box>
+                      <Button
+                        variant="text"
+                        icon="arrowForward"
+                        iconType="outline"
+                        size="medium"
+                      >
+                        Leiðbeiningar um ritun umsagna
+                      </Button>
+                    </Box>
+                  </Stack>
+                </GridColumn>
+              </GridRow>
+            </GridContainer>
+          </Box>
+          {/* Tölfræði */}
+          <Box>
+            <GridContainer>
+              <GridRow className={styles.gridRow}>
+                <GridColumn
+                  offset={['0', '0', '1/12']}
+                  span={['4/12', '4/12', '4/12']}
+                >
+                  <Box>
+                    <Text variant="eyebrow" color="purple400" marginBottom={2}>
+                      Tölfræði
+                    </Text>
+                    <Text variant="h2" marginBottom={2}>
+                      Vissir þú...
+                    </Text>
+                    <Text>
+                      Alþingi er eitt af elstu starfandi þingum heims og er
+                      æðsti handhafi löggjafarvalds á Íslandi.
+                    </Text>
+                  </Box>
+                </GridColumn>
+                <GridColumn
+                  offset={['0', '0', '0']}
+                  span={['9/12', '3/12', '3/12']}
+                >
+                  <Box marginBottom={2} background="blue100" padding={3}>
+                    <Text variant="eyebrow">Stofnár Alþingis</Text>
+                    <Text variant="h1" color="blue400">
+                      930
+                    </Text>
+                  </Box>
+                  <Box marginBottom={2} background="blue100" padding={3}>
+                    <Text variant="eyebrow">Þjóðkjörnir alþingismenn</Text>
+                    <Text variant="h1" color="blue400">
+                      63
+                    </Text>
+                  </Box>
+                </GridColumn>
+                <GridColumn
+                  offset={['0', '0', '0']}
+                  span={['9/12', '3/12', '3/12']}
+                >
+                  <Box marginBottom={2} background="blue100" padding={3}>
+                    <Text variant="eyebrow">Kjörtímabil</Text>
+                    <Text variant="h1" color="blue400">
+                      4
+                    </Text>
+                  </Box>
+                  <Box marginBottom={2} background="blue100" padding={3}>
+                    <Text variant="eyebrow">Staðfest lög á ári</Text>
+                    <Text variant="h1" color="blue400">
+                      100
+                    </Text>
+                  </Box>
+                  <Stack space={2}>
+                    <Box></Box>
+                    <Box></Box>
+                  </Stack>
+                </GridColumn>
+              </GridRow>
+            </GridContainer>
+          </Box>
+        </>
+      }
+    >
       <Stack space={SLICE_SPACING}>
         <section>
           <Box marginTop={2}>
             <Text variant="h1">{title}</Text>
-            <Text variant="intro" as="p" paddingTop={3}>
-              Þetta er ótrúlega flottur texti um Alþingi. Þetta er ótrúlega
-              flottur texti um Alþingi. Þetta er ótrúlega flottur texti um
-              Alþingi. Þetta er ótrúlega flottur texti um Alþingi. Þetta er
-              ótrúlega flottur texti um Alþingi. Þetta er ótrúlega flottur texti
-              um Alþingi.{' '}
+            <Text variant="intro" as="p" paddingTop={3} marginBottom={3}>
+              Velkomin á vef Alþingis, æðsta handhafa löggjafarvalds á Íslandi.{' '}
             </Text>
+            <Text variant="h4">Flýtileiðir</Text>
+            <Box
+              display="flex"
+              flexWrap={'wrap'}
+              rowGap={1}
+              columnGap={1}
+              marginTop={3}
+            >
+              <Tag variant="blue" outlined={false} href={paths.home}>
+                {'Þingstörf'}
+              </Tag>
+              <Tag variant="blue" outlined={false} href={paths.home}>
+                {'Þingmálalistar'}
+              </Tag>
+              <Tag variant="blue" outlined={false} href={paths.home}>
+                {'Þingfundir og ræður'}
+              </Tag>
+              <Tag variant="blue" outlined={false} href={paths.home}>
+                {'Upptökur'}
+              </Tag>
+              <Tag variant="blue" outlined={false} href={paths.home}>
+                {'Handbækur'}
+              </Tag>
+              <Tag variant="blue" outlined={false} href={paths.home}>
+                {'Í umsagnarferli'}
+              </Tag>
+              <Tag variant="blue" outlined={false} href={paths.home}>
+                {'Nefndir'}
+              </Tag>
+              <Tag variant="blue" outlined={false} href={paths.home}>
+                {'Þingmenn'}
+              </Tag>
+              <Tag variant="blue" outlined={false} href={paths.home}>
+                {'Alþjóðastarf'}
+              </Tag>
+              <Tag variant="blue" outlined={false} href={paths.home}>
+                {'Ályktanir Alþingis'}
+              </Tag>
+              <Tag variant="blue" outlined={false} href={paths.home}>
+                {'Þingmálaskrá ríkisstjórnar'}
+              </Tag>
+            </Box>
           </Box>
         </section>
         <Divider />
         <section>
-          <CTA
-            title="CTA"
-            content="Cta texti"
-            image={{
-              url: 'https://www.althingi.is/media/uncategorized/medium/utsendingar.jpg',
-            }}
-          />
-          <CTA
-            title="CTA"
-            content="Cta texti"
-            reverse
-            image={{
-              url: 'https://www.althingi.is/media/uncategorized/medium/utsendingar.jpg',
-            }}
-          />
+          <Box display="flex" justifyContent="spaceBetween" marginBottom={2}>
+            <Text variant="h3">Útsending</Text>
+            <Box display="flex" flexDirection="row">
+              <Button
+                variant="text"
+                icon="arrowForward"
+                iconType="outline"
+                size="small"
+              >
+                Sjá upptökur
+              </Button>
+            </Box>
+          </Box>
+          <Box
+            padding={3}
+            border="standard"
+            borderColor="blue200"
+            borderRadius="standard"
+          >
+            <iframe
+              className={styles.video}
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/fw7yXuwc2bE?si=2kx6pEzmDP6OjTqR"
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
+            <Box
+              display="flex"
+              flexWrap={'wrap'}
+              rowGap={1}
+              columnGap={1}
+              marginTop={3}
+            >
+              <Tag variant="blue" outlined={false} active href={paths.home}>
+                {'Dagskrá þingfundar'}
+              </Tag>
+              <Tag variant="blue" outlined={true} href={paths.home}>
+                {'Fundir og heimsóknir'}
+              </Tag>
+            </Box>
+          </Box>
         </section>
         <section>
-          <ActionCard
-            cta={{
-              label: 'Hérna er smá texti',
-              iconType: 'outline',
-              variant: 'text',
-            }}
-            text="Hérna er smá texti"
-            heading="Hérna er smá texti"
-            eyebrow="Hérna er smá texti"
-            children={<Box>Börn?</Box>}
-          />
+          <Stack space={3}>
+            <GridRow rowGap={3}>
+              <GridColumn span={['1/1', '1/1', '1/1', '1/1', '1/2']}>
+                <CategoryCard
+                  heading={'Þingstörf'}
+                  text={
+                    'Starfsemi yfirstandandi þings; þingmál, umsagnir, skýrslur, þingfundir og ræður'
+                  }
+                  href={paths.thingstorf}
+                />
+              </GridColumn>
+              <GridColumn span={['1/1', '1/1', '1/1', '1/1', '1/2']}>
+                <CategoryCard
+                  heading={'Þingmenn'}
+                  text={
+                    'Sitjandi aðal- og varaþingmenn, þingflokkar, hagsmunaskrá og sögulegar upplýsingar'
+                  }
+                  href={paths.thingmenn}
+                />
+              </GridColumn>
+              <GridColumn span={['1/1', '1/1', '1/1', '1/1', '1/2']}>
+                <CategoryCard
+                  heading={'Lagasafn'}
+                  text={
+                    'Öll gildandi lög ásamt upplýsingum um lagabreytingar og brottfallin lög'
+                  }
+                  href={paths.home}
+                />
+              </GridColumn>
+              <GridColumn span={['1/1', '1/1', '1/1', '1/1', '1/2']}>
+                <CategoryCard
+                  heading={'Um Alþingi'}
+                  text={
+                    'Upplýsingar um vinnustaðinn, ályktanir, alþjóðastarf og fræðsluefni'
+                  }
+                  href={paths.home}
+                />
+              </GridColumn>
+            </GridRow>
+          </Stack>
         </section>
-        <section></section>
       </Stack>
     </Layout>
   )
