@@ -66,6 +66,7 @@ import SidebarLayout from '@island.is/web/screens/Layouts/SidebarLayout'
 import { getBackgroundStyle } from '@island.is/web/utils/organization'
 
 import { LatestNewsCardConnectedComponent } from '../LatestNewsCardConnectedComponent'
+import { AlthingiFooter } from './Themes/AlthingiTheme'
 import { DigitalIcelandFooter } from './Themes/DigitalIcelandTheme/DigitalIcelandFooter'
 import { FiskistofaDefaultHeader } from './Themes/FiskistofaTheme'
 import { FiskistofaFooter } from './Themes/FiskistofaTheme'
@@ -97,7 +98,6 @@ import { UtlendingastofnunFooter } from './Themes/UtlendingastofnunTheme'
 import { VinnueftilitidHeader } from './Themes/VinnueftirlitidTheme'
 import { liveChatIncConfig, watsonConfig } from './config'
 import * as styles from './OrganizationWrapper.css'
-import { AlthingiFooter } from './Themes/AlthingiTheme'
 
 interface NavigationData {
   title: string
