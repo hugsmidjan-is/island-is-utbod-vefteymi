@@ -58,6 +58,10 @@ const ThingmalDetail: Screen<ThingmalDetailProps> = ({ title }) => {
       label: 'Útbýtingadagur',
       value: '12.febrúar 2025, kl 14:00',
     },
+    {
+      label: 'Flutningsmaður',
+      value: 'Mennta- og barnamálaráðherra',
+    },
   ]
 
   const stepperPanelData = [

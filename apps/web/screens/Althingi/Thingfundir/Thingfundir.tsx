@@ -22,6 +22,7 @@ import {
   Tag,
   Text,
   Table as T,
+  Stack,
 } from '@island.is/island-ui/core'
 import { theme } from '@island.is/island-ui/theme'
 import { CustomPageUniqueIdentifier } from '@island.is/shared/types'
@@ -35,6 +36,9 @@ import {
   withCustomPageWrapper,
 } from '../../CustomPage/CustomPageWrapper'
 import Layout from '../Layout'
+import GoBack from '../components/GoBack/GoBack'
+import NavigationSidebar from '../components/NavigationSidebar'
+import { useRouter } from 'next/router'
 
 type Blong =
   | {
@@ -95,6 +99,7 @@ const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
   }, [blingList])
 
   const [page, setPage] = useState(1)
+  const router = useRouter()
 
   const totalPages = chosenBling
     ? chosenBling.blongs.length > 0
@@ -117,6 +122,36 @@ const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
           isCurrentPage: true,
         },
       ]}
+      sidebar={
+        <Stack space={2}>
+          <GoBack />
+          <NavigationSidebar
+            title="Þingstörf"
+            items={[
+              {
+                title: 'Þingmál',
+                href: paths.thingmal,
+                accordion: true,
+                active: false,
+              },
+              {
+                title: 'Þingfundir og ræður',
+                href: paths.thingfundir,
+                accordion: true,
+
+                active: router.pathname === paths.thingfundir,
+                items: [
+                  {
+                    title: 'Fundargerðir og upptökur',
+                    href: paths.upptokur,
+                    active: router.pathname === paths.upptokur,
+                  },
+                ],
+              },
+            ]}
+          />
+        </Stack>
+      }
     >
       <Text variant="h1" marginBottom={3} marginTop={2}>
         Þingfundir og ræður

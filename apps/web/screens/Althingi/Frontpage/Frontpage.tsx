@@ -216,8 +216,8 @@ const Frontpage: Screen<FrontpageProps> = ({ title }) => {
                       Vissir þú...
                     </Text>
                     <Text>
-                      Alþingi er eitt af elstu starfandi þingum heims og er
-                      æðsti handhafi löggjafarvalds á Íslandi.
+                      Alþingi Íslands fer með löggjafarvald og gegnir
+                      lykilhlutverki í íslenskri stjórnsýslu.
                     </Text>
                   </Box>
                 </GridColumn>

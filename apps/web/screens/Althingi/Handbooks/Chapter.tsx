@@ -61,7 +61,7 @@ const Chapter: Screen<ChapterProps> = ({ locale }) => {
       title={data.title}
       sidebar={
         <Stack space={2}>
-          <GoBack />
+          <GoBack href={paths.handbok} />
           <JumpPanel
             items={panelData.items}
             title={panelData.title}

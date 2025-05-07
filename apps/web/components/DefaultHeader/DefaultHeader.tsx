@@ -3,7 +3,9 @@ import cn from 'classnames'
 
 import {
   Box,
+  Button,
   Hidden,
+  Icon,
   Link,
   ResponsiveSpace,
   Text,
@@ -13,6 +15,7 @@ import { theme } from '@island.is/island-ui/theme'
 import { useWindowSize } from '@island.is/web/hooks/useViewport'
 
 import * as styles from './DefaultHeader.css'
+import { paths } from '@island.is/web/utils/mockData'
 
 export interface DefaultHeaderProps {
   fullWidth?: boolean
@@ -71,21 +74,29 @@ export const DefaultHeader: React.FC<
   return (
     <>
       {logoProvided && (
-        <Hidden below="lg">
-          <div
-            className={cn(styles.contentContainer, {
-              [styles.contentContainerSubpage]: isSubpage,
-            })}
-          >
-            <div className={styles.innerContentContainer}>
-              <LinkWrapper href={logoHref as string}>
-                <Box
-                  className={cn(styles.logoContainer, {
-                    [styles.logoContainerSubpage]: isSubpage,
-                  })}
-                  borderRadius="full"
-                  background="white"
-                >
+        <div
+          className={cn(styles.contentContainer, {
+            [styles.contentContainerSubpage]: isSubpage,
+          })}
+        >
+          <div className={styles.innerContentContainer}>
+            <Box
+              className={cn(styles.logoContainer, {
+                [styles.logoContainerSubpage]: isSubpage,
+              })}
+              borderRadius="full"
+              background="white"
+              display={'flex'}
+              justifyContent={['spaceBetween', 'spaceBetween', 'flexStart']}
+            >
+              <Box
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                justifyContent={['spaceBetween', 'spaceBetween', 'flexStart']}
+                width="full"
+              >
+                <LinkWrapper href={logoHref as string}>
                   <img
                     className={
                       logoImageClassName ? logoImageClassName : styles.logo
@@ -93,11 +104,92 @@ export const DefaultHeader: React.FC<
                     src={logo}
                     alt={logoAltText}
                   />
+                </LinkWrapper>
+                <Hidden below="md">
+                  <Box display="flex" alignItems={'center'}>
+                    <Box marginRight={3} marginLeft={4}>
+                      <Link href={paths.home}>
+                        <Text
+                          fontWeight="medium"
+                          variant={isMobile ? 'medium' : 'default'}
+                        >
+                          Forsíða
+                        </Text>
+                      </Link>
+                    </Box>
+                    <Box marginX={3}>
+                      <Link href={paths.thingstorf}>
+                        <Text
+                          fontWeight="medium"
+                          variant={isMobile ? 'medium' : 'default'}
+                        >
+                          Þingstörf
+                        </Text>
+                      </Link>
+                    </Box>
+                    <Box marginX={3}>
+                      <Link href={paths.thingmenn}>
+                        <Text
+                          variant={isMobile ? 'medium' : 'default'}
+                          fontWeight="medium"
+                        >
+                          Þingmenn
+                        </Text>
+                      </Link>
+                    </Box>
+                    <Box marginX={3}>
+                      <Link href={paths.umAlthingi}>
+                        <Text
+                          variant={isMobile ? 'medium' : 'default'}
+                          fontWeight="medium"
+                        >
+                          Um Alþingi
+                        </Text>
+                      </Link>
+                    </Box>
+                    <Box marginX={3}>
+                      <Link href={paths.home}>
+                        <Text
+                          variant={isMobile ? 'medium' : 'default'}
+                          fontWeight="medium"
+                        >
+                          Lagasafn
+                        </Text>
+                      </Link>
+                    </Box>
+                  </Box>
+                </Hidden>
+                <Hidden above="sm" inline>
+                  <Box
+                    width="full"
+                    display="flex"
+                    marginRight={2}
+                    alignItems="center"
+                    justifyContent="flexStart"
+                  >
+                    <Text variant="eyebrow">Valmynd Alþingis</Text>
+
+                    <Box
+                      onClick={() => console.log('hi')}
+                      display="flex"
+                      alignItems={'center'}
+                      marginLeft={1}
+                    >
+                      <Icon icon="chevronDown" size="small" color="blue400" />
+                    </Box>
+                  </Box>
+                </Hidden>
+              </Box>
+              <Hidden below="md">
+                <Box marginRight={3}>
+                  <Button variant="utility" icon="chevronDown">
+                    Innskráning
+                  </Button>
                 </Box>
-              </LinkWrapper>
-            </div>
+              </Hidden>
+            </Box>
           </div>
-        </Hidden>
+        </div>
       )}
       <div
         className={cn({ [styles.gridContainerWidth]: !fullWidth })}
@@ -135,7 +227,7 @@ export const DefaultHeader: React.FC<
                 [styles.textInnerContainerSubpage]: isSubpage,
               })}
             >
-              {logoProvided && (
+              {/* {logoProvided && (
                 <Hidden above="md">
                   <LinkWrapper href={logoHref as string}>
                     <Box
@@ -159,31 +251,33 @@ export const DefaultHeader: React.FC<
                     </Box>
                   </LinkWrapper>
                 </Hidden>
-              )}
-              <Box
-                className={cn(styles.title, titleClassName)}
-                paddingLeft={
-                  !isMobile ? titleSectionPaddingLeft : isSubpage ? 2 : 0
-                }
-              >
-                <Text
-                  variant={isSubpage && isMobile ? 'h4' : 'h2'}
-                  as="h1"
-                  color={!customTitleColor ? titleColor : undefined}
+              )} */}
+              {!isSubpage && (
+                <Box
+                  className={cn(styles.title, titleClassName)}
+                  paddingLeft={
+                    !isMobile ? titleSectionPaddingLeft : isSubpage ? 2 : 0
+                  }
                 >
-                  <span style={{ color: customTitleColor }}>{title}</span>
-                </Text>
-                {underTitle && (
                   <Text
-                    fontWeight="regular"
+                    variant={isSubpage && isMobile ? 'h4' : 'h2'}
+                    as="h1"
                     color={!customTitleColor ? titleColor : undefined}
                   >
-                    <span style={{ color: customTitleColor }}>
-                      {underTitle}
-                    </span>
+                    <span style={{ color: customTitleColor }}>{title}</span>
                   </Text>
-                )}
-              </Box>
+                  {underTitle && (
+                    <Text
+                      fontWeight="regular"
+                      color={!customTitleColor ? titleColor : undefined}
+                    >
+                      <span style={{ color: customTitleColor }}>
+                        {underTitle}
+                      </span>
+                    </Text>
+                  )}
+                </Box>
+              )}
             </div>
           </div>
           {imageProvided && !isSubpage && (

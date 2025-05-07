@@ -7,6 +7,7 @@ import {
   Filter,
   FilterInput,
   FilterMultiChoice,
+  Stack,
   Tag,
   Text,
 } from '@island.is/island-ui/core'
@@ -22,6 +23,7 @@ import {
 import Layout from '../Layout'
 import ProfileCard from './ProfileCard'
 import { Screen } from '@island.is/web/types'
+import GoBack from '../components/GoBack/GoBack'
 
 const ThingmennDetail: Screen<ThingmennDetailProps> = ({ title }) => {
   const { width } = useWindowSize()
@@ -41,7 +43,12 @@ const ThingmennDetail: Screen<ThingmennDetailProps> = ({ title }) => {
           isTag: true,
         },
       ]}
-      sidebar={<ProfileCard />}
+      sidebar={
+        <Stack space={2}>
+          <GoBack />
+          <ProfileCard />
+        </Stack>
+      }
     >
       <Text variant="h1" marginBottom={2} marginTop={2}>
         Logi Einarsson

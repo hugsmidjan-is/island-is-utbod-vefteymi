@@ -27,6 +27,8 @@ import {
 } from '@island.is/web/utils/mockData'
 
 import Layout from '../Layout'
+import NavigationSidebar from '../components/NavigationSidebar'
+import GoBack from '../components/GoBack/GoBack'
 
 interface UtgefidEfniProps {
   title: string
@@ -70,13 +72,63 @@ const UtgefidEfni: Screen<UtgefidEfniProps> = ({ title }) => {
   return (
     <Layout
       title={title}
-      mainLayout={
-        <Box
-          className="rs_read"
-          background="blue100"
-          width="full"
-          padding={6}
-        ></Box>
+      sidebar={
+        <Stack space={2}>
+          <GoBack />
+          <NavigationSidebar
+            title="Um Alþingi"
+            items={[
+              {
+                title: 'Upplýsingar um Alþingi',
+                href: paths.umAlthingi,
+                accordion: true,
+                active: router.pathname === paths.umAlthingi,
+              },
+              {
+                title: 'Skrifstofa Alþingis',
+                href: paths.home,
+                accordion: true,
+                active: router.pathname === paths.thingfundir,
+              },
+              {
+                title: 'Ályktanir Alþingis',
+                href: paths.home,
+                accordion: true,
+                active: router.pathname === paths.thingfundir,
+              },
+              {
+                title: 'Útgefið efni',
+                href: paths.utgefidEfni,
+                accordion: true,
+                active: router.pathname === paths.utgefidEfni,
+              },
+              {
+                title: 'Stofnanir, stjórnir og nefndir',
+                href: paths.home,
+                accordion: true,
+                active: router.pathname === paths.thingfundir,
+              },
+              {
+                title: 'Alþjóðastarf',
+                href: paths.home,
+                accordion: true,
+                active: router.pathname === paths.thingfundir,
+              },
+              {
+                title: 'Fræðslu- og kynningarefni',
+                href: paths.home,
+                accordion: true,
+                active: router.pathname === paths.thingfundir,
+              },
+              {
+                title: 'Heimsóknir í Alþingishúsið',
+                href: paths.home,
+                accordion: true,
+                active: router.pathname === paths.thingfundir,
+              },
+            ]}
+          />
+        </Stack>
       }
     >
       <Stack space={SLICE_SPACING}>
@@ -152,7 +204,7 @@ const UtgefidEfni: Screen<UtgefidEfniProps> = ({ title }) => {
                 ]}
               />
             </Filter>
-            {!hideTag && (
+            {/* {!hideTag && (
               <Box marginTop={2}>
                 <Tag onClick={() => setHideTag(true)}>
                   <Box display="flex" alignItems="center">
@@ -163,7 +215,7 @@ const UtgefidEfni: Screen<UtgefidEfniProps> = ({ title }) => {
                   </Box>
                 </Tag>
               </Box>
-            )}
+            )} */}
           </Box>
         </section>
         <section>

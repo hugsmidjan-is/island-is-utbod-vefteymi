@@ -13,7 +13,7 @@ export const paths = {
   thingmalSkjal: '/s/althingi/thingstorf/thingmal/1/skjal/1',
   thingfundir: '/s/althingi/thingstorf/thingfundir-og-raedur',
   thingfundur: '/s/althingi/thingstorf/thingfundir-og-raedur/1',
-  upptokur: '/s/althingi/thingstorf/thingfundir/upptokur',
+  upptokur: '/s/althingi/thingstorf/thingfundir-og-raedur/upptokur',
 
   thingmenn: '/s/althingi/thingmenn',
   thingmennDetail: '/s/althingi/thingmenn/logi-einarsson',
@@ -870,5 +870,31 @@ export const videoTranscript = [
         label: 'Nánar',
       },
     ],
+  },
+]
+
+export const mockAboutArticles = [
+  {
+    title: 'Handbók Alþingis',
+    description:
+      'Handbókin er uppflettirit um starfsemi þingsins og alþingismenn. Í henni eru upplýsingar um síðustu alþingiskosningar hverju sinni, upplýsingar um skipan þingsins og ýmsar skrár um alþingismenn.',
+    url: paths.handbaekur,
+  },
+  {
+    title: 'Útgefið efni',
+    description: 'Hér má finna handbækur og skýrslur Alþingis',
+    url: paths.utgefidEfni,
+  },
+  {
+    title: 'Nýbygging á Alþingisreit',
+    description:
+      'Nýbygging Alþingis hefur hlotið mikla athygli fyrir arkitektúr. Að baki hennar eru Studio Granda, arkitetkarnir Margrét Harðardóttir og Steve Christer auk Kristinns E. Hrafnssonar sem er höfundur listskreytingar.',
+    url: paths.umAlthingi,
+  },
+  {
+    title: 'Heimsóknir í Alþingishúsið',
+    description:
+      'Boðið er upp á leiðsögn og fræðslu fyrir skóla og aðra hópa í námslegum tilgang. Ekki er boðið upp á leiðsögn fyrir almenna gesti.',
+    url: paths.umAlthingi,
   },
 ]

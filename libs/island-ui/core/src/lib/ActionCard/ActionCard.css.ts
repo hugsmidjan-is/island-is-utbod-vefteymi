@@ -25,7 +25,7 @@ export const avatar = style({
 export const button = style({
   ...themeUtils.responsiveStyle({
     sm: {
-      alignSelf: 'stretch',
+      alignSelf: 'flex-end',
       alignItems: 'flex-end',
     },
   }),

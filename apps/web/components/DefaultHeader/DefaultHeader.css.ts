@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
-import { themeUtils } from '@island.is/island-ui/theme'
+import { theme, themeUtils } from '@island.is/island-ui/theme'
 
 export const gridContainer = style({
   display: 'grid',
@@ -27,6 +27,7 @@ export const gridContainerSubpage = style({
 export const gridContainerWidth = style({
   maxWidth: '1342px',
   margin: '0 auto',
+  marginBottom: 40,
 })
 
 export const textContainer = style({
@@ -115,24 +116,52 @@ export const headerImage = style({
 })
 
 export const logoContainer = style({
-  width: '136px',
-  height: '136px',
+  width: '100%',
+  height: 56,
   boxShadow: '0px 4px 30px rgba(0, 97, 255, 0.08)',
   position: 'absolute',
-  bottom: '-92px',
-  left: '7%',
-  display: 'grid',
-  placeItems: 'center',
-  zIndex: 1,
+  bottom: -100,
+  zIndex: 99,
+  borderRadius: 8,
+  display: 'flex',
+  alignItems: 'center',
+  ...themeUtils.responsiveStyle({
+    md: {
+      height: 80,
+    },
+    xl: {
+      left: 24,
+      maxWidth: 1300,
+    },
+  }),
 })
 
 export const logoContainerSubpage = style({
-  bottom: '-48px',
+  bottom: -3,
+  ...themeUtils.responsiveStyle({
+    md: {
+      bottom: '-48px',
+    },
+    xl: {
+      maxWidth: 1300,
+    },
+  }),
 })
 
 export const logo = style({
-  width: '70px',
-  height: '70px',
+  width: 'auto',
+  height: 36,
+  marginLeft: 12,
+
+  ...themeUtils.responsiveStyle({
+    md: {
+      height: '50px',
+    },
+    lg: {
+      marginLeft: 24,
+      marginTop: 12,
+    },
+  }),
 })
 
 export const logoSubpage = style({
@@ -147,12 +176,28 @@ export const contentContainer = style({
   position: 'absolute',
   left: '50%',
   transform: 'translate(-50%, 0)',
-  paddingLeft: '48px',
-  paddingRight: '48px',
+
+  ...themeUtils.responsiveStyle({
+    sm: {
+      paddingLeft: '48px',
+      paddingRight: '48px',
+    },
+    md: {
+      paddingLeft: '96px',
+      paddingRight: '96px',
+    },
+  }),
 })
 
 export const contentContainerSubpage = style({
   height: '115px',
+  paddingLeft: 8,
+  paddingRight: 8,
+  ...themeUtils.responsiveStyle({
+    md: {
+      padding: 0,
+    },
+  }),
 })
 
 export const innerContentContainer = style({
@@ -160,6 +205,7 @@ export const innerContentContainer = style({
   height: '100%',
   margin: '0 auto',
   position: 'relative',
+  ...themeUtils.responsiveStyle({}),
 })
 
 export const logoContainerMobile = style({
@@ -170,6 +216,7 @@ export const logoContainerMobile = style({
   placeItems: 'center',
   margin: '0 auto',
   marginBottom: '4px',
+  marginLeft: 12,
 })
 
 export const logoContainerMobileSubpage = style({

@@ -3,11 +3,17 @@ import { useRouter } from 'next/router'
 
 import { Box, Button } from '@island.is/island-ui/core'
 
-const GoBack: React.FC = () => {
+interface GoBackProps {
+  href?: string
+}
+
+const GoBack: React.FC<GoBackProps> = ({ href }) => {
   const router = useRouter()
 
   const handleGoBack = () => {
-    router.back()
+    href
+      ? router.push(href) // If href is provided, navigate to that URL
+      : router.back()
   }
 
   return (
