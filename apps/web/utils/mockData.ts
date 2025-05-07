@@ -625,8 +625,9 @@ const links = [
 
 export const mockHandbooks: Array<MockHandbook> = [
   {
-    title: 'Handbók Alþingis 2024',
-    description: 'Handbók um þingstörfin',
+    title: 'Háttvirtur þingmaður 2024',
+    description:
+      'Upplýsingarit fyrir nýkjörna alþingismenn og varaþingmenn. Ritinu er einnig ætlað að gagnast þeim sem hafa áhuga á starfsemi Alþingis.',
     publicationDate: 'Desember 2024',
     publicationVersion: '3. útgáfa',
     publisher: 'Skrifstofa Alþingis',
@@ -634,18 +635,10 @@ export const mockHandbooks: Array<MockHandbook> = [
     links,
     textSlices: [
       {
-        label: 'Um handbókina',
+        label: 'Formálsorð',
         lines: [
-          'Handbók alþingins kemur jafnan út á fyrsta reglulega þingi eftir kosningar. Sú fyrsta var gefin út.',
-          'Handbækur eru til á rafrænu formi frá árinu 1999.',
-          `Handbókin er uppflettirit um starfsemi þingsins og alþingismenn. Í
-        henni eru upplýsingar um síðustu alþingiskosningar hverju sinni,
-        upplýsingar um skipan þingsins og ýmsar skrár um alþingsmenn.
-        Meðal annars má þar finna æviágrip þingmanna, ýmsa tölfræði,
-        upplýsingar um þingflokka og nefndaskipan, svo eitthvað sé nefnt.
-        Í viðaukum handbókar eru upplýsningar um starfsmenn skrifstofu
-        Alþingis og starfsmenn þingflokka, auk starfsmanna þeirra
-        stofnanna sem undir Alþingi heyra.`,
+          'Upplýsingaritið Háttvirtur þingmaður, sem skrifstofa Alþingis annast, kemur nú út í tíunda skipti. Venja hefur verið að gefa ritið út eftir hverjar alþingiskosningar. Efni ritsins hefur verið uppfært frá fyrri útgáfu.',
+          'Ritið er einkum hugsað til leiðbeiningar fyrir nýkjörna alþingismenn, svo og varaþingmenn sem setjast á Alþingi á kjörtímabilinu. Þess er þó enn fremur vænst að ritið nýtist öllum alþingismönnum sem geta á einum stað nálgast ýmsar hagnýtar upplýsingar um starfsvenjur og starfskjör sín. Þá er einnig haft í huga að ritið komi að notum hjá þeim sem hafa samskipti við Alþingi sem og þeim sem hafa áhuga á hvernig Alþingi starfar og hvernig búið er að alþingismönnum',
         ],
       },
     ],

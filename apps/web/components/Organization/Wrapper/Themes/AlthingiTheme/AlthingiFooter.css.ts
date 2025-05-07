@@ -7,7 +7,7 @@ export const footerBg = style({
   color: '#fff',
 })
 
-export const logoStyle = style({ width: 150 })
+export const logoStyle = style({})
 
 export const footerSecondRow = style({
   display: 'flex',
@@ -29,6 +29,9 @@ globalStyle(`${footerBg} a, ${footerBg} a:hover, ${footerBg} * `, {
   boxShadow: 'none !important',
 })
 
+globalStyle(`${logoStyle} > img`, {
+  width: 150,
+})
 globalStyle(
   `${footerSecondRow} a, ${footerSecondRow} a:hover, ${footerSecondRow} *`,
   {

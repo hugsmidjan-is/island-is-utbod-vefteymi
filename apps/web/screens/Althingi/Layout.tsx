@@ -250,7 +250,7 @@ const Layout: React.FC<LayoutProps> = ({
 
         <GridContainer>
           <GridRow>
-            <GridColumn span={['9/9', '9/9', '9/9']} offset={['0', '0', '1/9']}>
+            <GridColumn span={['9/9', '9/9', '7/9']} offset={['0', '0', '1/9']}>
               <Stack space={3}>
                 <Box display="flex" justifyContent="spaceBetween">
                   <Breadcrumbs

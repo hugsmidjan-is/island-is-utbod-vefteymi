@@ -5,7 +5,7 @@ import { getServerSidePropsWrapper } from '@island.is/web/utils/getServerSidePro
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore make web strict
-const Screen = withApollo(withLocale('is')(ThingmalDetail))
+const Screen = ThingmalDetail
 
 export default Screen
 

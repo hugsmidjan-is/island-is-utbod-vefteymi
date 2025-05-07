@@ -42,9 +42,12 @@ const UtgefidEfni: Screen<UtgefidEfniProps> = ({ title }) => {
     <Layout
       title={title}
       mainLayout={
-        <Box className="rs_read" background="blue100" width="full" padding={6}>
-          bleble
-        </Box>
+        <Box
+          className="rs_read"
+          background="blue100"
+          width="full"
+          padding={6}
+        ></Box>
       }
     >
       <Stack space={SLICE_SPACING}>

@@ -4,7 +4,7 @@ import Thingmenn from '@island.is/web/screens/Althingi/Thingmenn/Thingmenn'
 import { getServerSidePropsWrapper } from '@island.is/web/utils/getServerSidePropsWrapper'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore make web strict
-const Screen = withApollo(withLocale('is')(Thingmenn))
+const Screen = Thingmenn
 
 export default Screen
 

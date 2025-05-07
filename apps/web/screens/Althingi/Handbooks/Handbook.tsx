@@ -3,6 +3,8 @@ import { useWindowSize } from 'react-use'
 
 import {
   Box,
+  Button,
+  CategoryCard,
   Divider,
   FilterInput,
   FocusableBox,
@@ -19,6 +21,8 @@ import { mockHandbooks, paths } from '@island.is/web/utils/mockData'
 
 import Layout from '../Layout'
 import * as styles from './Handbook.css'
+import DetailPanel from '../components/Panels/DetailPanel'
+import GoBack from '../components/GoBack/GoBack'
 
 interface HandbookProps {
   locale: Locale
@@ -35,26 +39,52 @@ const Handbook: Screen<HandbookProps> = ({ locale }) => {
   return (
     <Layout
       title={data.title}
-      mainLayout={
-        <Box className="rs_read" background="blue100" width="full" padding={6}>
-          bleble
-        </Box>
+      sidebar={
+        <Stack space={2}>
+          <GoBack />
+          <DetailPanel
+            backgroundColor={'blue100'}
+            items={[
+              {
+                label: 'Útgefið',
+                value: 'Desember 2024',
+              },
+              {
+                label: 'Útgáfa',
+                value: '3. útgáfa',
+              },
+              {
+                label: 'Útgefið af',
+                value: 'Alþingi',
+              },
+            ]}
+            title="Upplýsingar"
+          />
+          <Button variant="utility" fluid icon="download" iconType="outline">
+            Sækja sem PDF
+          </Button>
+          <Button variant="utility" fluid icon="link" iconType="outline">
+            Afrita hlekk
+          </Button>
+        </Stack>
       }
     >
       <Stack space={SLICE_SPACING}>
         <section>
           <Box marginTop={2}>
             <Text variant="h1">{data.title}</Text>
-            <Text variant="intro" as="p" paddingTop={3} marginBottom={3}>
+            <Text as="p" paddingTop={3} marginBottom={3}>
               {data.description}
             </Text>
-            <FilterInput
-              backgroundColor={'blue'}
-              name={'Filter input'}
-              value={searchInput ?? ''}
-              onChange={(e) => setSearchInput(e)}
-              placeholder="Leita í handbók"
-            />
+            <Box width="half">
+              <FilterInput
+                backgroundColor={'blue'}
+                name={'Filter input'}
+                value={searchInput ?? ''}
+                onChange={(e) => setSearchInput(e)}
+                placeholder="Leita í handbók"
+              />
+            </Box>
           </Box>
         </section>
 
@@ -64,7 +94,7 @@ const Handbook: Screen<HandbookProps> = ({ locale }) => {
             <Stack space={2}>
               <Box marginBottom={1}>
                 <Text variant="h3" as="h3">
-                  {data.title}
+                  {slice.label}
                 </Text>
               </Box>
               {slice.lines.map((line) => (
@@ -83,26 +113,12 @@ const Handbook: Screen<HandbookProps> = ({ locale }) => {
 
             <Box className={styles.grid}>
               {data.chapters?.map((chapter, index) => (
-                <Box
-                  key={chapter.title}
-                  padding={3}
-                  border="standard"
-                  borderRadius="large"
-                >
-                  <FocusableBox
-                    display="block"
-                    key={`${chapter.title}-${index}`}
-                    component={LinkV2}
-                    href={paths.handbokKafli}
-                  >
-                    <Stack space={1}>
-                      <Text variant="h4" as="h4" color="blue400">
-                        {chapter.title}
-                      </Text>
-                      <Text>{chapter.text}</Text>
-                    </Stack>
-                  </FocusableBox>
-                </Box>
+                <CategoryCard
+                  key={`${chapter.title}-${index}`}
+                  heading={chapter.title}
+                  text={chapter.text}
+                  href={paths.handbokKafli}
+                />
               ))}
             </Box>
           </section>

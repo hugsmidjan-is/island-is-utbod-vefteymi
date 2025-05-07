@@ -1,5 +1,6 @@
 import React from 'react'
 import { useWindowSize } from 'react-use'
+import { useRouter } from 'next/router'
 
 import {
   Box,
@@ -19,6 +20,7 @@ import { theme } from '@island.is/island-ui/theme'
 import { SLICE_SPACING } from '@island.is/web/constants'
 import { CustomPageUniqueIdentifier } from '@island.is/web/graphql/schema'
 import { withMainLayout } from '@island.is/web/layouts/main'
+import { Screen } from '@island.is/web/types'
 import {
   mockInfoCards,
   paths,
@@ -30,11 +32,9 @@ import {
   CustomScreen,
   withCustomPageWrapper,
 } from '../../CustomPage/CustomPageWrapper'
+import { Video } from '../components/Video/Video'
 import Layout from '../Layout'
 import * as styles from './Frontpage.css'
-import { useRouter } from 'next/router'
-import { Screen } from '@island.is/web/types'
-import { Video } from '../components/Video/Video'
 
 const Frontpage: Screen<FrontpageProps> = ({ title }) => {
   const { width } = useWindowSize()

@@ -165,7 +165,8 @@ const Stepper = ({
   webReaderClassName = 'rs_read',
 }: StepperProps) => {
   const router = useRouter()
-  const { activeLocale } = useI18n()
+  const i18n = useI18n()
+  const activeLocale = i18n?.activeLocale ?? 'is'
 
   const n = useNamespace(namespace)
 

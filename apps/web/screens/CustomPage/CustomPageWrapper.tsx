@@ -40,7 +40,8 @@ export const withCustomPageWrapper = <Props,>(
     customPageData,
     pageProps,
   }) => {
-    const { activeLocale } = useI18n()
+    const i18n = useI18n()
+    const activeLocale = i18n?.activeLocale ?? 'en'
     return (
       <IntlProvider
         locale={activeLocale}
