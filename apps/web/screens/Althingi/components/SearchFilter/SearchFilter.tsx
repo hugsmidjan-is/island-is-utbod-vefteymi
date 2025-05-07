@@ -1,16 +1,13 @@
-import { useIntl } from 'react-intl'
+import { useState } from 'react'
 import sortBy from 'lodash/sortBy'
 
 import {
   Box,
   Filter,
-  FilterInput,
   FilterMultiChoice,
   FilterProps,
 } from '@island.is/island-ui/core'
 import { isDefined } from '@island.is/shared/utils'
-import { GenericTag } from '@island.is/web/graphql/schema'
-import { useState } from 'react'
 
 export interface SearchState {
   status?: 'open' | 'closed' // Staða
@@ -20,10 +17,7 @@ export interface SearchState {
 }
 
 interface Props {
-  onSearchUpdate: (
-    categoryId: keyof SearchState,
-    values?: Array<string>,
-  ) => void
+  onSearchUpdate: (categoryId: string) => void
   onReset: () => void
   searchState?: SearchState
   tags: Array<{ title: string }>
@@ -78,53 +72,49 @@ export const SearchFilter = ({
       >
         <Box background="white" borderRadius="large">
           <FilterMultiChoice
-            labelClear={'clearFilters'}
+            labelClear={'Hreinsa síu'}
             singleExpand={false}
-            onChange={({ categoryId, selected }) => {
+            onChange={() => {
               setIsChecked(true)
-              onSearchUpdate(
-                categoryId as keyof SearchState,
-                selected.length ? selected : undefined,
-              )
+              onSearchUpdate('Lagafrumvarp')
             }}
-            onClear={(categoryId) => {
+            onClear={() => {
               setIsChecked(false)
-              onSearchUpdate(categoryId as keyof SearchState, undefined)
+              onSearchUpdate('all')
             }}
             categories={[
-              sortedFilters.categories
-                ? {
-                    id: 'type',
-                    label: 'Tegund',
-                    selected: isChecked ? ['lagafrumvorp'] : [],
-                    filters: [
-                      {
-                        value: 'lagafumvorp',
-                        label: 'Lagafrumvörp',
-                      },
-                      {
-                        value: 'type2',
-                        label: 'Þingsályktunartillögur',
-                      },
-                      {
-                        value: 'type2',
-                        label: 'Fyrirspurnir',
-                      },
-                      {
-                        value: 'type2',
-                        label: 'Skýrslur, álit og beiðnir',
-                      },
-                      {
-                        value: 'type2',
-                        label: 'Sérstakar umræður',
-                      },
-                      {
-                        value: 'type2',
-                        label: 'Þingmál',
-                      },
-                    ],
-                  }
-                : undefined,
+              {
+                id: 'type',
+                label: 'Tegund',
+                selected: isChecked ? ['Lagafrumvarp'] : [],
+                filters: [
+                  {
+                    value: 'Lagafrumvarp',
+                    label: 'Lagafrumvörp',
+                  },
+                  {
+                    value: 'type2',
+                    label: 'Þingsályktunartillögur',
+                  },
+                  {
+                    value: 'type2',
+                    label: 'Fyrirspurnir',
+                  },
+                  {
+                    value: 'type2',
+                    label: 'Skýrslur, álit og beiðnir',
+                  },
+                  {
+                    value: 'type2',
+                    label: 'Sérstakar umræður',
+                  },
+                  {
+                    value: 'type2',
+                    label: 'Þingmál',
+                  },
+                ],
+              },
+
               {
                 id: 'status',
                 label: 'Staða',

@@ -1,6 +1,6 @@
-import { Box, Divider, Stack, Text } from '@island.is/island-ui/core'
-import { useRouter } from 'next/router'
 import React from 'react'
+
+import { Box, Divider, Stack, Text } from '@island.is/island-ui/core'
 
 interface JumpPanelProps {
   eyebrow?: string
@@ -51,7 +51,11 @@ const JumpPanel: React.FC<JumpPanelProps> = ({ title, eyebrow, items }) => {
               borderColor="purple200"
             >
               {item.subItems?.map((subItem, subIndex) => (
-                <Box as="span" onClick={() => goToId(subItem)}>
+                <Box
+                  as="span"
+                  onClick={() => goToId(subItem)}
+                  style={{ cursor: 'pointer' }}
+                >
                   <Text
                     variant="medium"
                     key={`subitem-${subIndex}`}

@@ -11,16 +11,12 @@ import {
   GridColumn,
   GridContainer,
   GridRow,
-  Icon,
-  InfoCardGrid,
   Inline,
   Link,
-  LinkV2,
   Navigation,
   NavigationItem,
   ProfileCard,
   Stack,
-  Tag,
   Text,
 } from '@island.is/island-ui/core'
 import { theme } from '@island.is/island-ui/theme'
@@ -31,9 +27,8 @@ import {
   Webreader,
 } from '@island.is/web/components'
 
-import { mockInfoCards, OrganizationMock, paths } from '../../utils/mockData'
+import { OrganizationMock, paths } from '../../utils/mockData'
 import SidebarLayout from '../Layouts/SidebarLayout'
-import * as styles from './Layout.css'
 interface LayoutProps {
   title: string
   children: React.ReactNode
@@ -92,11 +87,12 @@ const Layout: React.FC<LayoutProps> = ({
       ],
     },
     {
-      title: 'Lagasafn',
+      title: 'Um Alþingi',
       href: paths.home,
+      active: router.pathname === paths.umAlthingi,
     },
     {
-      title: 'Um Alþingi',
+      title: 'Lagasafn',
       href: paths.home,
     },
   ]

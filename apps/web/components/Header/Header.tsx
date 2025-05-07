@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC, useContext } from 'react'
+import { useRouter } from 'next/router'
 
 import {
   Box,
+  Button,
   ButtonTypes,
   ColorSchemeContext,
   Column,
@@ -15,14 +17,9 @@ import {
   Logo,
   ResponsiveSpace,
 } from '@island.is/island-ui/core'
-import { webMenuButtonClicked } from '@island.is/plausible'
 import { FixedNav, SearchInput } from '@island.is/web/components'
-import { useI18n } from '@island.is/web/i18n'
 import { LayoutProps } from '@island.is/web/layouts/main'
-
-import { LanguageToggler } from '../LanguageToggler'
-import { Menu } from '../Menu/Menu'
-import { LoginButton } from './LoginButton'
+import { paths } from '@island.is/web/utils/mockData'
 
 interface HeaderProps {
   showSearchInHeader?: boolean
@@ -51,7 +48,7 @@ export const Header: FC<React.PropsWithChildren<HeaderProps>> = ({
   children,
 }) => {
   const { colorScheme } = useContext(ColorSchemeContext)
-
+  const router = useRouter()
   const locale = 'is'
   const english = false
   const isWhite = colorScheme === 'white'
@@ -108,20 +105,33 @@ export const Header: FC<React.PropsWithChildren<HeaderProps>> = ({
                       </Box>
                     )}
 
-                    <Box marginLeft={marginLeft}></Box>
+                    <Box marginLeft={marginLeft}>
+                      <Button variant="utility" icon="person">
+                        Mínar síður
+                      </Button>
+                    </Box>
 
                     <Box
                       marginLeft={marginLeft}
                       display={['none', 'none', 'none', 'block']}
-                    ></Box>
+                    >
+                      <Button
+                        variant="utility"
+                        onClick={() => router.push(paths.home)}
+                      >
+                        EN
+                      </Button>
+                    </Box>
                     <Box marginLeft={marginLeft}>
-                      <Menu
-                        {...megaMenuData}
-                        buttonColorScheme={buttonColorScheme}
-                        onMenuOpen={webMenuButtonClicked}
-                        organizationSearchFilter={organizationSearchFilter}
-                        languageToggleQueryParams={languageToggleQueryParams}
-                      />
+                      <Button
+                        variant="utility"
+                        icon="menu"
+                        colorScheme={buttonColorScheme}
+                        data-testid="frontpage-burger-button"
+                        onClick={() => console.log('Menu button clicked')}
+                      >
+                        {'Valmynd'}
+                      </Button>
                     </Box>
                   </Box>
                 </Column>

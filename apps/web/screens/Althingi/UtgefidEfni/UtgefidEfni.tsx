@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useWindowSize } from 'react-use'
+import { useRouter } from 'next/router'
+import { useQueryState } from 'next-usequerystate'
 
 import {
   Box,
@@ -18,7 +20,11 @@ import { type Locale } from '@island.is/shared/types'
 import { SLICE_SPACING } from '@island.is/web/constants'
 import { withMainLayout } from '@island.is/web/layouts/main'
 import { Screen } from '@island.is/web/types'
-import { mockHandbooks, paths } from '@island.is/web/utils/mockData'
+import {
+  MockHandbook,
+  mockHandbooks,
+  paths,
+} from '@island.is/web/utils/mockData'
 
 import Layout from '../Layout'
 
@@ -29,14 +35,37 @@ interface UtgefidEfniProps {
 
 const UtgefidEfni: Screen<UtgefidEfniProps> = ({ title }) => {
   const { width } = useWindowSize()
-
   const isMobile = width < theme.breakpoints.md
-
-  const [searchInput, setSearchInput] = useState<string>()
-
   const [hideTag, setHideTag] = useState<boolean>(false)
+  const [query, setQuery] = useQueryState('query')
+  const [filteredData, setFilteredData] = useState<MockHandbook[]>([])
+  const [redirect, setRedirect] = useState(false)
 
   const data = mockHandbooks
+  const router = useRouter()
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setRedirect(true)
+    }
+
+    router.events.on('routeChangeStart', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange)
+    }
+  }, [router])
+
+  useEffect(() => {
+    if (!query && !redirect) {
+      setFilteredData(data)
+    } else if (query) {
+      setFilteredData(
+        data.filter((item) =>
+          item.title.toLowerCase().includes(query.toLowerCase()),
+        ),
+      )
+    }
+  }, [query, redirect])
 
   return (
     <Layout
@@ -74,8 +103,8 @@ const UtgefidEfni: Screen<UtgefidEfniProps> = ({ title }) => {
                 <FilterInput
                   backgroundColor={'blue'}
                   name={'Filter input'}
-                  value={searchInput ?? ''}
-                  onChange={(e) => setSearchInput(e)}
+                  value={query ?? ''}
+                  onChange={(e) => setQuery(e)}
                   placeholder="Leita eftir nafni"
                 />
               }
@@ -139,11 +168,11 @@ const UtgefidEfni: Screen<UtgefidEfniProps> = ({ title }) => {
         </section>
         <section>
           <Stack space={2}>
-            {data.map((t, index) => (
+            {filteredData.map((t, index) => (
               <FocusableBox
                 key={`${t.title}-${index}`}
                 component={LinkV2}
-                href={paths.handbaekur}
+                href={paths.handbok}
                 paddingY={2}
                 paddingX={3}
                 background="blue100"

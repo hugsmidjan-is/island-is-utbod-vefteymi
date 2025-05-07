@@ -5,4 +5,6 @@ import { getServerSidePropsWrapper } from '@island.is/web/utils/getServerSidePro
 // @ts-ignore make web strict
 const Screen = Frumvarp
 
+export default Screen
+
 export const getServerSideProps = getServerSidePropsWrapper(Screen)

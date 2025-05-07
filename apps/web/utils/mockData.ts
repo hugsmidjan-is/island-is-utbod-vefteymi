@@ -20,8 +20,9 @@ export const paths = {
 
   umAlthingi: '/s/althingi/um-althingi',
   utgefidEfni: '/s/althingi/um-althingi/utgefid-efni',
-  handbaekur: '/s/althingi/um-althingi/utgefid-efni/handbaekur/1',
-  handbokKafli: '/s/althingi/um-althingi/utgefid-efni/handbaekur/kafli/1',
+  handbaekur: '/s/althingi/um-althingi/utgefid-efni?query=handbók',
+  handbok: '/s/althingi/um-althingi/utgefid-efni/1',
+  handbokKafli: '/s/althingi/um-althingi/utgefid-efni/1/1',
 }
 
 export const searchItems: Array<SearchItem> = [
@@ -391,7 +392,7 @@ export const mockInfoStaffCards: Array<{
   },
 ]
 
-export const mockInfoCaseCards: Array<{
+export interface InfoCaseCards {
   id: string
   title: string
   description: string
@@ -403,7 +404,8 @@ export const mockInfoCaseCards: Array<{
   tags?: Array<ActionCardProps['tag']>
   eyebrow: string
   subEyebrow: string
-}> = [
+}
+export const mockInfoCaseCards: Array<InfoCaseCards> = [
   {
     id: '1',
     description: 'Aldursviðbót, launavísitala og tölfræðiupplýsingar.',
@@ -560,7 +562,7 @@ export const mockInfoCaseCards: Array<{
   },
 ]
 
-interface MockHandbook {
+export interface MockHandbook {
   title: string
   description: string
   publicationDate: string
@@ -625,7 +627,7 @@ const links = [
 
 export const mockHandbooks: Array<MockHandbook> = [
   {
-    title: 'Háttvirtur þingmaður 2024',
+    title: 'Háttvirtur þingmaður - Handbók um þingstörfin 2024',
     description:
       'Upplýsingarit fyrir nýkjörna alþingismenn og varaþingmenn. Ritinu er einnig ætlað að gagnast þeim sem hafa áhuga á starfsemi Alþingis.',
     publicationDate: 'Desember 2024',

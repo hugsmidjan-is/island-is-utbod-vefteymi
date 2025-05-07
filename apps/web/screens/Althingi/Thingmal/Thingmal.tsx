@@ -20,6 +20,7 @@ import { AlthingiFooter, DefaultHeader } from '@island.is/web/components'
 import { withMainLayout } from '@island.is/web/layouts/main'
 import { Screen } from '@island.is/web/types'
 import {
+  InfoCaseCards,
   mockInfoCaseCards,
   OrganizationMock,
   searchItems,
@@ -30,7 +31,7 @@ import ListView from '../components/ListView/ListView'
 import { SearchFilter } from '../components/SearchFilter/SearchFilter'
 import SearchHeader from '../components/SearchHeader/SearchHeader'
 
-const Thingmal: Screen<ThingmalProps> = () => {
+const Thingmal: Screen<ThingmalProps> = ({ data }) => {
   const { width } = useWindowSize()
   const [isGridLayout, setIsGridLayout] = useState(true)
   const [redirect, setRedirect] = useState(false)
@@ -57,17 +58,18 @@ const Thingmal: Screen<ThingmalProps> = () => {
 
   useEffect(() => {
     if (!query && !redirect) {
-      setFilteredCards(mockInfoCaseCards)
+      setFilteredCards(data)
     } else if (query) {
       setFilteredCards(
-        mockInfoCaseCards.filter((card) =>
+        data.filter((card) =>
           card.title.toLowerCase().includes(query.toLowerCase()),
         ),
       )
     }
   }, [query, redirect])
 
-  const totalCards = filteredCards?.length ?? mockInfoCaseCards.length
+  const totalCards = filteredCards?.length ?? data.length
+
   return (
     <Box>
       <Box>
@@ -104,15 +106,21 @@ const Thingmal: Screen<ThingmalProps> = () => {
                   onChange={(option) => setQuery(option)}
                 />
                 <SearchFilter
-                  onSearchUpdate={() => {
-                    setFilteredCards(
-                      mockInfoCaseCards.filter((card) =>
-                        card.tags?.some((tag) => tag?.label === 'Lagafrumvarp'),
-                      ),
-                    )
+                  onSearchUpdate={(id) => {
+                    if (id === 'all') {
+                      setFilteredCards(data)
+                    } else {
+                      setFilteredCards(
+                        data.filter((card) =>
+                          card.tags?.some(
+                            (tag) => tag?.label === 'Lagafrumvarp',
+                          ),
+                        ),
+                      )
+                    }
                   }}
                   searchState={{}}
-                  onReset={() => setFilteredCards(mockInfoCaseCards)}
+                  onReset={() => setFilteredCards(data)}
                   tags={[]}
                   url={''}
                 />
@@ -141,7 +149,7 @@ const Thingmal: Screen<ThingmalProps> = () => {
                       variant="popover"
                       onSearchUpdate={() => {
                         setFilteredCards(
-                          mockInfoCaseCards.filter((card) =>
+                          data.filter((card) =>
                             card.tags?.some(
                               (tag) => tag?.label === 'Lagafrumvarp',
                             ),
@@ -149,7 +157,7 @@ const Thingmal: Screen<ThingmalProps> = () => {
                         )
                       }}
                       searchState={{}}
-                      onReset={() => setFilteredCards(mockInfoCaseCards)}
+                      onReset={() => setFilteredCards(data)}
                       tags={[]}
                       url={''}
                     />
@@ -171,7 +179,7 @@ const Thingmal: Screen<ThingmalProps> = () => {
               {isGridLayout ? (
                 <InfoCardGrid
                   columns={1}
-                  cards={filteredCards ?? mockInfoCaseCards}
+                  cards={filteredCards ?? data}
                   variant="detailed"
                 />
               ) : (
@@ -212,13 +220,13 @@ const Thingmal: Screen<ThingmalProps> = () => {
 
 interface ThingmalProps {
   title: string
-  list?: [{ title: string; date: string }]
-  tags?: Array<string>
+  data: Array<InfoCaseCards>
 }
 
 Thingmal.getProps = async () => {
   return {
     title: 'Alþingi',
+    data: mockInfoCaseCards,
   }
 }
 export default withMainLayout(Thingmal, { showFooter: false, showHeader: true })
