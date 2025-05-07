@@ -33,6 +33,7 @@ import { PRELOADED_FONTS } from '../constants'
 import { GlobalContextProvider } from '../context'
 import { MenuTabsContext } from '../context/MenuTabsContext/MenuTabsContext'
 import {
+  ArticleCategory,
   ContentLanguage,
   GetAlertBannerQuery,
   GetArticleCategoriesQuery,
@@ -41,6 +42,8 @@ import {
   GetOrganizationPageQuery,
   GetSingleArticleQuery,
   Menu,
+  MenuLink,
+  MenuLinkWithChildren,
   QueryGetAlertBannerArgs,
   QueryGetArticleCategoriesArgs,
   QueryGetGroupedMenuArgs,
@@ -53,7 +56,7 @@ import {
   pathIsRoute,
   useLinkResolver,
 } from '../hooks/useLinkResolver'
-import { getLocaleFromPath, useI18n } from '../i18n'
+import { getLocaleFromPath } from '../i18n'
 import { GET_CATEGORIES_QUERY, GET_NAMESPACE_QUERY } from '../screens/queries'
 import { GET_ALERT_BANNER_QUERY } from '../screens/queries/AlertBanner'
 import { GET_GROUPED_MENU_QUERY } from '../screens/queries/Menu'
@@ -65,6 +68,13 @@ import {
 } from '../utils/processMenuData'
 import Illustration from './Illustration'
 import * as styles from './main.css'
+import {
+  alertBannerMock,
+  categoryMock,
+  footerMenuDataMock,
+  megamenuDatamock,
+  namespaceMock,
+} from './mock'
 
 const { publicRuntimeConfig = {} } = getConfig() ?? {}
 
@@ -156,7 +166,6 @@ const Layout: Screen<LayoutProps> = ({
   megaMenuData,
   customTopLoginButtonItem,
 }) => {
-  const { activeLocale, t } = useI18n()
   const { linkResolver } = useLinkResolver()
   const n = useNamespace(namespace)
   const router = useRouter()
@@ -164,8 +173,8 @@ const Layout: Screen<LayoutProps> = ({
 
   const menuTabs = [
     {
-      title: t.serviceCategories,
-      externalLinksHeading: t.serviceCategories,
+      title: 'Þjónustuflokkar',
+      externalLinksHeading: 'Þjónustuflokkar',
       links: categories.map((x) => {
         return {
           title: x.title,
@@ -174,9 +183,9 @@ const Layout: Screen<LayoutProps> = ({
       }),
     },
     {
-      title: t.siteTitle,
+      title: 'Stafrænt Ísland',
       links: topMenuCustomLinks,
-      externalLinksHeading: t.siteExternalTitle,
+      externalLinksHeading: 'Aðrir opinberir vefir',
       externalLinks: footerLowerMenu,
     },
   ]
@@ -235,11 +244,11 @@ const Layout: Screen<LayoutProps> = ({
     }
   }, [router.asPath, router.events])
 
-  const isServiceWeb = pathIsRoute(router.asPath, 'serviceweb', activeLocale)
+  const isServiceWeb = pathIsRoute(router.asPath, 'serviceweb', 'is')
 
   const organizationSearchFilter = extractOrganizationSlugFromPathname(
     router.asPath,
-    activeLocale,
+    'is',
   )
 
   return (
@@ -376,7 +385,7 @@ const Layout: Screen<LayoutProps> = ({
                 })
               }
             }}
-            closeButtonLabel={activeLocale === 'is' ? 'Loka' : 'Close'}
+            closeButtonLabel={'Loka'}
           />
         ))}
         <Hidden above="sm">
@@ -402,10 +411,7 @@ const Layout: Screen<LayoutProps> = ({
                 organizationSearchFilter={organizationSearchFilter}
                 searchPlaceholder={
                   organizationSearchFilter
-                    ? n(
-                        'organizationPageSearchPlaceholder',
-                        activeLocale === 'is' ? 'Leita' : 'Search',
-                      )
+                    ? n('organizationPageSearchPlaceholder', 'Leita')
                     : undefined
                 }
                 customTopLoginButtonItem={customTopLoginButtonItem}
@@ -435,11 +441,11 @@ const Layout: Screen<LayoutProps> = ({
                   topLinksContact={footerUpperContact}
                   bottomLinks={footerLowerMenu}
                   middleLinks={footerMiddleMenu}
-                  bottomLinksTitle={t.siteExternalTitle}
+                  bottomLinksTitle={'Aðrir opinberir vefir'}
                   middleLinksTitle={String(namespace.footerMiddleLabel)}
                   languageSwitchLink={{
-                    title: activeLocale === 'en' ? 'Íslenska' : 'English',
-                    href: activeLocale === 'en' ? '/' : '/en',
+                    title: 'English',
+                    href: '/en',
                   }}
                   privacyPolicyLink={{
                     title: n('privacyPolicyTitle', 'Persónuverndarstefna'),
@@ -521,63 +527,17 @@ Layout.getProps = async ({ apolloClient, locale, req }) => {
 
   const { origin } = absoluteUrl(req, 'localhost:4200')
   const respOrigin = `${origin}`
-  const [categories, alertBanner, namespace, megaMenuData, footerMenuData] =
-    await Promise.all([
-      apolloClient
-        .query<GetArticleCategoriesQuery, QueryGetArticleCategoriesArgs>({
-          query: GET_CATEGORIES_QUERY,
-          variables: {
-            input: {
-              lang: locale as ContentLanguage,
-            },
-          },
-        })
-        .then((res) => res.data.getArticleCategories),
-      apolloClient
-        .query<GetAlertBannerQuery, QueryGetAlertBannerArgs>({
-          query: GET_ALERT_BANNER_QUERY,
-          variables: {
-            input: { id: '2foBKVNnRnoNXx9CfiM8to', lang },
-          },
-        })
-        .then((res) => res.data.getAlertBanner),
-      apolloClient
-        .query<GetNamespaceQuery, QueryGetNamespaceArgs>({
-          query: GET_NAMESPACE_QUERY,
-          variables: {
-            input: {
-              namespace: 'Global',
-              lang,
-            },
-          },
-        })
-        .then((res) => {
-          // map data here to reduce data processing in component
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-expect-error make web strict
-          return JSON.parse(res.data.getNamespace.fields)
-        }),
-      apolloClient
-        .query<GetGroupedMenuQuery, QueryGetGroupedMenuArgs>({
-          query: GET_GROUPED_MENU_QUERY,
-          variables: {
-            input: { id: '5prHB8HLyh4Y35LI4bnhh2', lang },
-          },
-        })
-        .then((res) => res.data.getGroupedMenu),
-      apolloClient
-        .query<GetGroupedMenuQuery, QueryGetGroupedMenuArgs>({
-          query: GET_GROUPED_MENU_QUERY,
-          variables: {
-            input: { id: '7MeplCDXx2n01BoxRrekCi', lang },
-          },
-        })
-        .then((res) => res.data.getGroupedMenu),
-    ])
+
+  const alertBanner = alertBannerMock
+  const namespace = namespaceMock
+  const categories = categoryMock
+  const megaMenuData = megamenuDatamock
+  const footerMenuData = footerMenuDataMock
+
+  console.log('erum við hér?')
 
   const alertBannerId = `alert-${stringHash(JSON.stringify(alertBanner))}`
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error make web strict
   const [asideTopLinksData, asideBottomLinksData] = megaMenuData.menus
 
   const mapLinks = (item: Menu) =>
@@ -610,7 +570,6 @@ Layout.getProps = async ({ apolloClient, locale, req }) => {
     footerMiddleMenu: [],
   }
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error make web strict
   const footerMenu = footerMenuData.menus.reduce((menus, menu, idx) => {
     if (IS_MOCK) {
       const key = Object.keys(menus)[idx]
@@ -675,14 +634,20 @@ Layout.getProps = async ({ apolloClient, locale, req }) => {
     megaMenuData: {
       asideTopLinks: formatMegaMenuLinks(
         lang as Locale,
-        asideTopLinksData.menuLinks,
+        asideTopLinksData.menuLinks as (MenuLinkWithChildren | MenuLink)[],
       ),
       asideBottomTitle: asideBottomLinksData.title,
       asideBottomLinks: formatMegaMenuLinks(
         lang as Locale,
-        asideBottomLinksData.menuLinks,
+        asideBottomLinksData.menuLinks as (MenuLinkWithChildren | MenuLink)[],
       ),
-      mainLinks: formatMegaMenuCategoryLinks(lang as Locale, categories),
+      mainLinks: formatMegaMenuCategoryLinks(
+        lang as Locale,
+        categories.map((category) => ({
+          ...category,
+          __typename: 'ArticleCategory',
+        })) as ArticleCategory[],
+      ),
     },
   }
 }
