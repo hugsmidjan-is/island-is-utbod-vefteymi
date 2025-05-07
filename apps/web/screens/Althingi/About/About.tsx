@@ -1,21 +1,18 @@
 import React from 'react'
-import { useWindowSize } from 'react-use'
 import { useRouter } from 'next/router'
 
 import { ActionCard, Box, Stack, Text } from '@island.is/island-ui/core'
-import { theme } from '@island.is/island-ui/theme'
 import { SLICE_SPACING } from '@island.is/web/constants'
 import { withMainLayout } from '@island.is/web/layouts/main'
 import { Screen } from '@island.is/web/types'
 import { mockAboutArticles, paths } from '@island.is/web/utils/mockData'
 
-import Layout from '../Layout'
-import * as styles from './About.css'
 import GoBack from '../components/GoBack/GoBack'
 import NavigationSidebar from '../components/NavigationSidebar'
+import Layout from '../Layout'
+import * as styles from './About.css'
 
 const About: Screen<AboutProps> = ({ title }) => {
-  const { width } = useWindowSize()
   const router = useRouter()
 
   const data = mockAboutArticles
@@ -81,6 +78,13 @@ const About: Screen<AboutProps> = ({ title }) => {
           />
         </Stack>
       }
+      breadcrumbs={[
+        {
+          title: 'Um Alþingi',
+          href: paths.umAlthingi,
+          isCurrentPage: true,
+        },
+      ]}
     >
       <Stack space={SLICE_SPACING}>
         <section>
@@ -133,7 +137,7 @@ interface AboutProps {
 
 About.getProps = async () => {
   return {
-    title: 'Um Alþingi',
+    title: 'Upplýsingar um Alþingi',
   }
 }
 

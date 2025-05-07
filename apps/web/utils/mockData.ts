@@ -9,6 +9,7 @@ export const paths = {
 
   thingstorf: '/s/althingi/thingstorf',
   thingmal: '/s/althingi/thingstorf/thingmal',
+  thingmalLagafrumvarp: '/s/althingi/thingstorf/thingmal?type=lagafrumvarp',
   thingmalDetail: '/s/althingi/thingstorf/thingmal/1',
   thingmalSkjal: '/s/althingi/thingstorf/thingmal/1/skjal/1',
   thingfundir: '/s/althingi/thingstorf/thingfundir-og-raedur',
@@ -896,5 +897,37 @@ export const mockAboutArticles = [
     description:
       'Boðið er upp á leiðsögn og fræðslu fyrir skóla og aðra hópa í námslegum tilgang. Ekki er boðið upp á leiðsögn fyrir almenna gesti.',
     url: paths.umAlthingi,
+  },
+]
+
+export const mockThingstorfArticles = [
+  {
+    title: 'Þingmálaskrá',
+    description:
+      'Yfirlit yfir lagafrumvörp og önnur mál sem lögð hafa verið fram og stöðu þeirra.',
+    url: paths.thingmal,
+  },
+  {
+    title: 'Lagafrumvörp',
+    description:
+      'Yfirlit yfir lagafrumvörp og önnur mál sem lögð hafa verið fram og stöðu þeirra.',
+    url: paths.thingmalLagafrumvarp,
+  },
+  {
+    title: 'Fundargerðir og upptökur',
+    description:
+      'Hér má nálgast upptökur og fundargerðir af fundum Alþingis og hægt að skoða nánar ákveðnar umræður á þingi.',
+    url: paths.thingfundir,
+  },
+  {
+    title: 'Ræður',
+    description:
+      'Gervigreind skrifar upp ræður þingmanna og sérfræðingar í útgáfudeild lesa hann yfir. Bráðabirgðaútgáfa ræðutexta er aðgengileg á vefnum undir nafni ræðumanns jafnskjótt og hann hefur verið yfirlesinn.',
+    url: paths.thingfundir,
+  },
+  {
+    title: 'Dagskrá þingfundar',
+    description: 'Upplýsingar um dagskrá þingfundar má nálgast hér',
+    url: paths.thingfundir,
   },
 ]

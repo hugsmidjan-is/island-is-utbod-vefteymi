@@ -41,6 +41,7 @@ const Thingmal: Screen<ThingmalProps> = ({ data }) => {
 
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
   const [query, setQuery] = useQueryState('query')
+
   const router = useRouter()
 
   useEffect(() => {

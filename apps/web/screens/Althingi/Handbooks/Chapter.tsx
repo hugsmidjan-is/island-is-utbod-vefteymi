@@ -59,6 +59,14 @@ const Chapter: Screen<ChapterProps> = ({ locale }) => {
   return (
     <Layout
       title={data.title}
+      breadcrumbs={[
+        { title: 'Um Alþingi', href: paths.umAlthingi },
+        { title: 'Útgefið efni', href: paths.utgefidEfni },
+        {
+          title: 'Háttvirtur þingmaður - Handbók um þingstörfin 2024',
+          href: paths.handbok,
+        },
+      ]}
       sidebar={
         <Stack space={2}>
           <GoBack href={paths.handbok} />

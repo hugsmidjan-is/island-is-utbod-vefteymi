@@ -72,6 +72,13 @@ const UtgefidEfni: Screen<UtgefidEfniProps> = ({ title }) => {
   return (
     <Layout
       title={title}
+      breadcrumbs={[
+        {
+          title: 'Um Alþingi',
+          href: paths.umAlthingi,
+          isCurrentPage: true,
+        },
+      ]}
       sidebar={
         <Stack space={2}>
           <GoBack />

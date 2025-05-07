@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import sortBy from 'lodash/sortBy'
 
 import {
@@ -8,6 +8,8 @@ import {
   FilterProps,
 } from '@island.is/island-ui/core'
 import { isDefined } from '@island.is/shared/utils'
+import { useQueryState } from 'next-usequerystate'
+import { useRouter } from 'next/router'
 
 export interface SearchState {
   status?: 'open' | 'closed' // Staða
@@ -35,16 +37,34 @@ export const SearchFilter = ({
   variant = 'default',
   hits,
 }: Props) => {
-  const sortedFilters = {
-    categories: sortBy(
-      tags?.filter((t) => t.title === 'grant-category'),
-      'category',
-    ),
-    types: sortBy(
-      tags?.filter((t) => t.title === 'grant-type'),
-      'type',
-    ),
-  }
+  const [type, setType] = useQueryState('type')
+  const [redirect, setRedirect] = useState(false)
+
+  const router = useRouter()
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setRedirect(true)
+    }
+
+    router.events.on('routeChangeStart', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange)
+    }
+  }, [router])
+
+  useEffect(() => {
+    if (!type && !redirect) {
+      setIsChecked(false)
+    } else if (
+      type &&
+      (type.toLowerCase() === 'lagafrumvarp' ||
+        type.toLowerCase() === 'lagafrumvorp')
+    ) {
+      setIsChecked(true)
+      onSearchUpdate('Lagafrumvarp')
+    }
+  }, [type, redirect])
 
   const [isChecked, setIsChecked] = useState(false)
 

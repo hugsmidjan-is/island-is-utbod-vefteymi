@@ -39,6 +39,10 @@ const Handbook: Screen<HandbookProps> = ({ locale }) => {
   return (
     <Layout
       title={data.title}
+      breadcrumbs={[
+        { title: 'Um Alþingi', href: paths.umAlthingi },
+        { title: 'Útgefið efni', href: paths.utgefidEfni },
+      ]}
       sidebar={
         <Stack space={2}>
           <GoBack />

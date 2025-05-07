@@ -12,6 +12,7 @@ import { paths } from '@island.is/web/utils/mockData'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useWindowSize } from 'react-use'
+import NextLink from 'next/link'
 
 interface NavigationSidebarProps {
   title?: string
@@ -79,9 +80,9 @@ const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
   ]
 
   const defaultSubItems = [
-    { title: 'Lagafrumvörp', href: '/link1' },
+    { title: 'Lagafrumvörp', href: paths.thingmalLagafrumvarp },
     { title: 'Umsagnagátt', href: '/link2' },
-    { title: 'Handbækur', href: paths.utgefidEfni },
+    { title: 'Handbækur', href: paths.handbaekur },
   ]
 
   const SecondaryMenu = ({
@@ -126,6 +127,15 @@ const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
           title={title ?? 'Efnisyfirlit'}
           activeItemTitle="ACTIVE TITLE"
           expand
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error make web strict
+          renderLink={(link, { href }) => {
+            return (
+              <NextLink href={href} legacyBehavior>
+                {link}
+              </NextLink>
+            )
+          }}
         />
       </Stack>
 

@@ -53,10 +53,9 @@ const Thingmenn: Screen<ThingmennProps> = ({ title }) => {
       title={title}
       breadcrumbs={[
         {
-          title: 'Alþingismenn',
-          href: '/s/althingi/thingmenn',
+          title: 'Þingmenn',
+          href: paths.thingmenn,
           isCurrentPage: true,
-          isTag: true,
         },
       ]}
       sidebar={
@@ -66,7 +65,7 @@ const Thingmenn: Screen<ThingmennProps> = ({ title }) => {
             title="Þingmenn"
             items={[
               {
-                title: 'Þingmenn',
+                title: 'Alþingismenn',
                 href: paths.thingmenn,
                 accordion: true,
                 active: router.pathname === paths.thingmenn,

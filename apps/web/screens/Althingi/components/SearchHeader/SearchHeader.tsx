@@ -59,11 +59,11 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ title, onSearch }) => {
               ]}
             />
             <Text as="h1" variant="h1" marginY={2}>
-              {'Þingmál'}
+              {'Þingmálaskrá'}
             </Text>
             <Text variant="intro">
               {
-                'Non scelerisque risus amet tincidunt. Sit sed quis cursus hendrerit nulla egestas interdum.'
+                'Lagafrumvörp og önnur mál sem lögð hafa verið fram. Sýnd eru mál nýjasta þings nema annað sé valið.'
               }
               <Webreader readId={undefined} readClass="rs_read" />
             </Text>
