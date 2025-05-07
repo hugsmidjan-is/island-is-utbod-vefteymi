@@ -3,7 +3,7 @@ import { globalStyle, style } from '@vanilla-extract/css'
 import { theme } from '@island.is/island-ui/theme'
 
 export const footerBg = style({
-  background: '#174C97',
+  background: 'linear-gradient(180deg, #3D6BA2 0%, #315584 100%)',
   color: '#fff',
 })
 

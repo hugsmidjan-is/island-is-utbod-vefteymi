@@ -16,12 +16,7 @@ const DetailPanel: React.FC<DetailPanelProps> = ({
   backgroundColor,
 }) => {
   return (
-    <Box
-      background={backgroundColor}
-      padding={3}
-      borderRadius="large"
-      marginBottom={3}
-    >
+    <Box background={backgroundColor} padding={3} borderRadius="large">
       <Stack space={2}>
         {title && (
           <>
@@ -36,7 +31,7 @@ const DetailPanel: React.FC<DetailPanelProps> = ({
         {items.map((item, index) => (
           <Box key={`panel-item-${index}-${item.label}`}>
             <Text fontWeight="semiBold">{item.label}</Text>
-            <Text>{item.value}</Text>
+            <Text variant="medium">{item.value}</Text>
           </Box>
         ))}
       </Stack>

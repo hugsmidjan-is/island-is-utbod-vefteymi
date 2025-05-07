@@ -1,4 +1,4 @@
-import { IconMapIcon } from '@island.is/island-ui/core'
+import { IconMapIcon, IconProps, TagVariant } from '@island.is/island-ui/core'
 import { ActionCardProps } from '@island.is/island-ui/core/types'
 
 import { Organization } from '../graphql/schema'
@@ -10,12 +10,18 @@ export const paths = {
   thingstorf: '/s/althingi/thingstorf',
   thingmal: '/s/althingi/thingstorf/thingmal',
   thingmalDetail: '/s/althingi/thingstorf/thingmal/1',
+  thingmalSkjal: '/s/althingi/thingstorf/thingmal/1/skjal/1',
   thingfundir: '/s/althingi/thingstorf/thingfundir-og-raedur',
   thingfundur: '/s/althingi/thingstorf/thingfundir-og-raedur/1',
   upptokur: '/s/althingi/thingstorf/thingfundir/upptokur',
 
   thingmenn: '/s/althingi/thingmenn',
   thingmennDetail: '/s/althingi/thingmenn/logi-einarsson',
+
+  umAlthingi: '/s/althingi/um-althingi',
+  utgefidEfni: '/s/althingi/um-althingi/utgefid-efni',
+  handbaekur: '/s/althingi/um-althingi/utgefid-efni/handbaekur/1',
+  handbokKafli: '/s/althingi/um-althingi/utgefid-efni/handbaekur/kafli/1',
 }
 
 export const searchItems: Array<SearchItem> = [
@@ -549,6 +555,324 @@ export const mockInfoCaseCards: Array<{
         outlined: false,
 
         variant: 'purple',
+      },
+    ],
+  },
+]
+
+interface MockHandbook {
+  title: string
+  description: string
+  publicationDate: string
+  publicationVersion: string
+  publisher: string
+  href: string
+  textSlices: Array<{
+    label: string
+    lines: Array<string>
+  }>
+  chapters?: Array<{
+    title: string
+    text: string
+  }>
+  links?: Array<{
+    label: string
+    href: string
+  }>
+}
+
+const chapters = [
+  {
+    title: 'Alþingi og alþingismenn',
+    text: 'Starfssemi yfirstandandi þings; þingmál, umsangir, skýrslur, þingfundir og ræður',
+  },
+  {
+    title: 'Störf í þingsal',
+    text: 'Sitjandi aðal- og varaþingmenn, þingflokkar, hagsmunaskrá og sögulegar upplýsingar',
+  },
+  {
+    title: 'Nefndarstörf',
+    text: 'Starfssemi yfirstandandi þings; þingmál, umsangir, skýrslur, þingfundir og ræður',
+  },
+  {
+    title: 'Alþjóðastarf',
+    text: 'Sitjandi aðal- og varaþingmenn, þingflokkar, hagsmunaskrá og sögulegar upplýsingar',
+  },
+  {
+    title: 'Starfskjör',
+    text: 'Starfssemi yfirstandandi þings; þingmál, umsangir, skýrslur, þingfundir og ræður',
+  },
+  {
+    title: 'Hátterni og hagsmunaskráning',
+    text: 'Sitjandi aðal- og varaþingmenn, þingflokkar, hagsmunaskrá og sögulegar upplýsingar',
+  },
+]
+
+const links = [
+  {
+    label: 'Handbók Alþingis 2024',
+    href: paths.handbaekur,
+  },
+  {
+    label: 'Handbók Alþingis 2021',
+    href: paths.handbaekur,
+  },
+  {
+    label: 'Handbók Alþingis 2017',
+    href: paths.handbaekur,
+  },
+]
+
+export const mockHandbooks: Array<MockHandbook> = [
+  {
+    title: 'Handbók Alþingis 2024',
+    description: 'Handbók um þingstörfin',
+    publicationDate: 'Desember 2024',
+    publicationVersion: '3. útgáfa',
+    publisher: 'Skrifstofa Alþingis',
+    href: '2024',
+    links,
+    textSlices: [
+      {
+        label: 'Um handbókina',
+        lines: [
+          'Handbók alþingins kemur jafnan út á fyrsta reglulega þingi eftir kosningar. Sú fyrsta var gefin út.',
+          'Handbækur eru til á rafrænu formi frá árinu 1999.',
+          `Handbókin er uppflettirit um starfsemi þingsins og alþingismenn. Í
+        henni eru upplýsingar um síðustu alþingiskosningar hverju sinni,
+        upplýsingar um skipan þingsins og ýmsar skrár um alþingsmenn.
+        Meðal annars má þar finna æviágrip þingmanna, ýmsa tölfræði,
+        upplýsingar um þingflokka og nefndaskipan, svo eitthvað sé nefnt.
+        Í viðaukum handbókar eru upplýsningar um starfsmenn skrifstofu
+        Alþingis og starfsmenn þingflokka, auk starfsmanna þeirra
+        stofnanna sem undir Alþingi heyra.`,
+        ],
+      },
+    ],
+    chapters,
+  },
+  {
+    title: 'Handbók Alþingis 2021',
+    description: 'Handbók um þingstörfin',
+    publicationDate: 'Desember 2024',
+    publicationVersion: '3. útgáfa',
+    publisher: 'Skrifstofa Alþingis',
+    href: '2024',
+    links,
+    chapters,
+    textSlices: [
+      {
+        label: 'Um handbókina',
+        lines: [
+          'Handbók alþingins kemur jafnan út á fyrsta reglulega þingi eftir kosningar. Sú fyrsta var gefin út.',
+          'Handbækur eru til á rafrænu formi frá árinu 1999.',
+          `Handbókin er uppflettirit um starfsemi þingsins og alþingismenn. Í
+        henni eru upplýsingar um síðustu alþingiskosningar hverju sinni,
+        upplýsingar um skipan þingsins og ýmsar skrár um alþingsmenn.
+        Meðal annars má þar finna æviágrip þingmanna, ýmsa tölfræði,
+        upplýsingar um þingflokka og nefndaskipan, svo eitthvað sé nefnt.
+        Í viðaukum handbókar eru upplýsningar um starfsmenn skrifstofu
+        Alþingis og starfsmenn þingflokka, auk starfsmanna þeirra
+        stofnanna sem undir Alþingi heyra.`,
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Handbók Alþingis 2017',
+    description: 'Handbók um þingstörfin',
+    publicationDate: 'Desember 2024',
+    publicationVersion: '3. útgáfa',
+    publisher: 'Skrifstofa Alþingis',
+    href: '2024',
+    chapters,
+    links,
+    textSlices: [
+      {
+        label: 'Um handbókina',
+        lines: [
+          'Handbók alþingins kemur jafnan út á fyrsta reglulega þingi eftir kosningar. Sú fyrsta var gefin út.',
+          'Handbækur eru til á rafrænu formi frá árinu 1999.',
+          `Handbókin er uppflettirit um starfsemi þingsins og alþingismenn. Í
+        henni eru upplýsingar um síðustu alþingiskosningar hverju sinni,
+        upplýsingar um skipan þingsins og ýmsar skrár um alþingsmenn.
+        Meðal annars má þar finna æviágrip þingmanna, ýmsa tölfræði,
+        upplýsingar um þingflokka og nefndaskipan, svo eitthvað sé nefnt.
+        Í viðaukum handbókar eru upplýsningar um starfsmenn skrifstofu
+        Alþingis og starfsmenn þingflokka, auk starfsmanna þeirra
+        stofnanna sem undir Alþingi heyra.`,
+        ],
+      },
+    ],
+  },
+]
+
+export interface TableColumn {
+  value: string
+  isLink?: boolean
+  icon?: IconProps['icon']
+}
+
+export interface TableItem {
+  title: string
+  headers: string[]
+  columns: TableColumn[][]
+  isLink?: boolean
+}
+
+export const tabledata: TableItem[] = [
+  {
+    title: 'Þingskjöl',
+    headers: ['Útbýtingadagur', 'Þingskjal', 'Flutningamaður'],
+    columns: [
+      [
+        { value: '31.10.2024' },
+        { value: '97. stjórnarfrumvarp', isLink: true },
+        { value: 'Mennta- og barnamálaráðherra', isLink: true },
+      ],
+    ],
+  },
+  {
+    title: 'Umræða í þingsal',
+    headers: [
+      'Dags. umræðu',
+      'Þingfundur',
+      'Tegund umræðu',
+      'Tími umræðu',
+      ' ',
+    ],
+    columns: [
+      [
+        { value: '31.10.2024' },
+        { value: '6.fundur', isLink: true },
+        { value: '1. umræða - 2 atkvæðagreiðslur', isLink: true },
+        {
+          value: '10:50-11:30',
+          isLink: true,
+        },
+        {
+          value: 'Horfa',
+          isLink: true,
+          icon: 'arrowForward',
+        },
+      ],
+    ],
+  },
+  {
+    title: 'Umfjöllun í nefndum',
+    headers: ['Dagsetning', 'Fundur', 'Nefnd'],
+    columns: [
+      [
+        { value: '31.10.2024' },
+        { value: '3.fundur', isLink: true },
+        { value: 'Alls­herjar- og mennta­mála­nefnd' },
+      ],
+      [
+        { value: '31.10.2024' },
+        { value: '6.fundur', isLink: true },
+        { value: 'Alls­herjar- og mennta­mála­nefnd' },
+      ],
+    ],
+  },
+]
+
+export const secondTableData: TableItem[] = [
+  {
+    title: 'Þingskjöl',
+    headers: ['Útbýtingadagur', 'Þingskjal', 'Flutningamaður'],
+    columns: [
+      [
+        { value: '31.10.2024' },
+        { value: '97. stjórnarfrumvarp', isLink: true },
+        { value: 'Mennta- og barnamálaráðherra', isLink: true },
+      ],
+    ],
+  },
+  {
+    title: 'Umræða í þingsal',
+    headers: [
+      'Dags. umræðu',
+      'Þingfundur',
+      'Tegund umræðu',
+      'Tími umræðu',
+      ' ',
+    ],
+    columns: [
+      [
+        { value: '31.10.2024' },
+        { value: '6.fundur', isLink: true },
+        { value: '1. umræða - 2 atkvæðagreiðslur', isLink: true },
+        {
+          value: '10:50-11:30',
+          isLink: true,
+        },
+        {
+          value: 'Horfa',
+          isLink: true,
+          icon: 'arrowForward',
+        },
+      ],
+    ],
+  },
+  {
+    title: 'Umfjöllun í nefndum',
+    headers: ['Dagsetning', 'Fundur', 'Nefnd'],
+    columns: [
+      [
+        { value: '31.10.2024' },
+        { value: '3.fundur', isLink: true },
+        { value: 'Alls­herjar- og mennta­mála­nefnd' },
+      ],
+      [
+        { value: '31.10.2024' },
+        { value: '6.fundur', isLink: true },
+        { value: 'Alls­herjar- og mennta­mála­nefnd' },
+      ],
+    ],
+  },
+]
+
+export const videoTag = [
+  {
+    variant: 'blue' as TagVariant,
+    outlined: false,
+    active: true,
+    href: '/althingi/thingmal',
+    children: 'Dagskrá þingfundar',
+  },
+  {
+    variant: 'blue' as TagVariant,
+    outlined: true,
+    href: '/althingi/thingmal',
+    children: 'Fundir og heimsóknir',
+  },
+]
+
+export const videoTranscript = [
+  {
+    id: '1',
+    title: 'Störf þingsins',
+    contentLines: [
+      '351. mál, lagafrumvarp atvinnuvegaráðherra. -Framhald 1. umræðu',
+    ],
+    links: [
+      {
+        href: 'example.com',
+        label: 'Mælendaskrá',
+      },
+    ],
+  },
+  {
+    id: '2',
+    title: 'Veiðigjald (aflaverðmæti í reiknistofni)',
+    links: [
+      {
+        href: 'example.com',
+        label: 'Mælendaskrá',
+      },
+      {
+        href: 'example.com',
+        label: 'Nánar',
       },
     ],
   },

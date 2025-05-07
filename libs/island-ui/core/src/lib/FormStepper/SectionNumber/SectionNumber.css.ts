@@ -13,6 +13,18 @@ export const number = style({
   left: 0,
 })
 
+export const activeNumber = style({
+  width: 16,
+  height: 16,
+  color: theme.color.white,
+  fontWeight: theme.typography.semiBold,
+  fontSize: 18,
+  lineHeight: 0,
+  borderRadius: '50%',
+  top: 0,
+  left: 8,
+})
+
 export const progressLine = style({
   display: 'none',
   width: 2,

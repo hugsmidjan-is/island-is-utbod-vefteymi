@@ -104,7 +104,7 @@ const Layout: React.FC<LayoutProps> = ({
   const secondaryNavItems = [
     { title: 'Lagafrumvörp', href: '/link1' },
     { title: 'Umsagnagátt', href: '/link2' },
-    { title: 'Handbækur', href: '/link3' },
+    { title: 'Handbækur', href: paths.utgefidEfni },
   ]
   const SecondaryMenu = ({
     title,
@@ -184,13 +184,15 @@ const Layout: React.FC<LayoutProps> = ({
 
                 <ProfileCard
                   key={'card.id'}
-                  title={'card.title'}
-                  description={'card.contentString'}
+                  title={'Ungmennavefur Alþingis'}
+                  description={
+                    'Vefur fyrir ungt fólk á öllum aldri um Alþingi, sögu þess og dagleg störf. Hvað er svona merkilegt við það? '
+                  }
                   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                   // @ts-ignore make web strict
-                  link={'https://althingi.is'}
+                  link={'https://www.ungmennavefur.is/'}
                   image={
-                    'https://www.althingi.is/skin/basic9k/i/sitelogo-new.svg'
+                    'https://www.ungmennavefur.is/static/6a919a1211fd86e8e1a1b3e5d34609bd/b4490/Ahrif-Thingpallar.png'
                   }
                   size="default"
                 />
@@ -248,7 +250,7 @@ const Layout: React.FC<LayoutProps> = ({
 
         <GridContainer>
           <GridRow>
-            <GridColumn span={['9/9', '9/9', '7/9']} offset={['0', '0', '1/9']}>
+            <GridColumn span={['9/9', '9/9', '9/9']} offset={['0', '0', '1/9']}>
               <Stack space={3}>
                 <Box display="flex" justifyContent="spaceBetween">
                   <Breadcrumbs

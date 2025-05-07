@@ -29,6 +29,7 @@ interface SectionNumberProps {
   theme?: types.FormStepperThemes
   currentState: 'active' | 'previous' | 'next'
   number: number
+  last?: boolean
   lineHeight?: number
   isHistory?: boolean
 }
@@ -37,6 +38,7 @@ export const SectionNumber: FC<React.PropsWithChildren<SectionNumberProps>> = ({
   theme = types.FormStepperThemes.BLUE,
   currentState,
   number,
+  last,
   lineHeight,
   isHistory = false,
 }) => {
@@ -74,12 +76,14 @@ export const SectionNumber: FC<React.PropsWithChildren<SectionNumberProps>> = ({
           background={currentNumberColor}
           justifyContent="center"
           pointerEvents="none"
-          className={styles.number}
+          className={
+            currentState === 'active' ? styles.activeNumber : styles.number
+          }
         >
           {(currentState === 'previous' && (
             <Icon color="white" size="small" icon="checkmark" />
           )) ||
-            number}
+            undefined}
         </Box>
       )}
     </SectionNumberColumn>

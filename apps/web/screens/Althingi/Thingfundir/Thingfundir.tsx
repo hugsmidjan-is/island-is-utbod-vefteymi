@@ -223,7 +223,7 @@ const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
                         </T.Data>
                         <T.Data align="right">
                           {b.isPassed ? (
-                            <LinkV2 newTab key={b.id} href={b.streamUrl}>
+                            <LinkV2 key={b.id} href={b.streamUrl}>
                               <Button
                                 variant="text"
                                 size="small"

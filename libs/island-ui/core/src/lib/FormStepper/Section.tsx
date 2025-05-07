@@ -20,6 +20,7 @@ export const Section: FC<
     sectionIndex: number
     isActive?: boolean
     isComplete?: boolean
+    isLast?: boolean
   }>
 > = ({
   theme = types.FormStepperThemes.PURPLE,
@@ -28,6 +29,7 @@ export const Section: FC<
   sectionIndex,
   isActive = false,
   isComplete = false,
+  isLast = false,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const { height: activeHeight, width: activeWidth } =
@@ -67,6 +69,7 @@ export const Section: FC<
           <SectionNumber
             theme={theme}
             lineHeight={containerHeight}
+            last={isLast}
             currentState={
               isActive ? 'active' : isComplete ? 'previous' : 'next'
             }

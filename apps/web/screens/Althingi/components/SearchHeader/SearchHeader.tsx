@@ -32,12 +32,6 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ title, onSearch }) => {
         <GridRow>
           <GridColumn span={['0', '0', '2/6', '3/12', '3/12']} hiddenBelow="md">
             <Box display="flex" height="full">
-              {/* <img
-                src={'/assets/files.svg'}
-                className={styles.image}
-                alt={'illustration of woman holding files'}
-              /> */}
-
               <LinkV2 href={paths.home}>
                 <Button
                   preTextIcon="arrowBack"

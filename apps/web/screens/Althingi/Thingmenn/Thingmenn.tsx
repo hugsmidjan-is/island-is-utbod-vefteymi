@@ -21,8 +21,9 @@ import {
   withCustomPageWrapper,
 } from '../../CustomPage/CustomPageWrapper'
 import Layout from '../Layout'
+import { Screen } from '@island.is/web/types'
 
-const Thingmenn: CustomScreen<ThingmennProps> = ({ title }) => {
+const Thingmenn: Screen<ThingmennProps> = ({ title }) => {
   const { width } = useWindowSize()
   const isMobile = width < theme.breakpoints.md
   const [searchInput, setSearchInput] = React.useState<string>('')
@@ -143,9 +144,4 @@ Thingmenn.getProps = async () => {
   }
 }
 
-export default withMainLayout(
-  withCustomPageWrapper(
-    CustomPageUniqueIdentifier.OfficialJournalOfIceland,
-    Thingmenn,
-  ),
-)
+export default withMainLayout(Thingmenn, { showFooter: false })

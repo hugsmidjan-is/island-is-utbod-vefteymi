@@ -19,7 +19,12 @@ import { theme } from '@island.is/island-ui/theme'
 import { SLICE_SPACING } from '@island.is/web/constants'
 import { CustomPageUniqueIdentifier } from '@island.is/web/graphql/schema'
 import { withMainLayout } from '@island.is/web/layouts/main'
-import { mockInfoCards, paths } from '@island.is/web/utils/mockData'
+import {
+  mockInfoCards,
+  paths,
+  videoTag,
+  videoTranscript,
+} from '@island.is/web/utils/mockData'
 
 import {
   CustomScreen,
@@ -27,10 +32,14 @@ import {
 } from '../../CustomPage/CustomPageWrapper'
 import Layout from '../Layout'
 import * as styles from './Frontpage.css'
+import { useRouter } from 'next/router'
+import { Screen } from '@island.is/web/types'
+import { Video } from '../components/Video/Video'
 
-const Frontpage: CustomScreen<FrontpageProps> = ({ title }) => {
+const Frontpage: Screen<FrontpageProps> = ({ title }) => {
   const { width } = useWindowSize()
   const isMobile = width < theme.breakpoints.md
+  const router = useRouter()
   return (
     <Layout
       title={title}
@@ -44,7 +53,9 @@ const Frontpage: CustomScreen<FrontpageProps> = ({ title }) => {
             padding={6}
           >
             <Box width="full" display={'flex'} justifyContent={'spaceBetween'}>
-              <Text variant="h4">{'Á döfinni'}</Text>
+              <Text variant="h4" as="h3">
+                {'Á döfinni'}
+              </Text>
               <Box display="flex" justifyContent="center">
                 <LinkV2 href={'/s/althingi'}>
                   <Button
@@ -97,7 +108,7 @@ const Frontpage: CustomScreen<FrontpageProps> = ({ title }) => {
                 variant="white"
                 outlined={true}
                 whiteBackground
-                href="/s/althingi"
+                href={paths.thingfundir}
               >
                 {'Ræður'}
               </Tag>
@@ -131,10 +142,14 @@ const Frontpage: CustomScreen<FrontpageProps> = ({ title }) => {
             <GridContainer>
               <GridRow className={styles.gridRow}>
                 <GridColumn
-                  offset={['0', '0', '1/12']}
-                  span={['3/12', '3/12', '3/12']}
+                  offset={['1/12', '1/12', '1/12']}
+                  span={['9/12', '9/12', '3/12']}
+                  paddingBottom={[3, 3, 0]}
                 >
-                  <Box>
+                  <Box
+                    display={'flex'}
+                    justifyContent={['center', 'center', 'flexStart']}
+                  >
                     <img
                       src={'/assets/files.svg'}
                       alt={'Alþingi'}
@@ -145,11 +160,11 @@ const Frontpage: CustomScreen<FrontpageProps> = ({ title }) => {
                   </Box>
                 </GridColumn>
                 <GridColumn
-                  offset={['0', '0', '0']}
+                  offset={['1/12', '1/12', '0']}
                   span={['9/12', '7/12', '7/12']}
                 >
-                  <Box marginBottom={2}>
-                    <Text variant="h2" marginBottom={2}>
+                  <Box marginBottom={[4, 4, 2]}>
+                    <Text variant="h2" as="h3" marginBottom={2}>
                       Senda inn umsögn
                     </Text>
                     <Text>
@@ -158,7 +173,7 @@ const Frontpage: CustomScreen<FrontpageProps> = ({ title }) => {
                       Duis praesent ut sem non et augue pretium turpis.
                     </Text>
                   </Box>
-                  <Stack space={2}>
+                  <Stack space={[3, 3, 2]}>
                     <Box>
                       <Button
                         variant="text"
@@ -190,13 +205,14 @@ const Frontpage: CustomScreen<FrontpageProps> = ({ title }) => {
               <GridRow className={styles.gridRow}>
                 <GridColumn
                   offset={['0', '0', '1/12']}
-                  span={['4/12', '4/12', '4/12']}
+                  span={['12/12', '12/12', '4/12']}
+                  paddingBottom={[3, 3, 0]}
                 >
                   <Box>
                     <Text variant="eyebrow" color="purple400" marginBottom={2}>
                       Tölfræði
                     </Text>
-                    <Text variant="h2" marginBottom={2}>
+                    <Text variant="h2" as="h3" marginBottom={2}>
                       Vissir þú...
                     </Text>
                     <Text>
@@ -207,7 +223,7 @@ const Frontpage: CustomScreen<FrontpageProps> = ({ title }) => {
                 </GridColumn>
                 <GridColumn
                   offset={['0', '0', '0']}
-                  span={['9/12', '3/12', '3/12']}
+                  span={['12/12', '3/12', '3/12']}
                 >
                   <Box marginBottom={2} background="blue100" padding={3}>
                     <Text variant="eyebrow">Stofnár Alþingis</Text>
@@ -224,7 +240,7 @@ const Frontpage: CustomScreen<FrontpageProps> = ({ title }) => {
                 </GridColumn>
                 <GridColumn
                   offset={['0', '0', '0']}
-                  span={['9/12', '3/12', '3/12']}
+                  span={['12/12', '3/12', '3/12']}
                 >
                   <Box marginBottom={2} background="blue100" padding={3}>
                     <Text variant="eyebrow">Kjörtímabil</Text>
@@ -252,7 +268,9 @@ const Frontpage: CustomScreen<FrontpageProps> = ({ title }) => {
       <Stack space={SLICE_SPACING}>
         <section>
           <Box marginTop={2}>
-            <Text variant="h1">{title}</Text>
+            <Text variant="h1" as="h2">
+              {title}
+            </Text>
             <Text variant="intro" as="p" paddingTop={3} marginBottom={3}>
               Velkomin á vef Alþingis, æðsta handhafa löggjafarvalds á Íslandi.{' '}
             </Text>
@@ -303,49 +321,33 @@ const Frontpage: CustomScreen<FrontpageProps> = ({ title }) => {
         <Divider />
         <section>
           <Box display="flex" justifyContent="spaceBetween" marginBottom={2}>
-            <Text variant="h3">Útsending</Text>
+            <Text variant="h3" as="h3">
+              Útsending
+            </Text>
             <Box display="flex" flexDirection="row">
               <Button
                 variant="text"
                 icon="arrowForward"
                 iconType="outline"
                 size="small"
+                onClick={() => router.push(paths.thingfundir)}
               >
                 Sjá upptökur
               </Button>
             </Box>
           </Box>
-          <Box
-            padding={3}
-            border="standard"
-            borderColor="blue200"
-            borderRadius="standard"
-          >
-            <iframe
-              className={styles.video}
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/fw7yXuwc2bE?si=2kx6pEzmDP6OjTqR"
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
-            <Box
-              display="flex"
-              flexWrap={'wrap'}
-              rowGap={1}
-              columnGap={1}
-              marginTop={3}
-            >
-              <Tag variant="blue" outlined={false} active href={paths.home}>
-                {'Dagskrá þingfundar'}
-              </Tag>
-              <Tag variant="blue" outlined={true} href={paths.home}>
-                {'Fundir og heimsóknir'}
-              </Tag>
-            </Box>
-          </Box>
+
+          <Video
+            url={
+              'http://vod.althingi.is/player/?type=vod&width=512&height=288&icons=yes&file=20250506T131300&start=1004&duration=20669&autoplay=true'
+            }
+            tags={videoTag}
+            transcript={{
+              items: videoTranscript,
+              contentLabel: 'Dagskrá 35. þingfundar',
+              title: 'þriðjudaginn 6. maí kl. 13:30',
+            }}
+          />
         </section>
         <section>
           <Stack space={3}>
@@ -404,10 +406,4 @@ Frontpage.getProps = async () => {
   }
 }
 
-export default withMainLayout(
-  withCustomPageWrapper(
-    CustomPageUniqueIdentifier.OfficialJournalOfIceland,
-    Frontpage,
-  ),
-  { showFooter: false },
-)
+export default withMainLayout(Frontpage, { showFooter: false })

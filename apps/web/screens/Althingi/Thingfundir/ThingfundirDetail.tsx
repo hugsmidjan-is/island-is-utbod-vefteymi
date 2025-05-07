@@ -1,20 +1,30 @@
 import React from 'react'
 import { useWindowSize } from 'react-use'
 
-import { Box, Hidden, IconProps, Text } from '@island.is/island-ui/core'
+import {
+  Box,
+  Button,
+  Hidden,
+  IconProps,
+  Stack,
+  Tag,
+  Text,
+} from '@island.is/island-ui/core'
 import { theme } from '@island.is/island-ui/theme'
 import { withMainLayout } from '@island.is/web/layouts/main'
 import { Screen } from '@island.is/web/types'
 
 import Layout from '../Layout'
 import { Video } from '../components/Video/Video'
-import { paths } from '@island.is/web/utils/mockData'
+import { paths, videoTag, videoTranscript } from '@island.is/web/utils/mockData'
 import DetailPanel from '../components/Panels/DetailPanel'
 import LinkPanel from '../components/Panels/LinkPanel'
+import GoBack from '../components/GoBack/GoBack'
 
 const ThingfundirDetail: Screen<ThingfundirDetailProps> = ({ title }) => {
   const { width } = useWindowSize()
   const isMobile = width < theme.breakpoints.md
+
   const detailPanelData = [
     { label: 'Þingsnúmer', value: '156.löggjafarþing 2025' },
     {
@@ -67,21 +77,46 @@ const ThingfundirDetail: Screen<ThingfundirDetailProps> = ({ title }) => {
         },
       ]}
       sidebar={
-        <Box>
+        <Stack space={2}>
+          <GoBack />
           <DetailPanel
             backgroundColor={'blue100'}
             items={detailPanelData}
             title="Upptaka"
           />
-          <LinkPanel backgroundColor="purple100" links={linkPanelData} />
-        </Box>
+          <Button variant="utility" fluid icon="download" iconType="outline">
+            Hlaða niður vídeóskrá
+          </Button>
+          <Button variant="utility" fluid icon="download" iconType="outline">
+            Hlaða niður hljóðskrá
+          </Button>
+          <Button variant="utility" fluid icon="link" iconType="outline">
+            Sækja embed kóða
+          </Button>
+        </Stack>
       }
     >
       <Text variant="h1" marginBottom={2} marginTop={2}>
         Þingfundur 34
       </Text>
+      <Box marginY={6}>
+        <Text variant="eyebrow" marginBottom={2}>
+          Tengt efni
+        </Text>
+        <Box display="flex" flexWrap={'wrap'} rowGap={1} columnGap={1}>
+          <Tag variant="blue" outlined={false} href={paths.home}>
+            {'Fundargerð fundarins'}
+          </Tag>
+        </Box>
+      </Box>
       <Video
         url={'https://www.youtube.com/embed/fw7yXuwc2bE?si=2kx6pEzmDP6OjTqR'}
+        tags={videoTag}
+        transcript={{
+          items: videoTranscript,
+          contentLabel: 'Dagskrá 35. þingfundar',
+          title: 'þriðjudaginn 6. maí kl. 13:30',
+        }}
       />
       <Hidden above="sm">
         <Box marginTop={5} marginBottom={2}>

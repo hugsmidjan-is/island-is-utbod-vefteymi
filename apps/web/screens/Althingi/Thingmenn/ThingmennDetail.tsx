@@ -21,8 +21,9 @@ import {
 } from '../../CustomPage/CustomPageWrapper'
 import Layout from '../Layout'
 import ProfileCard from './ProfileCard'
+import { Screen } from '@island.is/web/types'
 
-const ThingmennDetail: CustomScreen<ThingmennDetailProps> = ({ title }) => {
+const ThingmennDetail: Screen<ThingmennDetailProps> = ({ title }) => {
   const { width } = useWindowSize()
   const isMobile = width < theme.breakpoints.md
   return (
@@ -175,9 +176,4 @@ ThingmennDetail.getProps = async () => {
   }
 }
 
-export default withMainLayout(
-  withCustomPageWrapper(
-    CustomPageUniqueIdentifier.OfficialJournalOfIceland,
-    ThingmennDetail,
-  ),
-)
+export default withMainLayout(ThingmennDetail, { showFooter: false })

@@ -2,63 +2,70 @@ import React, { useEffect, useState } from 'react'
 import { useWindowSize } from 'react-use'
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { InfoCardItemProps } from 'libs/island-ui/core/src/lib/InfoCardGrid/InfoCardGrid'
+import { useRouter } from 'next/router'
 import { parseAsInteger, useQueryState } from 'next-usequerystate'
 
 import {
   Box,
   Button,
   FilterInput,
+  Hidden,
   InfoCardGrid,
   Pagination,
   Stack,
   Text,
 } from '@island.is/island-ui/core'
 import { theme } from '@island.is/island-ui/theme'
-import { CustomPageUniqueIdentifier } from '@island.is/shared/types'
 import { AlthingiFooter, DefaultHeader } from '@island.is/web/components'
 import { withMainLayout } from '@island.is/web/layouts/main'
+import { Screen } from '@island.is/web/types'
 import {
   mockInfoCaseCards,
   OrganizationMock,
   searchItems,
 } from '@island.is/web/utils/mockData'
 
-import {
-  CustomScreen,
-  withCustomPageWrapper,
-} from '../../CustomPage/CustomPageWrapper'
 import SidebarLayout from '../../Layouts/SidebarLayout'
-import GridView from '../components/GridView/GridView'
 import ListView from '../components/ListView/ListView'
-import {
-  SearchFilter,
-  SearchState,
-} from '../components/SearchFilter/SearchFilter'
+import { SearchFilter } from '../components/SearchFilter/SearchFilter'
 import SearchHeader from '../components/SearchHeader/SearchHeader'
 
-const Thingmal: CustomScreen<ThingmalProps> = () => {
+const Thingmal: Screen<ThingmalProps> = () => {
   const { width } = useWindowSize()
   const [isGridLayout, setIsGridLayout] = useState(true)
+  const [redirect, setRedirect] = useState(false)
   const [filteredCards, setFilteredCards] = React.useState<
     Array<InfoCardItemProps> | undefined
   >(undefined)
 
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
   const [query, setQuery] = useQueryState('query')
+  const router = useRouter()
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setRedirect(true)
+    }
+
+    router.events.on('routeChangeStart', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange)
+    }
+  }, [router])
 
   const isTablet = width <= theme.breakpoints.lg
 
   useEffect(() => {
-    if (!query) {
+    if (!query && !redirect) {
       setFilteredCards(mockInfoCaseCards)
-    } else {
+    } else if (query) {
       setFilteredCards(
         mockInfoCaseCards.filter((card) =>
           card.title.toLowerCase().includes(query.toLowerCase()),
         ),
       )
     }
-  }, [query])
+  }, [query, redirect])
 
   const totalCards = filteredCards?.length ?? mockInfoCaseCards.length
   return (
@@ -81,7 +88,7 @@ const Thingmal: CustomScreen<ThingmalProps> = () => {
           throw new Error('Function not implemented.')
         }}
       />
-      <Box background="dark100" marginY={isTablet ? 6 : 8}>
+      <Box background="dark100" marginTop={isTablet ? 6 : 8} marginBottom={0}>
         {
           <SidebarLayout
             fullWidthContent={true}
@@ -112,7 +119,7 @@ const Thingmal: CustomScreen<ThingmalProps> = () => {
               </Stack>
             }
           >
-            <Box marginLeft={[0, 0, 0, 7]}>
+            <Box marginLeft={[0, 0, 0, 7]} marginTop={[3, 3, 0]}>
               <Box
                 marginBottom={3}
                 display="flex"
@@ -123,16 +130,43 @@ const Thingmal: CustomScreen<ThingmalProps> = () => {
                   <Box marginRight={1}></Box>
                   <Text>{'færslur fundust'}</Text>
                 </Box>
-                <Button
-                  variant="utility"
-                  icon={isGridLayout ? 'menu' : 'gridView'}
-                  iconType="filled"
-                  colorScheme="white"
-                  size="small"
-                  onClick={() => setIsGridLayout(!isGridLayout)}
-                >
-                  {isGridLayout ? 'Sýna sem lista' : 'Sýna sem spjöld'}
-                </Button>
+                <Hidden above="sm">
+                  <Box
+                    display="flex"
+                    justifyContent="flexEnd"
+                    height="full"
+                    alignItems={'center'}
+                  >
+                    <SearchFilter
+                      variant="popover"
+                      onSearchUpdate={() => {
+                        setFilteredCards(
+                          mockInfoCaseCards.filter((card) =>
+                            card.tags?.some(
+                              (tag) => tag?.label === 'Lagafrumvarp',
+                            ),
+                          ),
+                        )
+                      }}
+                      searchState={{}}
+                      onReset={() => setFilteredCards(mockInfoCaseCards)}
+                      tags={[]}
+                      url={''}
+                    />
+                  </Box>
+                </Hidden>
+                <Hidden below="md">
+                  <Button
+                    variant="utility"
+                    icon={isGridLayout ? 'menu' : 'gridView'}
+                    iconType="filled"
+                    colorScheme="white"
+                    size="small"
+                    onClick={() => setIsGridLayout(!isGridLayout)}
+                  >
+                    {isGridLayout ? 'Sýna sem lista' : 'Sýna sem spjöld'}
+                  </Button>
+                </Hidden>
               </Box>
               {isGridLayout ? (
                 <InfoCardGrid
@@ -167,80 +201,6 @@ const Thingmal: CustomScreen<ThingmalProps> = () => {
             </Box>
           </SidebarLayout>
         }
-        {/* {isTablet && (
-          <Box margin={3} paddingTop={3}>
-            <Text fontWeight="semiBold">{'leita'}</Text>
-            <Box marginTop={2} style={{ maxWidth: '475px' }}>
-              <FilterInput
-                name="query"
-                placeholder={'placeholder'}
-                value={query ?? ''}
-                onChange={(option) => setQuery(option)}
-                backgroundColor={'white'}
-              />
-            </Box>
-            <Box
-              marginTop={2}
-              display="flex"
-              justifyContent="spaceBetween"
-              height="full"
-              alignItems={'center'}
-            >
-              <Text>{'hitsMessage'}</Text>
-
-              <SearchFilter
-                onSearchUpdate={function (
-                  categoryId: keyof SearchState,
-                  values?: Array<string>,
-                ): void {
-                  throw new Error('Function not implemented.')
-                }}
-                onReset={function (): void {
-                  throw new Error('Function not implemented.')
-                }}
-                tags={[]}
-                url={''}
-              />
-            </Box>
-            <Box marginTop={2}>
-              <InfoCardGrid
-                cards={[
-                  {
-                    id: '1',
-                    eyebrow: 'Eyebrow',
-                    title: 'Title',
-                    description: 'Description',
-                    link: {
-                      href: '/link',
-                      label: 'Link',
-                    },
-                    borderColor: 'blue200',
-                  },
-                ]}
-              />
-            </Box>
-            <Box marginTop={2} paddingBottom={2} hidden={8 < 1}>
-              <Pagination
-                variant="purple"
-                page={page}
-                itemsPerPage={8}
-                totalItems={200}
-                totalPages={200 / 8}
-                renderLink={(page, className, children) => (
-                  <Box
-                    cursor="pointer"
-                    className={className}
-                    onClick={() => {
-                      setPage(page)
-                    }}
-                  >
-                    {children}
-                  </Box>
-                )}
-              />
-            </Box>
-          </Box>
-        )} */}
       </Box>
       <AlthingiFooter
         footerItems={OrganizationMock.footerItems}
@@ -261,10 +221,4 @@ Thingmal.getProps = async () => {
     title: 'Alþingi',
   }
 }
-export default withMainLayout(
-  withCustomPageWrapper(
-    CustomPageUniqueIdentifier.OfficialJournalOfIceland,
-    Thingmal,
-  ),
-  { showFooter: false, showHeader: true },
-)
+export default withMainLayout(Thingmal, { showFooter: false, showHeader: true })

@@ -52,17 +52,17 @@ const AlthingiFooter: React.FC<React.PropsWithChildren<FooterProps>> = ({
               <GridColumn
                 paddingBottom={[3, 3, 0]}
                 span={['8/12']}
-                offset={'1/12'}
+                offset={['0', '1/12']}
               >
                 <GridRow>
-                  <GridColumn span={['2/8']}>
+                  <GridColumn span={['8/8', '2/8']} paddingBottom={[3, 3, 0]}>
                     <Box>
                       <Text fontWeight="semiBold">Heimilisfang</Text>
 
                       <Text>101 Reykjavík</Text>
                     </Box>
                   </GridColumn>
-                  <GridColumn span={['2/8']}>
+                  <GridColumn span={['8/8', '2/8']} paddingBottom={[3, 3, 0]}>
                     <Box>
                       <Text fontWeight="semiBold">Opnunartími</Text>
                       <Text>
@@ -70,7 +70,7 @@ const AlthingiFooter: React.FC<React.PropsWithChildren<FooterProps>> = ({
                       </Text>
                     </Box>
                   </GridColumn>
-                  <GridColumn span={['2/8']}>
+                  <GridColumn span={['8/8', '2/8']} paddingBottom={[3, 3, 0]}>
                     <Box>
                       <Text fontWeight="semiBold">Hafðu samband</Text>
                       <Text>Sími: 563 0500</Text>
@@ -82,7 +82,7 @@ const AlthingiFooter: React.FC<React.PropsWithChildren<FooterProps>> = ({
                       </Text>
                     </Box>
                   </GridColumn>
-                  <GridColumn span={['2/8']}>
+                  <GridColumn span={['8/8', '2/8']} paddingBottom={[3, 3, 0]}>
                     <Box>
                       <Inline space={1} alignY="center">
                         <Icon size="small" icon="facebook" color="white" />

@@ -4,6 +4,7 @@ import sortBy from 'lodash/sortBy'
 import {
   Box,
   Filter,
+  FilterInput,
   FilterMultiChoice,
   FilterProps,
 } from '@island.is/island-ui/core'
@@ -52,6 +53,7 @@ export const SearchFilter = ({
   }
 
   const [isChecked, setIsChecked] = useState(false)
+
   return (
     <Box
       component="form"
@@ -63,7 +65,7 @@ export const SearchFilter = ({
     >
       <Filter
         labelClearAll={'Hreinsa allt'}
-        labelOpen={'Opna'}
+        labelOpen={'Leit og síun'}
         labelClose={'Loka'}
         labelClear={'Hreinsa'}
         labelTitle={'Sía'}
@@ -115,10 +117,6 @@ export const SearchFilter = ({
                       {
                         value: 'type2',
                         label: 'Sérstakar umræður',
-                      },
-                      {
-                        value: 'type2',
-                        label: 'Staða mála',
                       },
                       {
                         value: 'type2',

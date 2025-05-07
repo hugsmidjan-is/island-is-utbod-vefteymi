@@ -406,3 +406,7 @@ export const checkboxChecked = style({
     },
   },
 })
+
+globalStyle(`${wrapper} .island-select__value-container`, {
+  width: '100%',
+})
