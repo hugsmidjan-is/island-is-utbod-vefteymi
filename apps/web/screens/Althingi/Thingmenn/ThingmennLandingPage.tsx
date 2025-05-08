@@ -88,13 +88,6 @@ const ThingmennLandingPage: Screen<ThingmennLandingPageProps> = ({ title }) => {
           />
         </Stack>
       }
-      breadcrumbs={[
-        {
-          title: 'Þingmenn',
-          href: paths.thingmennLanding,
-          isCurrentPage: true,
-        },
-      ]}
     >
       <Stack space={SLICE_SPACING}>
         <section>

@@ -59,6 +59,10 @@ const Frumvarp: Screen<FrumvarpProps> = ({ locale }) => {
             href: paths.thingstorf,
           },
           {
+            title: 'Þingmál',
+            href: paths.thingstorf,
+          },
+          {
             title: 'Þingmálaskrá',
             href: paths.thingmal,
           },

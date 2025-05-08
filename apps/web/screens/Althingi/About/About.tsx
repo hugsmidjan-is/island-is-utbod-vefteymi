@@ -78,13 +78,6 @@ const About: Screen<AboutProps> = ({ title }) => {
           />
         </Stack>
       }
-      breadcrumbs={[
-        {
-          title: 'Um Alþingi',
-          href: paths.umAlthingi,
-          isCurrentPage: true,
-        },
-      ]}
     >
       <Stack space={SLICE_SPACING}>
         <section>

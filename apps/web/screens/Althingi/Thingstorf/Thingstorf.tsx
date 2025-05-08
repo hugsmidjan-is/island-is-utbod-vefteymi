@@ -141,13 +141,6 @@ const Thingstorf: Screen<ThingstorfProps> = ({ title }) => {
           />
         </Stack>
       }
-      breadcrumbs={[
-        {
-          title: 'Þingstörf',
-          href: paths.thingstorf,
-          isCurrentPage: true,
-        },
-      ]}
     >
       <Stack space={SLICE_SPACING}>
         <section>

@@ -1,10 +1,9 @@
 import React from 'react'
-import { useWindowSize } from 'react-use'
 
 import { Box, Stack, Tag, Text } from '@island.is/island-ui/core'
-import { theme } from '@island.is/island-ui/theme'
 import { withMainLayout } from '@island.is/web/layouts/main'
 import { Screen } from '@island.is/web/types'
+import { paths } from '@island.is/web/utils/mockData'
 
 import GoBack from '../components/GoBack/GoBack'
 import Layout from '../Layout'
@@ -16,8 +15,12 @@ const ThingmennDetail: Screen<ThingmennDetailProps> = ({ title }) => {
       title={'Logi Einarsson'}
       breadcrumbs={[
         {
+          title: 'Þingmenn',
+          href: paths.thingmennLanding,
+        },
+        {
           title: 'Alþingismenn',
-          href: '/s/althingi/thingmenn',
+          href: paths.thingmenn,
         },
       ]}
       sidebar={

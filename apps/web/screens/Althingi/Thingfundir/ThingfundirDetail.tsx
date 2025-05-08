@@ -73,6 +73,11 @@ const ThingfundirDetail: Screen<ThingfundirDetailProps> = ({ title }) => {
         {
           title: 'Þingfundir og ræður',
           href: paths.thingfundir,
+          isCurrentPage: false,
+        },
+        {
+          title: 'Fundargerðir og upptökur',
+          href: paths.thingfundir,
           isCurrentPage: true,
         },
       ]}
