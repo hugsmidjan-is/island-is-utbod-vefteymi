@@ -118,8 +118,9 @@ const About: Screen<AboutProps> = ({ title }) => {
         </section>
         <section>
           <Stack space={3}>
-            {data.map((article) => (
+            {data.map((article, index) => (
               <ActionCard
+                key={`${article.title}-${index}`}
                 heading={article.title}
                 text={article.description}
                 cta={{

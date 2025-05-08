@@ -59,8 +59,8 @@ const FullWidthLayout: React.FC<LayoutProps> = ({
         <DefaultHeader
           title={'Alþingi'}
           titleColor="white"
-          image={'/assets/althingi-new-logo.svg'}
-          background="linear-gradient(180deg, #3D6BA2 0%, #315584 100%);"
+          image={image}
+          background="linear-gradient(180deg, #3D6BA2 0%, #315584 100%)"
           imagePadding="20px"
           logoHref="/s/althingi"
           isSubpage={isMobile ? true : router.pathname !== paths.home}
@@ -106,8 +106,13 @@ const FullWidthLayout: React.FC<LayoutProps> = ({
                   columnGap={1}
                   marginTop={1}
                 >
-                  {tags?.map((tag) => (
-                    <Tag variant="blue" outlined={false} href={tag.href}>
+                  {tags?.map((tag, index) => (
+                    <Tag
+                      key={`${tag.label}-${index}`}
+                      variant="blue"
+                      outlined={false}
+                      href={tag.href}
+                    >
                       {tag.label}
                     </Tag>
                   ))}

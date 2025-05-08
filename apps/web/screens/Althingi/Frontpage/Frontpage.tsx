@@ -1,11 +1,9 @@
 import React from 'react'
 import { useWindowSize } from 'react-use'
-import { useRouter } from 'next/router'
 
 import {
   Box,
   Button,
-  CategoryCard,
   Divider,
   GridColumn,
   GridContainer,
@@ -39,7 +37,10 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
   return (
     <FullWidthLayout
       title={title}
-      description={''}
+      image="/assets/althingi-new-logo.svg"
+      description={
+        'Alþingi Íslands fer með löggjafarvald og gegnir lykilhlutverki í íslenskri stjórnsýslu.'
+      }
       tags={[
         { label: 'Þingstörf', href: paths.home },
         { label: 'Þingmálalistar', href: paths.home },

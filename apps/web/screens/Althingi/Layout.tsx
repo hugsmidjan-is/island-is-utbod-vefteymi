@@ -176,7 +176,7 @@ const Layout: React.FC<LayoutProps> = ({
           title={'Alþingi'}
           titleColor="white"
           image={'/assets/althingi-new-logo.svg'}
-          background="linear-gradient(180deg, #3D6BA2 0%, #315584 100%);"
+          background="linear-gradient(180deg, #3D6BA2 0%, #315584 100%)"
           imagePadding="20px"
           logoHref="/s/althingi"
           isSubpage={isMobile ? true : router.pathname !== paths.home}

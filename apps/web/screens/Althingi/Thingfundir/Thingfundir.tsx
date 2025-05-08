@@ -1,46 +1,37 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useWindowSize } from 'react-use'
+import format from 'date-fns/format'
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { InfoCardItemProps } from 'libs/island-ui/core/src/lib/InfoCardGrid/InfoCardGrid'
-import { type Locale } from '@island.is/shared/types'
-import format from 'date-fns/format'
+import { useRouter } from 'next/router'
 
 import {
   Box,
   Button,
-  Filter,
-  FilterInput,
-  FilterMultiChoice,
   GridColumn,
   GridContainer,
   GridRow,
-  InfoCardGrid,
   Inline,
   LinkV2,
   Pagination,
   Select,
+  Stack,
+  Table as T,
   Tag,
   Text,
-  Table as T,
-  Stack,
 } from '@island.is/island-ui/core'
 import { theme } from '@island.is/island-ui/theme'
-import { CustomPageUniqueIdentifier } from '@island.is/shared/types'
-import { withMainLayout } from '@island.is/web/layouts/main'
-import { mockInfoStaffCards, paths } from '@island.is/web/utils/mockData'
+import { type Locale } from '@island.is/shared/types'
 import * as hooks from '@island.is/web/hooks'
+import { withMainLayout } from '@island.is/web/layouts/main'
 import { Screen } from '@island.is/web/types'
+import { mockInfoStaffCards, paths } from '@island.is/web/utils/mockData'
 
-import {
-  CustomScreen,
-  withCustomPageWrapper,
-} from '../../CustomPage/CustomPageWrapper'
-import Layout from '../Layout'
 import GoBack from '../components/GoBack/GoBack'
 import NavigationSidebar from '../components/NavigationSidebar'
-import { useRouter } from 'next/router'
+import Layout from '../Layout'
 
-type Blong =
+type Fundur =
   | {
       isPassed: true
       id: string
@@ -57,17 +48,17 @@ type Blong =
       url: string
     }
 
-interface Bling {
+interface Thing {
   name: string
-  blongs: Array<Blong>
+  fundir: Array<Fundur>
 }
 
 interface ThingfundirProps {
   locale: Locale
-  blingList?: Array<Bling>
+  thingList?: Array<Thing>
 }
 
-const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
+const Thingfundir: Screen<ThingfundirProps> = ({ locale, thingList }) => {
   const { width } = useWindowSize()
   const isMobile = width < theme.breakpoints.md
   const [searchInput, setSearchInput] = React.useState<string>('')
@@ -90,20 +81,20 @@ const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
   }, [searchInput])
   const { linkResolver } = hooks.useLinkResolver()
 
-  const [chosenBling, setChosenBling] = useState<Bling | undefined>(
-    blingList?.[0],
+  const [chosenThing, setChosenThing] = useState<Thing | undefined>(
+    thingList?.[0],
   )
 
   useEffect(() => {
-    setChosenBling(blingList?.[0])
-  }, [blingList])
+    setChosenThing(thingList?.[0])
+  }, [thingList])
 
   const [page, setPage] = useState(1)
   const router = useRouter()
 
-  const totalPages = chosenBling
-    ? chosenBling.blongs.length > 0
-      ? Math.ceil(chosenBling.blongs.length / MAX_ROWS_PER_PAGE)
+  const totalPages = chosenThing
+    ? chosenThing.fundir.length > 0
+      ? Math.ceil(chosenThing.fundir.length / MAX_ROWS_PER_PAGE)
       : 0
     : undefined
 
@@ -191,21 +182,22 @@ const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
           <GridColumn span={['8/12', '4/12']}>
             <Box marginTop={2}>
               <Select
+                id="react-select"
                 size="xs"
                 backgroundColor="blue"
                 label="Veldu þing"
                 onChange={(option) => {
                   if (option?.value) {
-                    setChosenBling(option.value)
+                    setChosenThing(option.value)
                   }
                 }}
                 value={
-                  chosenBling
-                    ? { label: chosenBling?.name, value: chosenBling }
+                  chosenThing
+                    ? { label: chosenThing?.name, value: chosenThing }
                     : undefined
                 }
                 options={
-                  blingList?.map((b) => ({
+                  thingList?.map((b) => ({
                     label: b.name,
                     value: b,
                   })) ?? []
@@ -234,7 +226,7 @@ const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
                   </T.Row>
                 </T.Head>
                 <T.Body>
-                  {chosenBling?.blongs.map((b) => {
+                  {chosenThing?.fundir.map((b, index) => {
                     let formattedDate: string
                     if (b.isPassed) {
                       formattedDate = format(
@@ -251,9 +243,9 @@ const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
                       )})`
                     }
                     return (
-                      <T.Row key={b.id}>
+                      <T.Row key={`${b.id}-${index}`}>
                         <T.Data span={6}>
-                          <LinkV2 newTab key={b.id} href={b.url}>
+                          <LinkV2 newTab href={b.url}>
                             <Button
                               unfocusable
                               variant="text"
@@ -269,7 +261,7 @@ const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
                         </T.Data>
                         <T.Data align="right">
                           {b.isPassed ? (
-                            <LinkV2 key={b.id} href={b.streamUrl}>
+                            <LinkV2 href={b.streamUrl}>
                               <Button
                                 variant="text"
                                 size="small"
@@ -290,7 +282,7 @@ const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
                 </T.Body>
               </T.Table>
             </Box>
-            {chosenBling && totalPages && totalPages > 1 && (
+            {chosenThing && totalPages && totalPages > 1 && (
               <Box marginTop={3}>
                 <Pagination
                   page={page}
@@ -318,7 +310,7 @@ const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
 Thingfundir.getProps = async ({ locale }) => {
   const lang: Locale = locale === 'en' ? 'en' : 'is'
 
-  const content: Array<Array<Blong>> = [
+  const content: Array<Array<Fundur>> = [
     [
       {
         isPassed: false,
@@ -386,9 +378,9 @@ Thingfundir.getProps = async ({ locale }) => {
       },
     ],
   ]
-  const blingList: Array<Bling> = Array.from(Array(35).keys()).map((index) => ({
+  const thingList: Array<Thing> = Array.from(Array(35).keys()).map((index) => ({
     name: `15${index}:2025`,
-    blongs:
+    fundir:
       index % 2 === 0
         ? [...content[0], ...content[0], ...content[0], ...content[0]]
         : content[1],
@@ -396,7 +388,7 @@ Thingfundir.getProps = async ({ locale }) => {
 
   return {
     locale: lang,
-    blingList,
+    thingList,
   }
 }
 

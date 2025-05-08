@@ -31,6 +31,8 @@ import ListView from '../components/ListView/ListView'
 import { SearchFilter } from '../components/SearchFilter/SearchFilter'
 import SearchHeader from '../components/SearchHeader/SearchHeader'
 
+import * as styles from './Thingmal.css'
+
 const Thingmal: Screen<ThingmalProps> = ({ data }) => {
   const { width } = useWindowSize()
   const [isGridLayout, setIsGridLayout] = useState(true)
@@ -138,30 +140,29 @@ const Thingmal: Screen<ThingmalProps> = ({ data }) => {
                   <Box marginRight={1}></Box>
                   <Text>{'færslur fundust'}</Text>
                 </Box>
-                <Hidden above="sm">
-                  <Box
-                    display="flex"
-                    justifyContent="flexEnd"
-                    height="full"
-                    alignItems={'center'}
-                  >
-                    <SearchFilter
-                      variant="popover"
-                      onSearchUpdate={() => {
-                        setFilteredCards(
-                          data.filter((card) =>
-                            card.tags?.some(
-                              (tag) => tag?.label === 'Lagafrumvarp',
-                            ),
+                <Box
+                  display="flex"
+                  justifyContent="flexEnd"
+                  height="full"
+                  alignItems={'center'}
+                  className={styles.mobileFilter}
+                >
+                  <SearchFilter
+                    variant="popover"
+                    onSearchUpdate={() => {
+                      setFilteredCards(
+                        data.filter((card) =>
+                          card.tags?.some(
+                            (tag) => tag?.label === 'Lagafrumvarp',
                           ),
-                        )
-                      }}
-                      searchState={{}}
-                      onReset={() => setFilteredCards(data)}
-                      url={''}
-                    />
-                  </Box>
-                </Hidden>
+                        ),
+                      )
+                    }}
+                    searchState={{}}
+                    onReset={() => setFilteredCards(data)}
+                    url={''}
+                  />
+                </Box>
                 <Hidden below="md">
                   <Button
                     variant="utility"

@@ -1,6 +1,8 @@
 import React from 'react'
+import { useWindowSize } from 'react-use'
 
 import { Box, Stack, Tag, Text } from '@island.is/island-ui/core'
+import { theme } from '@island.is/island-ui/theme'
 import { withMainLayout } from '@island.is/web/layouts/main'
 import { Screen } from '@island.is/web/types'
 

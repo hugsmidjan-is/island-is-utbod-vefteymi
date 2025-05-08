@@ -7,7 +7,6 @@ import {
   GridRow,
   Icon,
   IconMapIcon,
-  Inline,
   LinkV2,
   Stack,
   Tag,
@@ -16,12 +15,6 @@ import {
 } from '@island.is/island-ui/core'
 
 import * as styles from './Video.css'
-
-interface TranscriptLink {
-  href: string
-  label: string
-  icon?: IconMapIcon
-}
 
 interface Transcript {
   title: string
@@ -59,7 +52,11 @@ export const NewVideo = ({
         <Box marginBottom={2} display="flex" justifyContent="spaceBetween">
           <Box display="flex">
             <Box marginRight={2}>
-              <Icon color="blue400" icon={icon ?? 'hammer'} type="outline" />
+              <Icon
+                color="blue400"
+                icon={icon ?? 'playCircle'}
+                type="outline"
+              />
             </Box>
             <Text variant="h4" as="h4">
               {title}
@@ -102,8 +99,10 @@ export const NewVideo = ({
                   {transcript.chapters?.length > 0 && (
                     <Box marginTop={2}>
                       <Stack space={1}>
-                        {transcript.chapters.map((chapter) => (
-                          <Box>
+                        {transcript.chapters.map((chapter, index) => (
+                          <Box
+                            key={`transcript-chapter-${chapter.label}-${index}`}
+                          >
                             <Divider />
                             <Box marginTop={1} paddingTop={2} display="flex">
                               <Box
@@ -181,8 +180,8 @@ export const NewVideo = ({
             columnGap={1}
             marginTop={3}
           >
-            {tags?.map((t) => (
-              <Tag {...t} />
+            {tags?.map((t, index) => (
+              <Tag key={`${t.id}-${index}`} {...t} />
             ))}
           </Box>
         )} */}

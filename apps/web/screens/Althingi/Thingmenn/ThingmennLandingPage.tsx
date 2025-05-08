@@ -186,8 +186,9 @@ const ThingmennLandingPage: Screen<ThingmennLandingPageProps> = ({ title }) => {
         </section>
         <section>
           <Stack space={3}>
-            {data.map((article) => (
+            {data.map((article, index) => (
               <ActionCard
+                key={`${index}-${article.title}`}
                 heading={article.title}
                 text={article.description}
                 cta={{

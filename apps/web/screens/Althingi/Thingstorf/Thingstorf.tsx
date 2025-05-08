@@ -238,8 +238,9 @@ const Thingstorf: Screen<ThingstorfProps> = ({ title }) => {
         </section>
         <section>
           <Stack space={3}>
-            {data.map((article) => (
+            {data.map((article, index) => (
               <ActionCard
+                key={`card-${index}`}
                 heading={article.title}
                 text={article.description}
                 cta={{

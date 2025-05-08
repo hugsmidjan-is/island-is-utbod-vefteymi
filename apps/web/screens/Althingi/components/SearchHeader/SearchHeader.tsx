@@ -69,8 +69,8 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ title, onSearch }) => {
               {
                 'Lagafrumvörp og önnur mál sem lögð hafa verið fram. Sýnd eru mál nýjasta þings nema annað sé valið.'
               }
-              <Webreader readId={undefined} readClass="rs_read" />
             </Text>
+            <Webreader readId={undefined} readClass="rs_read" />
           </GridColumn>
         </GridRow>
       </GridContainer>

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useWindowSize } from 'react-use'
 
 import {
   Box,
@@ -12,26 +11,22 @@ import {
   Stack,
   Text,
 } from '@island.is/island-ui/core'
-import { theme } from '@island.is/island-ui/theme'
 import { type Locale } from '@island.is/shared/types'
 import { SLICE_SPACING } from '@island.is/web/constants'
 import { withMainLayout } from '@island.is/web/layouts/main'
 import { Screen } from '@island.is/web/types'
 import { mockHandbooks, paths } from '@island.is/web/utils/mockData'
 
+import GoBack from '../components/GoBack/GoBack'
+import DetailPanel from '../components/Panels/DetailPanel'
 import Layout from '../Layout'
 import * as styles from './Handbook.css'
-import DetailPanel from '../components/Panels/DetailPanel'
-import GoBack from '../components/GoBack/GoBack'
 
 interface HandbookProps {
   locale: Locale
 }
 
 const Handbook: Screen<HandbookProps> = ({ locale }) => {
-  const { width } = useWindowSize()
-  const isMobile = width < theme.breakpoints.md
-
   const [searchInput, setSearchInput] = useState<string>()
 
   const data = mockHandbooks[0]
@@ -93,16 +88,16 @@ const Handbook: Screen<HandbookProps> = ({ locale }) => {
         </section>
 
         <Divider />
-        {data.textSlices.map((slice) => (
-          <section>
+        {data.textSlices.map((slice, index) => (
+          <section key={`${slice.label}-${index}`}>
             <Stack space={2}>
               <Box marginBottom={1}>
                 <Text variant="h3" as="h3">
                   {slice.label}
                 </Text>
               </Box>
-              {slice.lines.map((line) => (
-                <Text>{line}</Text>
+              {slice.lines.map((line, index) => (
+                <Text key={`${line}-${index}`}>{line}</Text>
               ))}
             </Stack>
           </section>
