@@ -47,6 +47,7 @@ const Layout: React.FC<LayoutProps> = ({
   const router = useRouter()
   const { width } = useWindowSize()
   const isMobile = width < theme.breakpoints.md
+  const EN = router.asPath.includes('/en')
 
   const defaultItems = [
     {

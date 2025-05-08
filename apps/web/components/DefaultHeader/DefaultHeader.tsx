@@ -1,5 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
+import { useRouter } from 'next/router'
 
 import {
   Box,
@@ -13,10 +14,9 @@ import {
 } from '@island.is/island-ui/core'
 import { theme } from '@island.is/island-ui/theme'
 import { useWindowSize } from '@island.is/web/hooks/useViewport'
+import { paths } from '@island.is/web/utils/mockData'
 
 import * as styles from './DefaultHeader.css'
-import { paths } from '@island.is/web/utils/mockData'
-import { useRouter } from 'next/router'
 
 export interface DefaultHeaderProps {
   fullWidth?: boolean
@@ -48,21 +48,14 @@ export const DefaultHeader: React.FC<
   image,
   background,
   mobileBackground,
-  title,
-  underTitle,
   logo,
   logoHref,
-  titleColor = 'dark400',
-  customTitleColor,
   imagePadding = '20px',
-  imageIsFullHeight = true,
   imageObjectFit = 'contain',
   imageObjectPosition = 'center',
   className,
-  titleClassName,
   logoImageClassName,
   logoAltText,
-  titleSectionPaddingLeft,
   isSubpage,
 }) => {
   const { width } = useWindowSize()
@@ -72,7 +65,7 @@ export const DefaultHeader: React.FC<
 
   const isMobile = width < theme.breakpoints.lg
   const router = useRouter()
-
+  const EN = router.asPath.includes('/en')
   return (
     <>
       {logoProvided && (
@@ -118,7 +111,7 @@ export const DefaultHeader: React.FC<
                             router.asPath === paths.home ? 'blue400' : undefined
                           }
                         >
-                          Forsíða
+                          {EN ? 'Frontpage' : 'Forsíða'}
                         </Text>
                       </Link>
                     </Box>
@@ -133,7 +126,7 @@ export const DefaultHeader: React.FC<
                               : undefined
                           }
                         >
-                          Þingstörf
+                          {EN ? 'Duties' : 'Þingstörf'}
                         </Text>
                       </Link>
                     </Box>
@@ -148,7 +141,7 @@ export const DefaultHeader: React.FC<
                               : undefined
                           }
                         >
-                          Þingmenn
+                          {EN ? 'Members' : 'Þingmenn'}
                         </Text>
                       </Link>
                     </Box>
@@ -163,7 +156,7 @@ export const DefaultHeader: React.FC<
                               : undefined
                           }
                         >
-                          Um Alþingi
+                          {EN ? 'About' : 'Um Alþingi'}
                         </Text>
                       </Link>
                     </Box>
@@ -173,7 +166,7 @@ export const DefaultHeader: React.FC<
                           variant={isMobile ? 'medium' : 'default'}
                           fontWeight="medium"
                         >
-                          Lagasafn
+                          {EN ? 'The Legislative Archive' : 'Lagasafn'}
                         </Text>
                       </Link>
                     </Box>
@@ -203,7 +196,7 @@ export const DefaultHeader: React.FC<
               <Hidden below="md">
                 <Box marginRight={3}>
                   <Button variant="utility" icon="chevronDown">
-                    Innskráning
+                    {EN ? 'Login' : 'Innskráning'}
                   </Button>
                 </Box>
               </Hidden>

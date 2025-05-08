@@ -5,71 +5,75 @@ import { ActionCard, Box, Stack, Text } from '@island.is/island-ui/core'
 import { SLICE_SPACING } from '@island.is/web/constants'
 import { withMainLayout } from '@island.is/web/layouts/main'
 import { Screen } from '@island.is/web/types'
-import { mockAboutArticles, paths } from '@island.is/web/utils/mockData'
+import {
+  mockAboutArticles,
+  mockAboutArticlesEN,
+  paths,
+} from '@island.is/web/utils/mockData'
 
 import GoBack from '../components/GoBack/GoBack'
 import NavigationSidebar from '../components/NavigationSidebar'
 import Layout from '../Layout'
 import * as styles from './About.css'
 
-const About: Screen<AboutProps> = ({ title }) => {
+const AboutEN: Screen<AboutENProps> = ({ title }) => {
   const router = useRouter()
 
-  const data = mockAboutArticles
+  const data = mockAboutArticlesEN
 
   return (
     <Layout
       title={title}
       sidebar={
         <Stack space={2}>
-          <GoBack />
+          <GoBack title="Back" />
           <NavigationSidebar
-            title="Um Alþingi"
+            title="About Alþingi"
             items={[
               {
-                title: 'Upplýsingar um Alþingi',
-                href: paths.umAlthingi,
+                title: 'About the parliament',
+                href: paths.umAlthingiEN,
                 accordion: true,
-                active: router.pathname === paths.umAlthingi,
+                active: router.pathname === paths.umAlthingiEN,
               },
               {
-                title: 'Skrifstofa Alþingis',
+                title: 'Office of the Parliament',
                 href: paths.home,
                 accordion: true,
                 active: router.pathname === paths.thingfundir,
               },
               {
-                title: 'Ályktanir Alþingis',
+                title: 'Resolutions',
                 href: paths.home,
                 accordion: true,
                 active: router.pathname === paths.thingfundir,
               },
               {
-                title: 'Útgefið efni',
+                title: 'Published material',
                 href: paths.utgefidEfni,
                 accordion: true,
                 active: router.pathname === paths.utgefidEfni,
               },
               {
-                title: 'Stofnanir, stjórnir og nefndir',
+                title: 'Boards and committees',
                 href: paths.home,
                 accordion: true,
                 active: router.pathname === paths.thingfundir,
               },
               {
-                title: 'Alþjóðastarf',
+                title: 'International relations',
                 href: paths.home,
                 accordion: true,
                 active: router.pathname === paths.thingfundir,
               },
               {
-                title: 'Fræðslu- og kynningarefni',
+                title: 'Educational material',
                 href: paths.home,
                 accordion: true,
                 active: router.pathname === paths.thingfundir,
               },
               {
-                title: 'Heimsóknir í Alþingishúsið',
+                title: 'Visits to the Parliament',
                 href: paths.home,
                 accordion: true,
                 active: router.pathname === paths.thingfundir,
@@ -80,7 +84,7 @@ const About: Screen<AboutProps> = ({ title }) => {
       }
       breadcrumbs={[
         {
-          title: 'Um Alþingi',
+          title: 'About Alþingi',
           href: paths.umAlthingi,
           isCurrentPage: true,
         },
@@ -93,9 +97,11 @@ const About: Screen<AboutProps> = ({ title }) => {
               {title}
             </Text>
             <Text variant="intro" as="p" paddingTop={3} marginBottom={3}>
-              Alþingi er æðsti handhafi löggjafarvalds á Íslandi og samkvæmt
-              þingræðisreglunni bera ráðherrar ábyrgð gagnvart Alþingi og
-              ríkisstjórnin verður að njóta stuðnings meirihluta þingheims.
+              The Parliament (Alþingi) is the highest authority of the
+              legislative power in Iceland, and according to the principle of
+              parliamentary democracy, ministers are responsible to the Alþingi,
+              and the government must have the support of the majority in
+              Parliament.{' '}
             </Text>
             <Box
               display="flex"
@@ -110,8 +116,8 @@ const About: Screen<AboutProps> = ({ title }) => {
                 alt={'Alþingishúsið'}
               />
               <Text variant="medium" fontWeight="light" marginTop={1}>
-                Alþingishúsið, sem stendur við Austurvöll, var byggt árið
-                1880–81.
+                The Parliament House, which stands on Austurvöllur square, was
+                built in 1880–81.
               </Text>
             </Box>
           </Box>
@@ -123,7 +129,7 @@ const About: Screen<AboutProps> = ({ title }) => {
                 heading={article.title}
                 text={article.description}
                 cta={{
-                  label: 'Nánar',
+                  label: 'More',
                   onClick: () => router.push(article.url),
                   variant: 'text',
                 }}
@@ -136,14 +142,14 @@ const About: Screen<AboutProps> = ({ title }) => {
   )
 }
 
-interface AboutProps {
+interface AboutENProps {
   title: string
 }
 
-About.getProps = async () => {
+AboutEN.getProps = async () => {
   return {
-    title: 'Upplýsingar um Alþingi',
+    title: 'About Alþingi',
   }
 }
 
-export default withMainLayout(About, { showFooter: false })
+export default withMainLayout(AboutEN, { showFooter: false })

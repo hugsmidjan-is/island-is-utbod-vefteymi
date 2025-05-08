@@ -52,6 +52,7 @@ export const Header: FC<React.PropsWithChildren<HeaderProps>> = ({
   const locale = 'is'
   const english = false
   const isWhite = colorScheme === 'white'
+  const EN = router.asPath.includes('/en')
 
   return (
     <header>
@@ -95,9 +96,7 @@ export const Header: FC<React.PropsWithChildren<HeaderProps>> = ({
                           id="search_input_header"
                           size="medium"
                           activeLocale={locale}
-                          placeholder={
-                            searchPlaceholder ?? 'Leitaðu á Ísland.is'
-                          }
+                          placeholder={EN ? 'Search' : searchPlaceholder}
                           autocomplete={true}
                           autosuggest={true}
                           organization={organizationSearchFilter}
@@ -107,7 +106,7 @@ export const Header: FC<React.PropsWithChildren<HeaderProps>> = ({
 
                     <Box marginLeft={marginLeft}>
                       <Button variant="utility" icon="person">
-                        Mínar síður
+                        {EN ? 'My pages' : 'Mínar síður'}
                       </Button>
                     </Box>
 
@@ -117,7 +116,7 @@ export const Header: FC<React.PropsWithChildren<HeaderProps>> = ({
                     >
                       <Button
                         variant="utility"
-                        onClick={() => router.push(paths.home)}
+                        onClick={() => router.push(paths.umAlthingiEN)}
                       >
                         EN
                       </Button>
@@ -130,7 +129,7 @@ export const Header: FC<React.PropsWithChildren<HeaderProps>> = ({
                         data-testid="frontpage-burger-button"
                         onClick={() => console.log('Menu button clicked')}
                       >
-                        {'Valmynd'}
+                        {EN ? 'Menu' : 'Valmynd'}
                       </Button>
                     </Box>
                   </Box>

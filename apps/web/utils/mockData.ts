@@ -20,6 +20,7 @@ export const paths = {
   thingmennDetail: '/s/althingi/thingmenn/logi-einarsson',
 
   umAlthingi: '/s/althingi/um-althingi',
+  umAlthingiEN: '/s/althingi/um-althingi/en',
   utgefidEfni: '/s/althingi/um-althingi/utgefid-efni',
   handbaekur: '/s/althingi/um-althingi/utgefid-efni?query=handbók',
   handbok: '/s/althingi/um-althingi/utgefid-efni/1',
@@ -916,13 +917,8 @@ export const mockAboutArticles = [
   {
     title: 'Handbækur Alþingis',
     description:
-      'Handbókin er uppflettirit um starfsemi þingsins og alþingismenn. Í henni eru upplýsingar um síðustu alþingiskosningar hverju sinni, upplýsingar um skipan þingsins og ýmsar skrár um alþingismenn.',
+      'Alþingi gefur út handbækur og upplýsingarit ætluð þingmönnum og starfsmönnum þingsins. Handbækurnar gagnast einnig þeim sem hafa samskipti við þingið eða vilja öðlast betri innsýn í störf þess og starfsreglur.',
     url: paths.handbaekur,
-  },
-  {
-    title: 'Útgefið efni',
-    description: 'Hér má finna handbækur og skýrslur Alþingis',
-    url: paths.utgefidEfni,
   },
   {
     title: 'Nýbygging á Alþingisreit',
@@ -934,6 +930,27 @@ export const mockAboutArticles = [
     title: 'Heimsóknir í Alþingishúsið',
     description:
       'Boðið er upp á leiðsögn og fræðslu fyrir skóla og aðra hópa í námslegum tilgang. Ekki er boðið upp á leiðsögn fyrir almenna gesti.',
+    url: paths.umAlthingi,
+  },
+]
+
+export const mockAboutArticlesEN = [
+  {
+    title: 'Handbooks and manuals',
+    description:
+      'The Alþingi publishes manuals and informational materials intended for parliament members and parliamentary staff. These handbooks are also useful for those who communicate with the Parliament.',
+    url: paths.handbaekur,
+  },
+  {
+    title: 'New Parliament building',
+    description:
+      'The new Parliament building has received significant attention for its architecture. Behind it are Studio Granda, architects Margrét Harðardóttir and Steve Christer, along with Kristinn E. Hrafnsson, who is responsible for the artwork and decorations',
+    url: paths.umAlthingi,
+  },
+  {
+    title: 'Visits to the Parliament',
+    description:
+      'Guided tours and educational programs are available for schools and other groups for learning purposes. However, guided tours are not offered to general visitors.',
     url: paths.umAlthingi,
   },
 ]

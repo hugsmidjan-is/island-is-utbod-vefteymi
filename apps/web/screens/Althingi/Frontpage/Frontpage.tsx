@@ -56,7 +56,7 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
     >
       <Stack space={SLICE_SPACING}>
         <section>
-          <Box marginX={'auto'} style={{ maxWidth: '1344px' }}>
+          <Box marginX={'auto'} paddingX={2} style={{ maxWidth: '1344px' }}>
             <NewVideo
               url={
                 'https://www.youtube.com/embed/fw7yXuwc2bE?si=2kx6pEzmDP6OjTqR'

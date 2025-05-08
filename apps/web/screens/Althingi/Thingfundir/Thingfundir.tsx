@@ -137,8 +137,6 @@ const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
               {
                 title: 'Þingfundir og ræður',
                 href: paths.thingfundir,
-                accordion: true,
-
                 active: router.pathname === paths.thingfundir,
                 items: [
                   {
@@ -146,7 +144,31 @@ const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
                     href: paths.upptokur,
                     active: router.pathname === paths.upptokur,
                   },
+                  {
+                    title: 'Ræður',
+                    href: 'https://mbl.is',
+                  },
+                  {
+                    title: 'Dagskrá þingfundar',
+                    href: '/',
+                  },
+                  {
+                    title: 'Starfsáætlun Alþingis',
+                    href: '/',
+                  },
+                  {
+                    title: 'Mælendaskrá',
+                    href: '/',
+                  },
                 ],
+              },
+              {
+                title: 'Yfirlit og úttektir',
+                href: '/',
+              },
+              {
+                title: 'Tilkynningar',
+                href: '/',
               },
             ]}
           />

@@ -5,9 +5,10 @@ import { Box, Button } from '@island.is/island-ui/core'
 
 interface GoBackProps {
   href?: string
+  title?: string
 }
 
-const GoBack: React.FC<GoBackProps> = ({ href }) => {
+const GoBack: React.FC<GoBackProps> = ({ href, title }) => {
   const router = useRouter()
 
   const handleGoBack = () => {
@@ -26,7 +27,7 @@ const GoBack: React.FC<GoBackProps> = ({ href }) => {
         variant="text"
         onClick={handleGoBack}
       >
-        {'Til baka'}
+        {title ?? 'Til baka'}
       </Button>
     </Box>
   )

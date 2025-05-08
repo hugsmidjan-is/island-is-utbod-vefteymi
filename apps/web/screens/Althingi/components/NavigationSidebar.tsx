@@ -27,7 +27,7 @@ const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
 }) => {
   const router = useRouter()
   const { width } = useWindowSize()
-
+  const frontpage = router.asPath === paths.home
   const defaultItems = [
     {
       title: 'Þingstörf',
@@ -139,10 +139,12 @@ const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
       </Stack>
 
       <>
-        <SecondaryMenu
-          title={'Tengt efni'}
-          items={subItems ?? defaultSubItems}
-        />
+        {frontpage && (
+          <SecondaryMenu
+            title={'Tengt efni'}
+            items={subItems ?? defaultSubItems}
+          />
+        )}
 
         {/* <ProfileCard
           key={'card.id'}
