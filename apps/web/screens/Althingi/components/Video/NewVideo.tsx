@@ -127,25 +127,27 @@ export const NewVideo = ({
                                 width="full"
                                 marginRight={1}
                               >
-                                <Text
-                                  color={chapter.link ? 'blue400' : 'black'}
-                                  variant="medium"
-                                  fontWeight="semiBold"
-                                >
-                                  {chapter.label}
-                                </Text>
                                 {chapter.link && (
-                                  <LinkV2
-                                    newTab
-                                    className={styles.link}
-                                    href={chapter.link}
-                                  >
-                                    <Icon
-                                      icon="arrowForward"
-                                      size="medium"
-                                      color="blue400"
-                                    />
-                                  </LinkV2>
+                                  <>
+                                    <Text
+                                      color={chapter.link ? 'blue400' : 'black'}
+                                      variant="medium"
+                                      fontWeight="semiBold"
+                                    >
+                                      {chapter.label}
+                                    </Text>
+                                    <LinkV2
+                                      className={styles.link}
+                                      href={chapter.link}
+                                      ariaLabel="Skoða þingfund"
+                                    >
+                                      <Icon
+                                        icon="arrowForward"
+                                        size="medium"
+                                        color="blue400"
+                                      />
+                                    </LinkV2>
+                                  </>
                                 )}
                               </Box>
                             </Box>

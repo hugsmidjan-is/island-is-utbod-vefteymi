@@ -23,6 +23,7 @@ export interface LinkProps extends NextLinkProps {
   pureChildren?: boolean
   newTab?: boolean
   onClick?: () => void
+  ariaLabel?: string
 }
 
 // Next link that can handle external urls
@@ -43,6 +44,7 @@ export const LinkV2: React.FC<React.PropsWithChildren<LinkProps>> = ({
   newTab = false,
   dataTestId = undefined,
   onClick,
+  ariaLabel,
   ...linkProps
 }) => {
   const isInternal = !shouldLinkOpenInNewWindow(href as string)
@@ -62,6 +64,7 @@ export const LinkV2: React.FC<React.PropsWithChildren<LinkProps>> = ({
     if (shouldLinkBeAnAnchorTag(hrefString)) {
       return (
         <a
+          aria-label={ariaLabel}
           className={classNames}
           data-testid={dataTestId}
           href={hrefString}
@@ -84,11 +87,13 @@ export const LinkV2: React.FC<React.PropsWithChildren<LinkProps>> = ({
         prefetch={prefetch}
         data-testid={dataTestId}
         legacyBehavior
+        aria-label={ariaLabel}
       >
         {pureChildren ? (
           children
         ) : (
           <a
+            aria-label={ariaLabel}
             className={classNames}
             data-testid={dataTestId}
             {...linkProps}
@@ -103,6 +108,7 @@ export const LinkV2: React.FC<React.PropsWithChildren<LinkProps>> = ({
   } else {
     return (
       <a
+        aria-label={ariaLabel}
         href={href as string}
         target="_blank"
         rel="noopener noreferrer"

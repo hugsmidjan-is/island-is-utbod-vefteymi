@@ -112,7 +112,10 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
                           <Text variant="h5" fontWeight="semiBold">
                             Lagasafn
                           </Text>
-                          <LinkV2 href={paths.thingmal}>
+                          <LinkV2
+                            href={paths.thingmal}
+                            ariaLabel="Skoða lagasafn"
+                          >
                             <Icon
                               icon="arrowForward"
                               size="medium"
@@ -131,7 +134,10 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
                           <Text variant="h5" fontWeight="semiBold">
                             Lagafrumvörp
                           </Text>
-                          <LinkV2 href={paths.thingmal}>
+                          <LinkV2
+                            href={paths.thingmal}
+                            ariaLabel="Skoða lagafrumvörp"
+                          >
                             <Icon
                               icon="arrowForward"
                               size="medium"
@@ -151,7 +157,10 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
                             Þingsályktarnir
                           </Text>
 
-                          <LinkV2 href={paths.thingmal}>
+                          <LinkV2
+                            href={paths.thingmal}
+                            ariaLabel="Skoða þingsályktarnir"
+                          >
                             <Icon
                               icon="arrowForward"
                               size="medium"
@@ -280,7 +289,10 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
                           <Text variant="h5" fontWeight="semiBold">
                             Mál í umsagnarferli
                           </Text>
-                          <LinkV2 href={paths.thingmal}>
+                          <LinkV2
+                            href={paths.thingmal}
+                            ariaLabel="Skoða mál í umsagnarferli"
+                          >
                             <Icon
                               icon="arrowForward"
                               size="medium"
@@ -299,7 +311,10 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
                           <Text variant="h5" fontWeight="semiBold">
                             Leiðbeiningar um ritun umsagna
                           </Text>
-                          <LinkV2 href={paths.thingmal}>
+                          <LinkV2
+                            href={paths.thingmal}
+                            ariaLabel="Skoða leiðbeiningar um ritun umsagna"
+                          >
                             <Icon
                               icon="arrowForward"
                               size="medium"
@@ -319,7 +334,10 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
                             Umsagnagátt
                           </Text>
 
-                          <LinkV2 href={paths.thingmal}>
+                          <LinkV2
+                            href={paths.thingmal}
+                            ariaLabel="Skoða umsagnagátt"
+                          >
                             <Icon
                               icon="arrowForward"
                               size="medium"

@@ -601,6 +601,7 @@ export const NavigationTree: FC<
                       styles.accordionIcon,
                       styles.largerClickableArea,
                     )}
+                    aria-label="Toggle accordion"
                   >
                     <Icon
                       icon="chevronBack"
