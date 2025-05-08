@@ -25,11 +25,14 @@ const JumpPanel: React.FC<JumpPanelProps> = ({ title, eyebrow, items }) => {
           <>
             <Box>
               {eyebrow && (
-                <Text variant="eyebrow" color="blue600">
+                <Text
+                  variant="eyebrow"
+                  color="foregroundBrandSecondaryContrast"
+                >
                   {eyebrow}
                 </Text>
               )}
-              <Text variant="h4" color="blue600">
+              <Text variant="h4" color="foregroundBrandSecondaryContrast">
                 {title}
               </Text>
             </Box>
@@ -40,7 +43,11 @@ const JumpPanel: React.FC<JumpPanelProps> = ({ title, eyebrow, items }) => {
           <Box key={`panel-item-${index}-${item.label}`}>
             <Text
               fontWeight={item.active ? 'semiBold' : 'regular'}
-              color={item.active ? 'blue400' : 'blue600'}
+              color={
+                item.active
+                  ? 'foregroundBrandSecondary'
+                  : 'foregroundBrandSecondaryContrast'
+              }
               marginBottom={1}
             >
               {item.label}
@@ -59,7 +66,7 @@ const JumpPanel: React.FC<JumpPanelProps> = ({ title, eyebrow, items }) => {
                   <Text
                     variant="medium"
                     key={`subitem-${subIndex}`}
-                    color="blue600"
+                    color="foregroundBrandSecondaryContrast"
                     marginBottom={1}
                   >
                     {subItem}

@@ -88,9 +88,7 @@ const Chapter: Screen<ChapterProps> = ({ locale }) => {
       <Stack space={SLICE_SPACING}>
         <section>
           <Box marginTop={2}>
-            <Text variant="h1" as="h1">
-              {data.title}
-            </Text>
+            <Text variant="h1">{'Háttvirtur þingmaður 2024'}</Text>
             <Text as="p" paddingTop={3} marginBottom={3}>
               {data.description}
             </Text>

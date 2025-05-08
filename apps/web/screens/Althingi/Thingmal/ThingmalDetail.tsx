@@ -1,49 +1,30 @@
-import React, { useEffect, useMemo } from 'react'
-import { useWindowSize } from 'react-use'
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import { InfoCardItemProps } from 'libs/island-ui/core/src/lib/InfoCardGrid/InfoCardGrid'
+import React from 'react'
 
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   Box,
   Button,
-  Filter,
-  FilterInput,
-  FilterMultiChoice,
-  GridColumn,
-  GridRow,
-  InfoCardGrid,
   Link,
   LinkV2,
   Stack,
   Tag,
   Text,
 } from '@island.is/island-ui/core'
-import { theme } from '@island.is/island-ui/theme'
-import { CustomPageUniqueIdentifier } from '@island.is/shared/types'
 import { withMainLayout } from '@island.is/web/layouts/main'
+import { Screen } from '@island.is/web/types'
 import {
-  mockInfoStaffCards,
   paths,
   secondTableData,
   tabledata,
 } from '@island.is/web/utils/mockData'
 
-import {
-  CustomScreen,
-  withCustomPageWrapper,
-} from '../../CustomPage/CustomPageWrapper'
-import Layout from '../Layout'
-import { Screen } from '@island.is/web/types'
+import GoBack from '../components/GoBack/GoBack'
 import DetailPanel from '../components/Panels/DetailPanel'
 import TimelinePanel from '../components/Panels/TimelinePanel'
 import ThingmalTable from '../components/ThingmalTable/ThingmalTable'
-import GoBack from '../components/GoBack/GoBack'
+import Layout from '../Layout'
 
 const ThingmalDetail: Screen<ThingmalDetailProps> = ({ title }) => {
-  const { width } = useWindowSize()
-  const isMobile = width < theme.breakpoints.md
-  const [searchInput, setSearchInput] = React.useState<string>('')
-
   const detailPanelData = [
     { label: 'Þingsnúmer', value: '156.löggjafarþing 2025' },
     {
@@ -120,6 +101,15 @@ const ThingmalDetail: Screen<ThingmalDetailProps> = ({ title }) => {
             backgroundColor="purple100"
             items={stepperPanelData}
           />
+          <Button variant="utility" fluid icon="link" iconType="outline">
+            RSS áskrift
+          </Button>
+          <Button variant="utility" fluid icon="link" iconType="outline">
+            RSS hlaðvarp
+          </Button>
+          <Button variant="utility" fluid icon="link" iconType="outline">
+            XML áskrift
+          </Button>
         </Stack>
       }
     >
@@ -130,8 +120,28 @@ const ThingmalDetail: Screen<ThingmalDetailProps> = ({ title }) => {
         Frumvarpið er endurflutt, sjá 272. mál á 155. þingi - grunnskólar.
       </Text>
 
+      <Box
+        background={'purple100'}
+        paddingY={3}
+        paddingX={4}
+        display="flex"
+        justifyContent={'spaceBetween'}
+        marginBottom={2}
+        marginTop={6}
+      >
+        <Box marginRight={4}>
+          <Text variant="eyebrow" marginBottom={'p2'} color="purple600">
+            Í hnotskurn
+          </Text>
+          <Text marginBottom={3}>
+            Þetta frumvarp snýr að breytingu á lögum nr. 91/2008, Nýjasta útgáfa
+            þess er í þingskjali 253. Frumvarpið bíður þess nú að verða tekið
+            fyrir í 3. umræðu.
+          </Text>
+        </Box>
+      </Box>
       <Box marginY={6}>
-        <Text variant="eyebrow" marginBottom={2}>
+        <Text variant="eyebrow" marginBottom={2} color="purple600">
           Tengt efni
         </Text>
         <Box display="flex" flexWrap={'wrap'} rowGap={1} columnGap={1}>

@@ -2,12 +2,10 @@ import {
   Box,
   Button,
   Divider,
-  Icon,
   IconMapIcon,
   Inline,
   LinkV2,
   Stack,
-  Tag,
   TagProps,
   Text,
 } from '@island.is/island-ui/core'
@@ -36,11 +34,10 @@ interface Transcript {
 interface Props {
   url: string
   title?: string
-  tags?: Array<TagProps>
   transcript?: Transcript
 }
 
-export const Video = ({ url, title, tags, transcript }: Props) => {
+export const Video = ({ url, title, transcript }: Props) => {
   return (
     <section>
       {title && (
@@ -74,90 +71,56 @@ export const Video = ({ url, title, tags, transcript }: Props) => {
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
         ></iframe>
-        {tags && (
-          <Box
-            display="flex"
-            flexWrap={'wrap'}
-            rowGap={1}
-            columnGap={1}
-            marginTop={3}
-          >
-            {tags?.map((t) => (
-              <Tag {...t} />
-            ))}
-          </Box>
-        )}
-        {transcript && (
-          <>
-            <Box marginY={3}>
-              <Box display="flex" justifyContent="spaceBetween">
-                <Box display="flex">
-                  <Box marginRight={2}>
-                    <Icon
-                      color="blue400"
-                      icon={transcript.icon ?? 'hammer'}
-                      type="outline"
-                    />
+        {transcript && transcript.items.length > 0 && (
+          <Stack space={1}>
+            <Text variant="h3" marginTop={2}>
+              Dagskrá
+            </Text>
+            {transcript.items.map((transcript) => (
+              <>
+                <Divider />
+                <Box display="flex" marginTop={3}>
+                  <Box marginX={2} className={styles.timestamp}>
+                    <Text fontWeight="semiBold" variant="small">
+                      {transcript.id}
+                    </Text>
                   </Box>
-                  <Text variant="h4" as="h4">
-                    {transcript.title}
-                  </Text>
+                  <Box>
+                    <Text variant="medium" fontWeight="semiBold">
+                      {transcript.title}
+                    </Text>
+                    {transcript.contentLines?.map((cl) => (
+                      <Text variant="small"> {cl}</Text>
+                    ))}
+                    {transcript.links && (
+                      <Box marginY={1}>
+                        <Inline space={1}>
+                          {transcript.links.map((l, index) => (
+                            <LinkV2
+                              newTab
+                              key={`transcript-link-${index}`}
+                              className={styles.link}
+                              href={l.href}
+                            >
+                              <Button
+                                variant="text"
+                                size="small"
+                                unfocusable
+                                as="span"
+                                icon={l.icon ?? 'arrowForward'}
+                              >
+                                {l.label}
+                              </Button>
+                            </LinkV2>
+                          ))}
+                        </Inline>
+                      </Box>
+                    )}
+                  </Box>
                 </Box>
-                <Text variant="h4" as="h4">
-                  {transcript.contentLabel}
-                </Text>
-              </Box>
-            </Box>
-
-            {transcript.items.length > 0 && (
-              <Stack space={1}>
-                {transcript.items.map((transcript) => (
-                  <>
-                    <Divider />
-                    <Box display="flex">
-                      <Box marginX={2} className={styles.timestamp}>
-                        <Text fontWeight="semiBold" variant="small">
-                          {transcript.id}
-                        </Text>
-                      </Box>
-                      <Box>
-                        <Text variant="medium" fontWeight="semiBold">
-                          {transcript.title}
-                        </Text>
-                        {transcript.contentLines?.map((cl) => (
-                          <Text variant="small"> {cl}</Text>
-                        ))}
-                        {transcript.links && (
-                          <Box marginY={1}>
-                            <Inline space={1}>
-                              {transcript.links.map((l, index) => (
-                                <LinkV2
-                                  newTab
-                                  key={`transcript-link-${index}`}
-                                  className={styles.link}
-                                  href={l.href}
-                                >
-                                  <Button
-                                    variant="text"
-                                    size="small"
-                                    unfocusable
-                                    as="span"
-                                    icon={l.icon ?? 'arrowForward'}
-                                  >
-                                    {l.label}
-                                  </Button>
-                                </LinkV2>
-                              ))}
-                            </Inline>
-                          </Box>
-                        )}
-                      </Box>
-                    </Box>
-                  </>
-                ))}
-              </Stack>
-            )}
-          </>
+              </>
+            ))}
+          </Stack>
         )}
       </Box>
     </section>

@@ -1,33 +1,14 @@
 import React from 'react'
-import { useWindowSize } from 'react-use'
 
-import { TeamList } from '@island.is/island-ui/contentful'
-import {
-  Box,
-  Filter,
-  FilterInput,
-  FilterMultiChoice,
-  Stack,
-  Tag,
-  Text,
-} from '@island.is/island-ui/core'
-import { theme } from '@island.is/island-ui/theme'
-import { CustomPageUniqueIdentifier } from '@island.is/shared/types'
-import { GenericList } from '@island.is/web/components'
+import { Box, Stack, Tag, Text } from '@island.is/island-ui/core'
 import { withMainLayout } from '@island.is/web/layouts/main'
+import { Screen } from '@island.is/web/types'
 
-import {
-  CustomScreen,
-  withCustomPageWrapper,
-} from '../../CustomPage/CustomPageWrapper'
+import GoBack from '../components/GoBack/GoBack'
 import Layout from '../Layout'
 import ProfileCard from './ProfileCard'
-import { Screen } from '@island.is/web/types'
-import GoBack from '../components/GoBack/GoBack'
 
 const ThingmennDetail: Screen<ThingmennDetailProps> = ({ title }) => {
-  const { width } = useWindowSize()
-  const isMobile = width < theme.breakpoints.md
   return (
     <Layout
       title={'Logi Einarsson'}

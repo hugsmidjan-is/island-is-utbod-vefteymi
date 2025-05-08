@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { useWindowSize } from 'react-use'
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { InfoCardItemProps } from 'libs/island-ui/core/src/lib/InfoCardGrid/InfoCardGrid'
+import { useRouter } from 'next/router'
 
 import {
   Box,
@@ -13,19 +14,13 @@ import {
   Text,
 } from '@island.is/island-ui/core'
 import { theme } from '@island.is/island-ui/theme'
-import { CustomPageUniqueIdentifier } from '@island.is/shared/types'
 import { withMainLayout } from '@island.is/web/layouts/main'
+import { Screen } from '@island.is/web/types'
 import { mockInfoStaffCards, paths } from '@island.is/web/utils/mockData'
 
-import {
-  CustomScreen,
-  withCustomPageWrapper,
-} from '../../CustomPage/CustomPageWrapper'
-import Layout from '../Layout'
-import { Screen } from '@island.is/web/types'
-import router, { useRouter } from 'next/router'
 import GoBack from '../components/GoBack/GoBack'
 import NavigationSidebar from '../components/NavigationSidebar'
+import Layout from '../Layout'
 
 const Thingmenn: Screen<ThingmennProps> = ({ title }) => {
   const { width } = useWindowSize()
@@ -186,6 +181,17 @@ const Thingmenn: Screen<ThingmennProps> = ({ title }) => {
         />
       </Filter>
       <Box marginY={3} />
+      <Box
+        display="flex"
+        alignItems={'flexEnd'}
+        justifyContent="flexStart"
+        marginBottom={2}
+      >
+        <Box marginRight={1}>
+          <Text fontWeight="medium">{filteredCards?.length ?? 0}</Text>
+        </Box>
+        <Text>{' niðurstöður'}</Text>
+      </Box>
       <InfoCardGrid
         cards={filteredCards ?? mockInfoStaffCards}
         cardsBorder="blue200"

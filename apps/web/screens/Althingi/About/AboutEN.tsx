@@ -5,11 +5,7 @@ import { ActionCard, Box, Stack, Text } from '@island.is/island-ui/core'
 import { SLICE_SPACING } from '@island.is/web/constants'
 import { withMainLayout } from '@island.is/web/layouts/main'
 import { Screen } from '@island.is/web/types'
-import {
-  mockAboutArticles,
-  mockAboutArticlesEN,
-  paths,
-} from '@island.is/web/utils/mockData'
+import { mockAboutArticlesEN, paths } from '@island.is/web/utils/mockData'
 
 import GoBack from '../components/GoBack/GoBack'
 import NavigationSidebar from '../components/NavigationSidebar'

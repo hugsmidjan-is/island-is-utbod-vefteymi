@@ -28,7 +28,12 @@ const AlthingiFooter: React.FC<React.PropsWithChildren<FooterProps>> = ({
 
   return (
     <footer>
-      <Box className={styles.footerBg} color="white" paddingTop={5}>
+      <Box
+        className={styles.footerBg}
+        color="white"
+        paddingTop={5}
+        paddingBottom={8}
+      >
         <Box
           paddingTop={[2, 2, 0]}
           paddingBottom={[0, 0, 4]}
@@ -44,7 +49,7 @@ const AlthingiFooter: React.FC<React.PropsWithChildren<FooterProps>> = ({
                   width="full"
                   className={styles.logoStyle}
                   display={['flex', 'flex', 'block']}
-                  alignItems={['center', 'center', 'flexStart']}
+                  alignItems={['center', 'center', 'center']}
                   justifyContent={['center', 'center', 'flexStart']}
                 >
                   <img
@@ -54,19 +59,21 @@ const AlthingiFooter: React.FC<React.PropsWithChildren<FooterProps>> = ({
                 </Box>
               </GridColumn>
               <GridColumn
+                paddingTop={3}
                 paddingBottom={[3, 3, 0]}
                 span={['12/12', '12/12', '2/12']}
               >
-                <Box>
+                <Box marginX={3}>
                   <Text fontWeight="semiBold">Heimilisfang</Text>
                   <Text>101 Reykjavík</Text>
                 </Box>
               </GridColumn>
               <GridColumn
+                paddingTop={3}
                 span={['12/12', '12/12', '2/12']}
                 paddingBottom={[3, 3, 0]}
               >
-                <Box>
+                <Box marginX={3}>
                   <Text fontWeight="semiBold">Opnunartími</Text>
                   <Text>
                     Skiptiborðið er opið virka daga frá 9:00 til 16:00
@@ -74,10 +81,11 @@ const AlthingiFooter: React.FC<React.PropsWithChildren<FooterProps>> = ({
                 </Box>
               </GridColumn>
               <GridColumn
+                paddingTop={3}
                 span={['12/12', '12/12', '2/12']}
                 paddingBottom={[3, 3, 0]}
               >
-                <Box>
+                <Box marginX={3}>
                   <Text fontWeight="semiBold">Hafðu samband</Text>
                   <Text>Sími: 563 0500</Text>
                   <Text>
@@ -89,10 +97,11 @@ const AlthingiFooter: React.FC<React.PropsWithChildren<FooterProps>> = ({
                 </Box>
               </GridColumn>
               <GridColumn
+                paddingTop={3}
                 span={['12/12', '12/12', '2/12']}
                 paddingBottom={[3, 3, 0]}
               >
-                <Box>
+                <Box marginX={3}>
                   <Inline space={1} alignY="center">
                     <Icon size="small" icon="facebook" color="white" />
                     <Text variant="h5" color="blue600" fontWeight="light">

@@ -122,7 +122,6 @@ const Thingmal: Screen<ThingmalProps> = ({ data }) => {
                   }}
                   searchState={{}}
                   onReset={() => setFilteredCards(data)}
-                  tags={[]}
                   url={''}
                 />
               </Stack>
@@ -159,7 +158,6 @@ const Thingmal: Screen<ThingmalProps> = ({ data }) => {
                       }}
                       searchState={{}}
                       onReset={() => setFilteredCards(data)}
-                      tags={[]}
                       url={''}
                     />
                   </Box>

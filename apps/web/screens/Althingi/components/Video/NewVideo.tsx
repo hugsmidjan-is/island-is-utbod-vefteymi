@@ -92,7 +92,7 @@ export const NewVideo = ({
           <GridContainer>
             <GridRow>
               <GridColumn span={'5/12'}>
-                <Box>
+                <Box marginRight={3}>
                   <Text variant="h5" as="h5">
                     {transcript.title}
                   </Text>
@@ -141,12 +141,10 @@ export const NewVideo = ({
                                     className={styles.link}
                                     href={chapter.link}
                                   >
-                                    <Button
-                                      variant="text"
-                                      size="small"
-                                      unfocusable
-                                      as="span"
-                                      icon={'arrowForward'}
+                                    <Icon
+                                      icon="arrowForward"
+                                      size="medium"
+                                      color="blue400"
                                     />
                                   </LinkV2>
                                 )}
@@ -175,7 +173,7 @@ export const NewVideo = ({
           </GridContainer>
         </Box>
 
-        {tags && (
+        {/* {tags && (
           <Box
             display="flex"
             flexWrap={'wrap'}
@@ -187,7 +185,7 @@ export const NewVideo = ({
               <Tag {...t} />
             ))}
           </Box>
-        )}
+        )} */}
       </section>
     )
   }

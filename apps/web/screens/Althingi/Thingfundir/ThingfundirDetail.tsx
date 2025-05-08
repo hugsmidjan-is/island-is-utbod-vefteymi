@@ -84,6 +84,25 @@ const ThingfundirDetail: Screen<ThingfundirDetailProps> = ({ title }) => {
             items={detailPanelData}
             title="Upptaka"
           />
+          <DetailPanel
+            backgroundColor={'purple100'}
+            subtitle="Tengt efni"
+            items={[
+              {
+                label: '',
+                value: 'Fundargerð',
+              },
+              {
+                label: '',
+                value: 'Dagsskrá',
+              },
+              {
+                label: '',
+                value: 'Ræður',
+              },
+            ]}
+          />
+
           <Button variant="utility" fluid icon="download" iconType="outline">
             Hlaða niður vídeóskrá
           </Button>
@@ -97,21 +116,14 @@ const ThingfundirDetail: Screen<ThingfundirDetailProps> = ({ title }) => {
       }
     >
       <Text variant="h1" marginBottom={2} marginTop={2}>
-        Þingfundur 34
+        34. þingfundur
       </Text>
-      <Box marginY={6}>
-        <Text variant="eyebrow" marginBottom={2}>
-          Tengt efni
-        </Text>
-        <Box display="flex" flexWrap={'wrap'} rowGap={1} columnGap={1}>
-          <Tag variant="blue" outlined={false} href={paths.home}>
-            {'Fundargerð fundarins'}
-          </Tag>
-        </Box>
-      </Box>
+      <Text marginBottom={3} marginTop={2}>
+        34. þingfundur á 156. löggjafarþingi 2025.
+      </Text>
+
       <Video
         url={'https://www.youtube.com/embed/fw7yXuwc2bE?si=2kx6pEzmDP6OjTqR'}
-        tags={videoTag}
         transcript={{
           items: videoTranscript,
           contentLabel: 'Dagskrá 35. þingfundar',

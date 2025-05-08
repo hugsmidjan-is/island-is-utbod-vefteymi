@@ -1,15 +1,19 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-import { ActionCard, Box, Stack, Text } from '@island.is/island-ui/core'
+import {
+  ActionCard,
+  Box,
+  GridColumn,
+  GridRow,
+  Icon,
+  Stack,
+  Text,
+} from '@island.is/island-ui/core'
 import { SLICE_SPACING } from '@island.is/web/constants'
 import { withMainLayout } from '@island.is/web/layouts/main'
 import { Screen } from '@island.is/web/types'
-import {
-  mockAboutArticles,
-  mockThingstorfArticles,
-  paths,
-} from '@island.is/web/utils/mockData'
+import { mockThingstorfArticles, paths } from '@island.is/web/utils/mockData'
 
 import GoBack from '../components/GoBack/GoBack'
 import NavigationSidebar from '../components/NavigationSidebar'
@@ -34,11 +38,35 @@ const Thingstorf: Screen<ThingstorfProps> = ({ title }) => {
                 href: paths.thingmal,
                 accordion: true,
                 active: false,
+                items: [
+                  {
+                    title: 'Þingmálaskrá',
+                    href: paths.thingmal,
+                    active: router.pathname === paths.thingmal,
+                  },
+                  {
+                    title: 'Lagafrumvörp',
+                    href: paths.thingmalLagafrumvarp,
+                  },
+                  {
+                    title: 'Þingsályktunartillöfur',
+                    href: '/',
+                  },
+                  {
+                    title: 'Fyrirspurnir',
+                    href: '/',
+                  },
+                  {
+                    title: 'Staða mála',
+                    href: '/',
+                  },
+                ],
               },
               {
                 title: 'Þingfundir og ræður',
                 href: paths.thingfundir,
                 active: router.pathname === paths.thingfundir,
+                accordion: true,
                 items: [
                   {
                     title: 'Fundargerðir og upptökur',
@@ -66,10 +94,48 @@ const Thingstorf: Screen<ThingstorfProps> = ({ title }) => {
               {
                 title: 'Yfirlit og úttektir',
                 href: '/',
+                accordion: true,
+                items: [
+                  {
+                    title: 'Yfirlit yfir þingstörf',
+                    href: '/',
+                  },
+                  {
+                    title: 'Samantektir',
+                    href: '/',
+                  },
+                  {
+                    title: 'Skýrslur',
+                    href: '/',
+                  },
+                  {
+                    title: 'Umsagnir',
+                    href: '/',
+                  },
+                ],
               },
               {
                 title: 'Tilkynningar',
                 href: '/',
+                accordion: true,
+                items: [
+                  {
+                    title: 'Yfirlit yfir þingstörf',
+                    href: '/',
+                  },
+                  {
+                    title: 'Samantektir',
+                    href: '/',
+                  },
+                  {
+                    title: 'Skýrslur',
+                    href: '/',
+                  },
+                  {
+                    title: 'Umsagnir',
+                    href: '/',
+                  },
+                ],
               },
             ]}
           />
@@ -96,6 +162,78 @@ const Thingstorf: Screen<ThingstorfProps> = ({ title }) => {
               undir það. Fyrst er frumvarp lagt fram og rætt almennt, síðan fara
               þau í umsögn til þingnefnda.
             </Text>
+          </Box>
+        </section>
+        <section>
+          <Box
+            border="standard"
+            borderColor="blue200"
+            borderRadius="large"
+            padding={3}
+          >
+            <Box
+              display="flex"
+              justifyContent="spaceBetween"
+              alignItems={'center'}
+              marginBottom={4}
+            >
+              <Box>
+                <Text color="blue400" variant="h3" marginBottom={1}>
+                  Staða mála
+                </Text>
+                <Text>Á 156. þingi, 2025</Text>
+              </Box>
+              <Icon icon="arrowForward" type="outline" color="blue400" />
+            </Box>
+            <GridRow>
+              <GridColumn span={['3/12']}>
+                <Box
+                  borderRightWidth="standard"
+                  borderColor="blue200"
+                  padding={3}
+                  paddingLeft={0}
+                >
+                  <Text variant="small">Samþykkt</Text>
+                  <Text variant="h3" as="p">
+                    4
+                  </Text>
+                </Box>
+              </GridColumn>
+              <GridColumn span={['3/12']}>
+                <Box
+                  borderRightWidth="standard"
+                  borderColor="blue200"
+                  padding={3}
+                  paddingLeft={0}
+                >
+                  <Text variant="small">Bíða 1. umræðu</Text>
+                  <Text variant="h3" as="p">
+                    40
+                  </Text>
+                </Box>
+              </GridColumn>
+              <GridColumn span={['3/12']}>
+                <Box
+                  borderRightWidth="standard"
+                  borderColor="blue200"
+                  padding={3}
+                  paddingLeft={0}
+                >
+                  <Text variant="small">Í nefnd</Text>
+                  <Text variant="h3" as="p">
+                    60
+                  </Text>
+                </Box>
+              </GridColumn>
+              <GridColumn span={['3/12']}>
+                <Box borderColor="blue200" padding={3} paddingLeft={0}>
+                  <Text variant="small">Bíða eftir 2.umræðu</Text>
+                  <Text variant="h3" as="p">
+                    12
+                  </Text>
+                </Box>
+              </GridColumn>
+            </GridRow>
           </Box>
         </section>
         <section>

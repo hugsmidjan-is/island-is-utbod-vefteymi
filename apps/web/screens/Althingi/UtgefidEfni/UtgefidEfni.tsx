@@ -9,11 +9,8 @@ import {
   FilterInput,
   FilterMultiChoice,
   FocusableBox,
-  Icon,
-  Inline,
   LinkV2,
   Stack,
-  Tag,
   Text,
 } from '@island.is/island-ui/core'
 import { theme } from '@island.is/island-ui/theme'
@@ -27,9 +24,9 @@ import {
   paths,
 } from '@island.is/web/utils/mockData'
 
-import Layout from '../Layout'
-import NavigationSidebar from '../components/NavigationSidebar'
 import GoBack from '../components/GoBack/GoBack'
+import NavigationSidebar from '../components/NavigationSidebar'
+import Layout from '../Layout'
 
 interface UtgefidEfniProps {
   title: string
@@ -39,7 +36,6 @@ interface UtgefidEfniProps {
 const UtgefidEfni: Screen<UtgefidEfniProps> = ({ title }) => {
   const { width } = useWindowSize()
   const isMobile = width < theme.breakpoints.md
-  const [hideTag, setHideTag] = useState<boolean>(false)
   const [query, setQuery] = useQueryState('query')
   const [filteredData, setFilteredData] = useState<MockHandbook[]>([])
   const [redirect, setRedirect] = useState(false)
@@ -212,18 +208,6 @@ const UtgefidEfni: Screen<UtgefidEfniProps> = ({ title }) => {
                 ]}
               />
             </Filter>
-            {/* {!hideTag && (
-              <Box marginTop={2}>
-                <Tag onClick={() => setHideTag(true)}>
-                  <Box display="flex" alignItems="center">
-                    <Box marginRight={1} as="span">
-                      Háttvirtur þingmaður - handbók um þingstörfin
-                    </Box>
-                    <Icon icon="close" size="small" />
-                  </Box>
-                </Tag>
-              </Box>
-            )} */}
           </Box>
         </section>
         <section>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import sortBy from 'lodash/sortBy'
+import { useRouter } from 'next/router'
+import { useQueryState } from 'next-usequerystate'
 
 import {
   Box,
@@ -8,8 +9,6 @@ import {
   FilterProps,
 } from '@island.is/island-ui/core'
 import { isDefined } from '@island.is/shared/utils'
-import { useQueryState } from 'next-usequerystate'
-import { useRouter } from 'next/router'
 
 export interface SearchState {
   status?: 'open' | 'closed' // Staða
@@ -22,7 +21,6 @@ interface Props {
   onSearchUpdate: (categoryId: string) => void
   onReset: () => void
   searchState?: SearchState
-  tags: Array<{ title: string }>
   url: string
   variant?: FilterProps['variant']
   hits?: number
@@ -32,7 +30,6 @@ export const SearchFilter = ({
   onSearchUpdate,
   onReset,
   searchState,
-  tags,
   url,
   variant = 'default',
   hits,

@@ -30,7 +30,7 @@ const About: Screen<AboutProps> = ({ title }) => {
                 title: 'Upplýsingar um Alþingi',
                 href: paths.umAlthingi,
                 accordion: true,
-                active: router.pathname === paths.umAlthingi,
+                active: false,
               },
               {
                 title: 'Skrifstofa Alþingis',
@@ -142,7 +142,7 @@ interface AboutProps {
 
 About.getProps = async () => {
   return {
-    title: 'Upplýsingar um Alþingi',
+    title: 'Um Alþingi',
   }
 }
 

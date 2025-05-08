@@ -137,12 +137,13 @@ const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
               {
                 title: 'Þingfundir og ræður',
                 href: paths.thingfundir,
-                active: router.pathname === paths.thingfundir,
+                active: true,
+                accordion: true,
                 items: [
                   {
                     title: 'Fundargerðir og upptökur',
                     href: paths.upptokur,
-                    active: router.pathname === paths.upptokur,
+                    active: true,
                   },
                   {
                     title: 'Ræður',
@@ -176,7 +177,7 @@ const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
       }
     >
       <Text variant="h1" marginBottom={3} marginTop={2}>
-        Þingfundir og ræður
+        Fundargerðir og upptökur{' '}
       </Text>
       <Text marginBottom={3}>
         Yfirlit yfir þingfundi og ræður, þar með taldar dagskrár funda. Athugið
@@ -184,14 +185,7 @@ const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
         fundarhléum, í síðasta lagi í lok fundardags en hljóðupptökur strax að
         lokinni ræðu.
       </Text>
-      <Inline space={2}>
-        <Tag active href="/">
-          Þingfundir
-        </Tag>
-        <Tag outlined href="/">
-          Ræður
-        </Tag>
-      </Inline>
+
       <GridContainer>
         <GridRow>
           <GridColumn span={['8/12', '4/12']}>
@@ -222,12 +216,7 @@ const Thingfundir: Screen<ThingfundirProps> = ({ locale, blingList }) => {
         </GridRow>
         <GridRow>
           <GridColumn span="11/12">
-            <Box marginTop={3}>
-              <Text variant="h4" as="h4">
-                Umræða í þingsal
-              </Text>
-            </Box>
-            <Box marginTop={3}>
+            <Box marginTop={4}>
               <T.Table>
                 <T.Head>
                   <T.Row>

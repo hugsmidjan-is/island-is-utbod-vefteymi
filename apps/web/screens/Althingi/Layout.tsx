@@ -12,12 +12,8 @@ import {
   GridContainer,
   GridRow,
   Inline,
-  Link,
   Navigation,
-  NavigationItem,
-  ProfileCard,
   Stack,
-  Text,
 } from '@island.is/island-ui/core'
 import { theme } from '@island.is/island-ui/theme'
 import {
@@ -47,7 +43,6 @@ const Layout: React.FC<LayoutProps> = ({
   const router = useRouter()
   const { width } = useWindowSize()
   const isMobile = width < theme.breakpoints.md
-  const EN = router.asPath.includes('/en')
 
   const defaultItems = [
     {

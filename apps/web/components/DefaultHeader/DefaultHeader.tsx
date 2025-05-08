@@ -131,12 +131,12 @@ export const DefaultHeader: React.FC<
                       </Link>
                     </Box>
                     <Box marginX={3}>
-                      <Link href={paths.thingmenn}>
+                      <Link href={paths.thingmennLanding}>
                         <Text
                           variant={isMobile ? 'medium' : 'default'}
                           fontWeight="medium"
                           color={
-                            router.asPath.includes(paths.thingmenn)
+                            router.asPath.includes(paths.thingmennLanding)
                               ? 'blue400'
                               : undefined
                           }

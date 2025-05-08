@@ -16,8 +16,9 @@ export const paths = {
   thingfundur: '/s/althingi/thingstorf/thingfundir-og-raedur/1',
   upptokur: '/s/althingi/thingstorf/thingfundir-og-raedur/upptokur',
 
-  thingmenn: '/s/althingi/thingmenn',
-  thingmennDetail: '/s/althingi/thingmenn/logi-einarsson',
+  thingmennLanding: '/s/althingi/thingmenn/',
+  thingmenn: '/s/althingi/thingmenn/althingismenn',
+  thingmennDetail: '/s/althingi/thingmenn/althingismenn/logi-einarsson',
 
   umAlthingi: '/s/althingi/um-althingi',
   umAlthingiEN: '/s/althingi/um-althingi/en',
@@ -320,7 +321,7 @@ export const mockInfoStaffCards: Array<{
     description: 'Menningar-, nýsköpunar- og háskólaráðherra',
     link: {
       label: 'Skoða nánar',
-      href: '/s/althingi/thingmenn/logi-einarsson',
+      href: paths.thingmennDetail,
     },
     detailLines: [
       {
@@ -983,6 +984,33 @@ export const mockThingstorfArticles = [
   {
     title: 'Dagskrá þingfundar',
     description: 'Upplýsingar um dagskrá þingfundar má nálgast hér',
+    url: paths.thingfundir,
+  },
+]
+
+export const mockThingmennLanding = [
+  {
+    title: 'Alþingismenn',
+    description:
+      'Listi yfir starfandi alþingismenn, þingmenn og embætti og ráðherra ríkistjórnar Íslands.',
+    url: paths.thingmal,
+  },
+  {
+    title: 'Þingflokkar',
+    description:
+      'Þingmenn skipa sér í þingflokka og velja sér formann sem kemur fram fyrir þeirra hönd gagnvart forseta og öðrum þingflokkum og þingmönnum. ',
+    url: paths.thingmalLagafrumvarp,
+  },
+  {
+    title: 'Forseti Alþingis',
+    description:
+      'Meginhlutverk forseta Alþingis er að sjá um að ákvæði stjórnarskrár, sem varða Alþingi og þingsköp Alþingis, séu haldin. Forseti Alþingis er einn handhafa forsetavalds ásamt forsætisráðherra og forseta Hæstaréttar í fjarveru og forföllum forseta Íslands.',
+    url: paths.thingfundir,
+  },
+  {
+    title: 'Ræður',
+    description:
+      'Gervigreind skrifar upp ræður þingmanna og sérfræðingar í útgáfudeild lesa hann yfir. Bráðabirgðaútgáfa ræðutexta er aðgengileg á vefnum undir nafni ræðumanns jafnskjótt og hann hefur verið yfirlesinn.',
     url: paths.thingfundir,
   },
 ]

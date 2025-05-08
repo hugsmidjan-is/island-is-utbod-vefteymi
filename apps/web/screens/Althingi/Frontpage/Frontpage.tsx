@@ -81,11 +81,12 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
                     height="full"
                     justifyContent="center"
                     alignItems="center"
+                    flexDirection={'column'}
                   >
                     <img
                       src={'/assets/frontpage-cta-1.png'}
                       className={styles.image}
-                      alt={'Alþingishúsið'}
+                      alt={''}
                     />
                   </Box>
                 </GridColumn>
@@ -111,13 +112,10 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
                             Lagasafn
                           </Text>
                           <LinkV2 href={paths.thingmal}>
-                            <Button
+                            <Icon
                               icon="arrowForward"
-                              iconType="filled"
                               size="medium"
-                              type="button"
-                              variant="text"
-                              truncate
+                              color="blue400"
                             />
                           </LinkV2>
                         </Box>
@@ -133,13 +131,10 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
                             Lagafrumvörp
                           </Text>
                           <LinkV2 href={paths.thingmal}>
-                            <Button
+                            <Icon
                               icon="arrowForward"
-                              iconType="filled"
                               size="medium"
-                              type="button"
-                              variant="text"
-                              truncate
+                              color="blue400"
                             />
                           </LinkV2>
                         </Box>
@@ -156,13 +151,10 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
                           </Text>
 
                           <LinkV2 href={paths.thingmal}>
-                            <Button
+                            <Icon
                               icon="arrowForward"
-                              iconType="filled"
                               size="medium"
-                              type="button"
-                              variant="text"
-                              truncate
+                              color="blue400"
                             />
                           </LinkV2>
                         </Box>
@@ -288,13 +280,10 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
                             Mál í umsagnarferli
                           </Text>
                           <LinkV2 href={paths.thingmal}>
-                            <Button
+                            <Icon
                               icon="arrowForward"
-                              iconType="filled"
                               size="medium"
-                              type="button"
-                              variant="text"
-                              truncate
+                              color="blue400"
                             />
                           </LinkV2>
                         </Box>
@@ -310,13 +299,10 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
                             Leiðbeiningar um ritun umsagna
                           </Text>
                           <LinkV2 href={paths.thingmal}>
-                            <Button
+                            <Icon
                               icon="arrowForward"
-                              iconType="filled"
                               size="medium"
-                              type="button"
-                              variant="text"
-                              truncate
+                              color="blue400"
                             />
                           </LinkV2>
                         </Box>
@@ -333,13 +319,10 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
                           </Text>
 
                           <LinkV2 href={paths.thingmal}>
-                            <Button
-                              icon="open"
-                              iconType="outline"
+                            <Icon
+                              icon="arrowForward"
                               size="medium"
-                              type="button"
-                              variant="text"
-                              truncate
+                              color="blue400"
                             />
                           </LinkV2>
                         </Box>
@@ -358,7 +341,7 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
                     <img
                       src={'/assets/frontpage-cta-2.png'}
                       className={styles.image}
-                      alt={'Alþingishúsið'}
+                      alt={''}
                     />
                   </Box>
                 </GridColumn>

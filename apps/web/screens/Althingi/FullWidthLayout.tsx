@@ -1,24 +1,14 @@
 import React from 'react'
 import { useWindowSize } from 'react-use'
-import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
 import {
   Box,
   BreadCrumbItem,
   Breadcrumbs,
-  Button,
   GridColumn,
   GridContainer,
   GridRow,
-  Icon,
-  InfoCardGrid,
-  Inline,
-  Link,
-  LinkV2,
-  Navigation,
-  NavigationItem,
-  ProfileCard,
   Stack,
   Tag,
   Text,
@@ -28,12 +18,10 @@ import {
   DefaultHeader,
   HeadWithSocialSharing,
   OrganizationFooter,
-  Webreader,
 } from '@island.is/web/components'
 import { SLICE_SPACING } from '@island.is/web/constants'
 
-import { mockInfoCards, OrganizationMock, paths } from '../../utils/mockData'
-import * as styles from './Layout.css'
+import { OrganizationMock, paths } from '../../utils/mockData'
 
 interface LayoutProps {
   title: string
@@ -104,7 +92,7 @@ const FullWidthLayout: React.FC<LayoutProps> = ({
                 <Text variant="h1" as="h2">
                   {title}
                 </Text>
-                <Text marginTop={1}>
+                <Text variant="h3" as="p" fontWeight="light">
                   Alþingi Íslands fer með löggjafarvald og gegnir lykilhlutverki
                   í íslenskri stjórnsýslu.
                 </Text>
@@ -132,8 +120,18 @@ const FullWidthLayout: React.FC<LayoutProps> = ({
                 height="full"
                 justifyContent="flexEnd"
                 alignItems="center"
+                flexDirection="column"
               >
-                <img src={'/assets/frontpage-1.png'} alt={'Alþingishúsið'} />
+                <img
+                  src={'/assets/frontpage-1.png'}
+                  alt={
+                    'Stytta af Ingibjörgu H. Bjarnason, eftir Ragnhildi Stefánsdóttur myndhöggvara, fyrir utan Alþingishúsið.'
+                  }
+                />
+                <Text fontWeight="light" variant="medium" marginTop={1}>
+                  Stytta af Ingibjörgu H. Bjarnason, eftir Ragnhildi
+                  Stefánsdóttur myndhöggvara, fyrir utan Alþingishúsið.
+                </Text>
               </Box>
             </GridColumn>
           </GridRow>

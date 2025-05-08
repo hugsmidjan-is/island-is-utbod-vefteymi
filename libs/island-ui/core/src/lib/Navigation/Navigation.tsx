@@ -593,7 +593,7 @@ export const NavigationTree: FC<
                     onClick={() => {
                       toggleAccordion(accordionId)
                     }}
-                    background={colorSchemeColors[colorScheme]['dividerColor']}
+                    // background={colorSchemeColors[colorScheme]['dividerColor']}
                     marginRight={2}
                     aria-expanded={activeAccordion}
                     aria-controls={'test2'}
@@ -603,9 +603,9 @@ export const NavigationTree: FC<
                     )}
                   >
                     <Icon
-                      icon="add"
+                      icon="chevronBack"
                       color={colorSchemeColors[colorScheme]['color']}
-                      size="small"
+                      size="medium"
                       className={cn(
                         styles.icon,
                         activeAccordion
@@ -614,9 +614,9 @@ export const NavigationTree: FC<
                       )}
                     />
                     <Icon
-                      icon="remove"
+                      icon="chevronUp"
                       color={colorSchemeColors[colorScheme]['color']}
-                      size="small"
+                      size="medium"
                       className={cn(
                         styles.icon,
                         activeAccordion

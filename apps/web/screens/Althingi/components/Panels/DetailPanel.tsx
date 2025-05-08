@@ -1,9 +1,11 @@
-import { Box, Divider, Stack, Text } from '@island.is/island-ui/core'
 import React from 'react'
+
+import { Box, Divider, Stack, Text } from '@island.is/island-ui/core'
 
 interface DetailPanelProps {
   backgroundColor: 'blue100' | 'purple100'
   title?: string
+  subtitle?: string
   items: {
     label: string
     value: string
@@ -13,6 +15,7 @@ interface DetailPanelProps {
 const DetailPanel: React.FC<DetailPanelProps> = ({
   title,
   items,
+  subtitle,
   backgroundColor,
 }) => {
   return (
@@ -28,12 +31,21 @@ const DetailPanel: React.FC<DetailPanelProps> = ({
             <Divider />
           </>
         )}
+        {subtitle && (
+          <Text variant="eyebrow" color="blueberry600">
+            {subtitle}
+          </Text>
+        )}
         {items.map((item, index) => (
           <Box key={`panel-item-${index}-${item.label}`}>
             <Text fontWeight="semiBold" color="blueberry600">
               {item.label}
             </Text>
-            <Text variant="medium" color="blueberry600">
+            <Text
+              variant="medium"
+              color="blueberry600"
+              fontWeight={item.label === '' ? 'light' : 'regular'}
+            >
               {item.value}
             </Text>
           </Box>

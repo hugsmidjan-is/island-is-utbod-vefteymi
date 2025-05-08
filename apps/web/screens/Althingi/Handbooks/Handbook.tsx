@@ -62,7 +62,7 @@ const Handbook: Screen<HandbookProps> = ({ locale }) => {
                 value: 'Alþingi',
               },
             ]}
-            title="Upplýsingar"
+            title="Handbók"
           />
           <Button variant="utility" fluid icon="download" iconType="outline">
             Sækja sem PDF
@@ -76,7 +76,7 @@ const Handbook: Screen<HandbookProps> = ({ locale }) => {
       <Stack space={SLICE_SPACING}>
         <section>
           <Box marginTop={2}>
-            <Text variant="h1">{data.title}</Text>
+            <Text variant="h1">{'Háttvirtur þingmaður 2024'}</Text>
             <Text as="p" paddingTop={3} marginBottom={3}>
               {data.description}
             </Text>

@@ -1,14 +1,14 @@
+import React from 'react'
+
 import {
   Box,
   Divider,
-  FormStepper,
   FormStepperThemes,
   FormStepperV2,
   Section,
   Stack,
   Text,
 } from '@island.is/island-ui/core'
-import React from 'react'
 
 interface TimelinePanelProps {
   backgroundColor: 'blue100' | 'purple100'
@@ -26,12 +26,7 @@ const TimelinePanel: React.FC<TimelinePanelProps> = ({
   backgroundColor = 'blue100',
 }) => {
   return (
-    <Box
-      background={backgroundColor}
-      padding={3}
-      borderRadius="large"
-      marginBottom={3}
-    >
+    <Box background={backgroundColor} padding={3} borderRadius="large">
       <Stack space={2}>
         {title && (
           <>
