@@ -116,9 +116,13 @@ export const Header: FC<React.PropsWithChildren<HeaderProps>> = ({
                     >
                       <Button
                         variant="utility"
-                        onClick={() => router.push(paths.umAlthingiEN)}
+                        onClick={() =>
+                          EN
+                            ? router.push(paths.umAlthingi)
+                            : router.push(paths.umAlthingiEN)
+                        }
                       >
-                        EN
+                        {EN ? 'IS' : 'EN'}
                       </Button>
                     </Box>
                     <Box marginLeft={marginLeft}>
