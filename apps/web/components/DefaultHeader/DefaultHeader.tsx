@@ -136,7 +136,7 @@ export const DefaultHeader: React.FC<
                           variant={isMobile ? 'medium' : 'default'}
                           fontWeight="medium"
                           color={
-                            router.asPath.includes(paths.thingmennLanding)
+                            router.asPath.includes('thingmenn')
                               ? 'blue400'
                               : undefined
                           }

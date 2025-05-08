@@ -184,7 +184,7 @@ const ThingmalDetail: Screen<ThingmalDetailProps> = ({ title }) => {
         </Box>
         <Box display={'flex'} alignItems={'flexStart'}>
           <Button size="small" icon="open" iconType="outline">
-            Umsagnargátt
+            Umsagnagátt
           </Button>
         </Box>
       </Box>

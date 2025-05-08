@@ -316,7 +316,7 @@ const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
                           justifyContent={'spaceBetween'}
                         >
                           <Text variant="h5" fontWeight="semiBold">
-                            Umsagnargátt
+                            Umsagnagátt
                           </Text>
 
                           <LinkV2 href={paths.thingmal}>
