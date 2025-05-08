@@ -36,12 +36,6 @@ const ThingmennDetail: Screen<ThingmennDetailProps> = ({ title }) => {
           title: 'Alþingismenn',
           href: '/s/althingi/thingmenn',
         },
-        {
-          title: 'Logi Einarsson',
-          href: '/s/althingi/thingmenn/logi-einarsson',
-          isCurrentPage: true,
-          isTag: true,
-        },
       ]}
       sidebar={
         <Stack space={2}>

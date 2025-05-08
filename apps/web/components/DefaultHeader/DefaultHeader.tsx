@@ -16,6 +16,7 @@ import { useWindowSize } from '@island.is/web/hooks/useViewport'
 
 import * as styles from './DefaultHeader.css'
 import { paths } from '@island.is/web/utils/mockData'
+import { useRouter } from 'next/router'
 
 export interface DefaultHeaderProps {
   fullWidth?: boolean
@@ -70,6 +71,7 @@ export const DefaultHeader: React.FC<
   const LinkWrapper = logoHref ? Link : Box
 
   const isMobile = width < theme.breakpoints.lg
+  const router = useRouter()
 
   return (
     <>
@@ -112,6 +114,9 @@ export const DefaultHeader: React.FC<
                         <Text
                           fontWeight="medium"
                           variant={isMobile ? 'medium' : 'default'}
+                          color={
+                            router.asPath === paths.home ? 'blue400' : undefined
+                          }
                         >
                           Forsíða
                         </Text>
@@ -122,6 +127,11 @@ export const DefaultHeader: React.FC<
                         <Text
                           fontWeight="medium"
                           variant={isMobile ? 'medium' : 'default'}
+                          color={
+                            router.asPath.includes(paths.thingstorf)
+                              ? 'blue400'
+                              : undefined
+                          }
                         >
                           Þingstörf
                         </Text>
@@ -132,6 +142,11 @@ export const DefaultHeader: React.FC<
                         <Text
                           variant={isMobile ? 'medium' : 'default'}
                           fontWeight="medium"
+                          color={
+                            router.asPath.includes(paths.thingmenn)
+                              ? 'blue400'
+                              : undefined
+                          }
                         >
                           Þingmenn
                         </Text>
@@ -142,6 +157,11 @@ export const DefaultHeader: React.FC<
                         <Text
                           variant={isMobile ? 'medium' : 'default'}
                           fontWeight="medium"
+                          color={
+                            router.asPath.includes(paths.umAlthingi)
+                              ? 'blue400'
+                              : undefined
+                          }
                         >
                           Um Alþingi
                         </Text>
@@ -252,7 +272,7 @@ export const DefaultHeader: React.FC<
                   </LinkWrapper>
                 </Hidden>
               )} */}
-              {!isSubpage && (
+              {/* {!isSubpage && (
                 <Box
                   className={cn(styles.title, titleClassName)}
                   paddingLeft={
@@ -277,7 +297,7 @@ export const DefaultHeader: React.FC<
                     </Text>
                   )}
                 </Box>
-              )}
+              )} */}
             </div>
           </div>
           {imageProvided && !isSubpage && (

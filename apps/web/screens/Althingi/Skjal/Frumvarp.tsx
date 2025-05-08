@@ -53,6 +53,20 @@ const Frumvarp: Screen<FrumvarpProps> = ({ locale }) => {
       </Head>
       <Layout
         title={'Frumvarp | Ísland.is'}
+        breadcrumbs={[
+          {
+            title: 'Þingstörf',
+            href: paths.thingstorf,
+          },
+          {
+            title: 'Þingmálaskrá',
+            href: paths.thingmal,
+          },
+          {
+            title: 'Frumvarp',
+            href: paths.thingmalDetail,
+          },
+        ]}
         sidebar={
           <Stack space={2}>
             <GoBack />
@@ -64,33 +78,42 @@ const Frumvarp: Screen<FrumvarpProps> = ({ locale }) => {
                   value: '156. löggjafarþing 2025',
                 },
                 {
-                  label: 'Tegund',
-                  value: '97. mál, lagafrumvarp RSS þjónusta',
+                  label: 'Málsnúmer',
+                  value: '97. mál',
+                },
+                {
+                  label: 'Staða',
+                  value: '2. umræða',
                 },
                 {
                   label: 'Útbýtingadagur',
-                  value: '02.05.2025',
+                  value: '12.02.2025',
+                },
+                {
+                  label: 'Flutninsgmaður',
+                  value: 'Mennta- og barnamálaráðherra',
                 },
               ]}
-              title="Upplýsingar um lagafrumvarp"
+              title="Lagafrumvarp"
             />
             <DetailPanel
               backgroundColor={'purple100'}
               items={[
                 {
-                  label: '584/2020',
-                  value:
-                    'Lorem ipsum dolor sit amet consectetur. Purus nunc vivamus facilisis et vestibulum.',
+                  label: '12.02.2025',
+                  value: '97 stjórnarfrumvarp',
                 },
                 {
-                  label: '380/2020',
-                  value:
-                    'Lorem ipsum dolor sit amet consectetur. Purus nunc vivamus facilisis et vestibulum.',
+                  label: '20.03.2025',
+                  value: '231 nefndarálit með breytingartillögu',
                 },
                 {
-                  label: '449/2019',
-                  value:
-                    'Lorem ipsum dolor sit amet consectetur. Purus nunc vivamus facilisis et vestibulum',
+                  label: '24.03.2025',
+                  value: '242 nefndarálit með breytingartillögu',
+                },
+                {
+                  label: '25.03.2025',
+                  value: '253 frumvarp eftir 2. umræðu',
                 },
               ]}
               title="Breytingasaga frumvarps"

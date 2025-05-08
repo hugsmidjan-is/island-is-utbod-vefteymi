@@ -21,7 +21,7 @@ const DetailPanel: React.FC<DetailPanelProps> = ({
         {title && (
           <>
             <Box>
-              <Text variant="h4" color="blue600">
+              <Text variant="h4" color="blueberry600">
                 {title}
               </Text>
             </Box>
@@ -30,8 +30,12 @@ const DetailPanel: React.FC<DetailPanelProps> = ({
         )}
         {items.map((item, index) => (
           <Box key={`panel-item-${index}-${item.label}`}>
-            <Text fontWeight="semiBold">{item.label}</Text>
-            <Text variant="medium">{item.value}</Text>
+            <Text fontWeight="semiBold" color="blueberry600">
+              {item.label}
+            </Text>
+            <Text variant="medium" color="blueberry600">
+              {item.value}
+            </Text>
           </Box>
         ))}
       </Stack>

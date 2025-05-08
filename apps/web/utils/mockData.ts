@@ -648,6 +648,25 @@ export const mockHandbooks: Array<MockHandbook> = [
     chapters,
   },
   {
+    title: 'Ársreikningur Alþingis 2024',
+    description: 'Ársreikningur Alþingis 2024',
+    publicationDate: 'Janúar 2025',
+    publicationVersion: '1. útgáfa',
+    publisher: 'Skrifstofa Alþingis',
+    href: '2024',
+    links,
+    textSlices: [
+      {
+        label: 'Formálsorð',
+        lines: [
+          'Upplýsingaritið Háttvirtur þingmaður, sem skrifstofa Alþingis annast, kemur nú út í tíunda skipti. Venja hefur verið að gefa ritið út eftir hverjar alþingiskosningar. Efni ritsins hefur verið uppfært frá fyrri útgáfu.',
+          'Ritið er einkum hugsað til leiðbeiningar fyrir nýkjörna alþingismenn, svo og varaþingmenn sem setjast á Alþingi á kjörtímabilinu. Þess er þó enn fremur vænst að ritið nýtist öllum alþingismönnum sem geta á einum stað nálgast ýmsar hagnýtar upplýsingar um starfsvenjur og starfskjör sín. Þá er einnig haft í huga að ritið komi að notum hjá þeim sem hafa samskipti við Alþingi sem og þeim sem hafa áhuga á hvernig Alþingi starfar og hvernig búið er að alþingismönnum',
+        ],
+      },
+    ],
+    chapters,
+  },
+  {
     title: 'Handbók Alþingis 2021',
     description: 'Handbók um þingstörfin',
     publicationDate: 'Desember 2024',
@@ -673,6 +692,25 @@ export const mockHandbooks: Array<MockHandbook> = [
         ],
       },
     ],
+  },
+  {
+    title: 'Ársreikningur Alþingis 2020',
+    description: 'Ársreikningur Alþingis 2020',
+    publicationDate: 'Janúar 2021',
+    publicationVersion: '1. útgáfa',
+    publisher: 'Skrifstofa Alþingis',
+    href: '2021',
+    links,
+    textSlices: [
+      {
+        label: 'Formálsorð',
+        lines: [
+          'Upplýsingaritið Háttvirtur þingmaður, sem skrifstofa Alþingis annast, kemur nú út í tíunda skipti. Venja hefur verið að gefa ritið út eftir hverjar alþingiskosningar. Efni ritsins hefur verið uppfært frá fyrri útgáfu.',
+          'Ritið er einkum hugsað til leiðbeiningar fyrir nýkjörna alþingismenn, svo og varaþingmenn sem setjast á Alþingi á kjörtímabilinu. Þess er þó enn fremur vænst að ritið nýtist öllum alþingismönnum sem geta á einum stað nálgast ýmsar hagnýtar upplýsingar um starfsvenjur og starfskjör sín. Þá er einnig haft í huga að ritið komi að notum hjá þeim sem hafa samskipti við Alþingi sem og þeim sem hafa áhuga á hvernig Alþingi starfar og hvernig búið er að alþingismönnum',
+        ],
+      },
+    ],
+    chapters,
   },
   {
     title: 'Handbók Alþingis 2017',
@@ -876,7 +914,7 @@ export const videoTranscript = [
 
 export const mockAboutArticles = [
   {
-    title: 'Handbók Alþingis',
+    title: 'Handbækur Alþingis',
     description:
       'Handbókin er uppflettirit um starfsemi þingsins og alþingismenn. Í henni eru upplýsingar um síðustu alþingiskosningar hverju sinni, upplýsingar um skipan þingsins og ýmsar skrár um alþingismenn.',
     url: paths.handbaekur,
@@ -931,3 +969,43 @@ export const mockThingstorfArticles = [
     url: paths.thingfundir,
   },
 ]
+
+interface FullWidthTranscript {
+  title: string
+  subtitle?: string
+  chapters: Array<{
+    timestamp?: string
+    label: string
+    link?: string
+  }>
+}
+
+export const fullWidthVideoTranscript: FullWidthTranscript = {
+  title: '34. þingfundur',
+  subtitle: 'Mánudaginn 5. maí, kl. 15:00 síðdegis',
+  chapters: [
+    {
+      timestamp: '15:00',
+      label: 'Varamenn taka þingsæti',
+      link: 'example.com',
+    },
+    {
+      timestamp: '13:43',
+      label: 'Drengskapaheit',
+      link: 'example.com',
+    },
+    {
+      timestamp: '15:03',
+      label: 'Lengd þingfundar',
+      link: 'example.com',
+    },
+    {
+      timestamp: '15:40',
+      label: 'Veiðigjald, 1. umr.',
+      link: 'example.com',
+    },
+    {
+      label: 'Óundirbúinn fyrirspurnatími',
+    },
+  ],
+}

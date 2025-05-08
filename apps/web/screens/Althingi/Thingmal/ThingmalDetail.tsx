@@ -102,7 +102,7 @@ const ThingmalDetail: Screen<ThingmalDetailProps> = ({ title }) => {
           isCurrentPage: false,
         },
         {
-          title: 'Þingmál',
+          title: 'Þingmálaskrá',
           href: paths.thingmal,
           isCurrentPage: false,
         },

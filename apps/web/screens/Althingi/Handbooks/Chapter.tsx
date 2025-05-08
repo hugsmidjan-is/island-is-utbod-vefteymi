@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 import { useWindowSize } from 'react-use'
 
 import {
@@ -10,6 +10,7 @@ import {
   FocusableBox,
   Hidden,
   LinkV2,
+  Pagination,
   Stack,
   Text,
 } from '@island.is/island-ui/core'
@@ -192,6 +193,16 @@ const Chapter: Screen<ChapterProps> = ({ locale }) => {
             ef hún telur ástæðu til, að birta álit sitt á vef Alþingis.
           </Text>
         </Box>
+        <Pagination
+          page={0}
+          renderLink={function (
+            page: number,
+            className: string,
+            children: ReactNode,
+          ): ReactNode {
+            throw new Error('Function not implemented.')
+          }}
+        ></Pagination>
       </Stack>
     </Layout>
   )

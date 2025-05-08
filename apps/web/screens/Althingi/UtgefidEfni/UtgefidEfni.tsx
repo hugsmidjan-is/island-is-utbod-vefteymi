@@ -10,6 +10,7 @@ import {
   FilterMultiChoice,
   FocusableBox,
   Icon,
+  Inline,
   LinkV2,
   Stack,
   Tag,
@@ -227,6 +228,16 @@ const UtgefidEfni: Screen<UtgefidEfniProps> = ({ title }) => {
         </section>
         <section>
           <Stack space={2}>
+            <Box
+              display="flex"
+              alignItems={'flexEnd'}
+              justifyContent="flexStart"
+            >
+              <Box marginRight={1}>
+                <Text fontWeight="medium">{filteredData.length}</Text>
+              </Box>
+              <Text>{' niðurstöður'}</Text>
+            </Box>
             {filteredData.map((t, index) => (
               <FocusableBox
                 key={`${t.title}-${index}`}

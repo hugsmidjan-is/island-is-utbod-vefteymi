@@ -12,9 +12,7 @@ export const comingUpButtons = style({
   width: 'auto',
 })
 
-export const image = style({
-  width: 259,
-})
+export const image = style({})
 
 export const gridRow = style({
   marginTop: 120,

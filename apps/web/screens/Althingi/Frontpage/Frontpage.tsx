@@ -10,6 +10,7 @@ import {
   GridColumn,
   GridContainer,
   GridRow,
+  Icon,
   InfoCardGrid,
   LinkV2,
   Stack,
@@ -18,40 +19,164 @@ import {
 } from '@island.is/island-ui/core'
 import { theme } from '@island.is/island-ui/theme'
 import { SLICE_SPACING } from '@island.is/web/constants'
-import { CustomPageUniqueIdentifier } from '@island.is/web/graphql/schema'
 import { withMainLayout } from '@island.is/web/layouts/main'
 import { Screen } from '@island.is/web/types'
 import {
+  fullWidthVideoTranscript,
   mockInfoCards,
   paths,
   videoTag,
-  videoTranscript,
 } from '@island.is/web/utils/mockData'
 
-import {
-  CustomScreen,
-  withCustomPageWrapper,
-} from '../../CustomPage/CustomPageWrapper'
-import { Video } from '../components/Video/Video'
-import Layout from '../Layout'
+import { NewVideo } from '../components/Video/NewVideo'
+import FullWidthLayout from '../FullWidthLayout'
 import * as styles from './Frontpage.css'
 
-const Frontpage: Screen<FrontpageProps> = ({ title }) => {
+const FrontpageFullWidth: Screen<FrontpageProps> = ({ title }) => {
   const { width } = useWindowSize()
   const isMobile = width < theme.breakpoints.md
-  const router = useRouter()
+
   return (
-    <Layout
+    <FullWidthLayout
       title={title}
-      mainLayout={
-        <>
-          {/* Á döfinni */}
-          <Box
-            className="rs_read"
-            background="blue100"
-            width="full"
-            padding={6}
-          >
+      description={''}
+      tags={[
+        { label: 'Þingstörf', href: paths.home },
+        { label: 'Þingmálalistar', href: paths.home },
+        { label: 'Þingfundir og ræður', href: paths.home },
+        { label: 'Upptökur', href: paths.home },
+        { label: 'Handbækur', href: paths.home },
+        { label: 'Í umsagnarferli', href: paths.home },
+        { label: 'Nefndir', href: paths.home },
+        { label: 'Þingmenn', href: paths.home },
+        { label: 'Alþjóðastarf', href: paths.home },
+        { label: 'Ályktanir Alþingis', href: paths.home },
+        { label: 'Þingmálaskrá ríkisstjórnar', href: paths.home },
+      ]}
+    >
+      <Stack space={SLICE_SPACING}>
+        <section>
+          <Box marginX={'auto'} style={{ maxWidth: '1344px' }}>
+            <NewVideo
+              url={
+                'https://www.youtube.com/embed/fw7yXuwc2bE?si=2kx6pEzmDP6OjTqR'
+              }
+              title="Beint streymi"
+              tags={videoTag}
+              link={{
+                label: 'Sjá allar upptökur',
+                url: paths.thingfundir,
+              }}
+              transcript={fullWidthVideoTranscript}
+            />
+          </Box>
+        </section>
+        <section>
+          <Box paddingY={8}>
+            <GridContainer>
+              <GridRow>
+                <GridColumn span="5/12">
+                  <Box
+                    display="flex"
+                    height="full"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <img
+                      src={'/assets/frontpage-cta-1.png'}
+                      className={styles.image}
+                      alt={'Alþingishúsið'}
+                    />
+                  </Box>
+                </GridColumn>
+                <GridColumn offset="1/12" span="5/12">
+                  <Text variant="h2" as="h2">
+                    Þingmál
+                  </Text>
+                  <Text marginTop={1}>
+                    Samkvæmt stjórnarskrá Íslands verða lagafrumvörp að fara í
+                    gegnum þrjár umræður á þingi áður en þau eru samþykkt eða
+                    felld þar. Frumvarpið hlýtur svo endanlega gildi ef forseti
+                    Íslands skrifar undir það.
+                  </Text>
+                  <Box marginTop={6}>
+                    <Stack space={3}>
+                      <Box>
+                        <Box
+                          marginBottom={2}
+                          display="flex"
+                          justifyContent={'spaceBetween'}
+                        >
+                          <Text variant="h5" fontWeight="semiBold">
+                            Lagasafn
+                          </Text>
+                          <LinkV2 href={paths.thingmal}>
+                            <Button
+                              icon="arrowForward"
+                              iconType="filled"
+                              size="medium"
+                              type="button"
+                              variant="text"
+                              truncate
+                            />
+                          </LinkV2>
+                        </Box>
+                        <Divider />
+                      </Box>
+                      <Box>
+                        <Box
+                          marginBottom={2}
+                          display="flex"
+                          justifyContent={'spaceBetween'}
+                        >
+                          <Text variant="h5" fontWeight="semiBold">
+                            Lagafrumvörp
+                          </Text>
+                          <LinkV2 href={paths.thingmal}>
+                            <Button
+                              icon="arrowForward"
+                              iconType="filled"
+                              size="medium"
+                              type="button"
+                              variant="text"
+                              truncate
+                            />
+                          </LinkV2>
+                        </Box>
+                        <Divider />
+                      </Box>
+                      <Box>
+                        <Box
+                          marginBottom={2}
+                          display="flex"
+                          justifyContent={'spaceBetween'}
+                        >
+                          <Text variant="h5" fontWeight="semiBold">
+                            Þingsályktarnir
+                          </Text>
+
+                          <LinkV2 href={paths.thingmal}>
+                            <Button
+                              icon="arrowForward"
+                              iconType="filled"
+                              size="medium"
+                              type="button"
+                              variant="text"
+                              truncate
+                            />
+                          </LinkV2>
+                        </Box>
+                        <Divider />
+                      </Box>
+                    </Stack>
+                  </Box>
+                </GridColumn>
+              </GridRow>
+            </GridContainer>
+          </Box>
+        </section>
+        <section>
+          <Box paddingY={8} background="blue100" paddingX={3}>
             <Box width="full" display={'flex'} justifyContent={'spaceBetween'}>
               <Text variant="h4" as="h3">
                 {'Á döfinni'}
@@ -137,72 +262,114 @@ const Frontpage: Screen<FrontpageProps> = ({ title }) => {
               />
             </Box>
           </Box>
-          {/* Senda inn umsögn */}
-          <Box>
+        </section>
+        <section>
+          <Box paddingY={8}>
             <GridContainer>
-              <GridRow className={styles.gridRow}>
-                <GridColumn
-                  offset={['1/12', '1/12', '1/12']}
-                  span={['9/12', '9/12', '3/12']}
-                  paddingBottom={[3, 3, 0]}
-                >
-                  <Box
-                    display={'flex'}
-                    justifyContent={['center', 'center', 'flexStart']}
-                  >
-                    <img
-                      src={'/assets/files.svg'}
-                      alt={'Alþingi'}
-                      width={100}
-                      height={100}
-                      className={styles.image}
-                    />
+              <GridRow>
+                <GridColumn offset="1/12" span="5/12">
+                  <Text variant="h2" as="h2">
+                    Viltu senda inn umsögn?
+                  </Text>
+                  <Text marginTop={1}>
+                    Öllum er frjálst að senda nefnd skriflega umsögn um þingmál
+                    að eigin frumkvæði og hefur slík umsögn sömu stöðu og þær
+                    sem berast samkvæmt beiðni nefndar
+                  </Text>
+                  <Box marginTop={6}>
+                    <Stack space={3}>
+                      <Box>
+                        <Box
+                          marginBottom={2}
+                          display="flex"
+                          justifyContent={'spaceBetween'}
+                        >
+                          <Text variant="h5" fontWeight="semiBold">
+                            Mál í umsagnarferli
+                          </Text>
+                          <LinkV2 href={paths.thingmal}>
+                            <Button
+                              icon="arrowForward"
+                              iconType="filled"
+                              size="medium"
+                              type="button"
+                              variant="text"
+                              truncate
+                            />
+                          </LinkV2>
+                        </Box>
+                        <Divider />
+                      </Box>
+                      <Box>
+                        <Box
+                          marginBottom={2}
+                          display="flex"
+                          justifyContent={'spaceBetween'}
+                        >
+                          <Text variant="h5" fontWeight="semiBold">
+                            Leiðbeiningar um ritun umsagna
+                          </Text>
+                          <LinkV2 href={paths.thingmal}>
+                            <Button
+                              icon="arrowForward"
+                              iconType="filled"
+                              size="medium"
+                              type="button"
+                              variant="text"
+                              truncate
+                            />
+                          </LinkV2>
+                        </Box>
+                        <Divider />
+                      </Box>
+                      <Box>
+                        <Box
+                          marginBottom={2}
+                          display="flex"
+                          justifyContent={'spaceBetween'}
+                        >
+                          <Text variant="h5" fontWeight="semiBold">
+                            Umsagnargátt
+                          </Text>
+
+                          <LinkV2 href={paths.thingmal}>
+                            <Button
+                              icon="open"
+                              iconType="outline"
+                              size="medium"
+                              type="button"
+                              variant="text"
+                              truncate
+                            />
+                          </LinkV2>
+                        </Box>
+                        <Divider />
+                      </Box>
+                    </Stack>
                   </Box>
                 </GridColumn>
-                <GridColumn
-                  offset={['1/12', '1/12', '0']}
-                  span={['9/12', '7/12', '7/12']}
-                >
-                  <Box marginBottom={[4, 4, 2]}>
-                    <Text variant="h2" as="h3" marginBottom={2}>
-                      Senda inn umsögn
-                    </Text>
-                    <Text>
-                      Etiam odio elementum eu libero velit quis. Semper turpis
-                      suspendisse ultrices ut nibh hendrerit malesuada urna.
-                      Duis praesent ut sem non et augue pretium turpis.
-                    </Text>
+                <GridColumn offset="1/12" span="5/12">
+                  <Box
+                    display="flex"
+                    height="full"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <img
+                      src={'/assets/frontpage-cta-2.png'}
+                      className={styles.image}
+                      alt={'Alþingishúsið'}
+                    />
                   </Box>
-                  <Stack space={[3, 3, 2]}>
-                    <Box>
-                      <Button
-                        variant="text"
-                        icon="arrowForward"
-                        iconType="outline"
-                        size="medium"
-                      >
-                        Mál í umsagnarferli
-                      </Button>
-                    </Box>
-                    <Box>
-                      <Button
-                        variant="text"
-                        icon="arrowForward"
-                        iconType="outline"
-                        size="medium"
-                      >
-                        Leiðbeiningar um ritun umsagna
-                      </Button>
-                    </Box>
-                  </Stack>
                 </GridColumn>
               </GridRow>
             </GridContainer>
           </Box>
-          {/* Tölfræði */}
-          <Box>
+        </section>
+        <section>
+          <Box paddingY={10} background="dark100">
             <GridContainer>
-              <GridRow className={styles.gridRow}>
+              <GridRow>
                 <GridColumn
                   offset={['0', '0', '1/12']}
                   span={['12/12', '12/12', '4/12']}
@@ -216,8 +383,8 @@ const Frontpage: Screen<FrontpageProps> = ({ title }) => {
                       Vissir þú...
                     </Text>
                     <Text>
-                      Alþingi Íslands fer með löggjafarvald og gegnir
-                      lykilhlutverki í íslenskri stjórnsýslu.
+                      Alþingi er eitt af elstu starfandi þingum heims og er
+                      æðsti handhafi löggjafarvalds á Íslandi.
                     </Text>
                   </Box>
                 </GridColumn>
@@ -225,13 +392,23 @@ const Frontpage: Screen<FrontpageProps> = ({ title }) => {
                   offset={['0', '0', '0']}
                   span={['12/12', '3/12', '3/12']}
                 >
-                  <Box marginBottom={2} background="blue100" padding={3}>
+                  <Box
+                    marginBottom={2}
+                    background="white"
+                    padding={3}
+                    borderRadius="large"
+                  >
                     <Text variant="eyebrow">Stofnár Alþingis</Text>
                     <Text variant="h1" color="blue400">
                       930
                     </Text>
                   </Box>
-                  <Box marginBottom={2} background="blue100" padding={3}>
+                  <Box
+                    marginBottom={2}
+                    background="white"
+                    padding={3}
+                    borderRadius="large"
+                  >
                     <Text variant="eyebrow">Þjóðkjörnir alþingismenn</Text>
                     <Text variant="h1" color="blue400">
                       63
@@ -242,13 +419,23 @@ const Frontpage: Screen<FrontpageProps> = ({ title }) => {
                   offset={['0', '0', '0']}
                   span={['12/12', '3/12', '3/12']}
                 >
-                  <Box marginBottom={2} background="blue100" padding={3}>
+                  <Box
+                    marginBottom={2}
+                    background="white"
+                    padding={3}
+                    borderRadius="large"
+                  >
                     <Text variant="eyebrow">Kjörtímabil</Text>
                     <Text variant="h1" color="blue400">
                       4
                     </Text>
                   </Box>
-                  <Box marginBottom={2} background="blue100" padding={3}>
+                  <Box
+                    marginBottom={2}
+                    background="white"
+                    padding={3}
+                    borderRadius="large"
+                  >
                     <Text variant="eyebrow">Staðfest lög á ári</Text>
                     <Text variant="h1" color="blue400">
                       100
@@ -262,137 +449,9 @@ const Frontpage: Screen<FrontpageProps> = ({ title }) => {
               </GridRow>
             </GridContainer>
           </Box>
-        </>
-      }
-    >
-      <Stack space={SLICE_SPACING}>
-        <section>
-          <Box marginTop={2}>
-            <Text variant="h1" as="h2">
-              {title}
-            </Text>
-            <Text variant="intro" as="p" paddingTop={3} marginBottom={3}>
-              Velkomin á vef Alþingis, æðsta handhafa löggjafarvalds á Íslandi.{' '}
-            </Text>
-            <Text variant="h4">Flýtileiðir</Text>
-            <Box
-              display="flex"
-              flexWrap={'wrap'}
-              rowGap={1}
-              columnGap={1}
-              marginTop={3}
-            >
-              <Tag variant="blue" outlined={false} href={paths.home}>
-                {'Þingstörf'}
-              </Tag>
-              <Tag variant="blue" outlined={false} href={paths.home}>
-                {'Þingmálalistar'}
-              </Tag>
-              <Tag variant="blue" outlined={false} href={paths.home}>
-                {'Þingfundir og ræður'}
-              </Tag>
-              <Tag variant="blue" outlined={false} href={paths.home}>
-                {'Upptökur'}
-              </Tag>
-              <Tag variant="blue" outlined={false} href={paths.home}>
-                {'Handbækur'}
-              </Tag>
-              <Tag variant="blue" outlined={false} href={paths.home}>
-                {'Í umsagnarferli'}
-              </Tag>
-              <Tag variant="blue" outlined={false} href={paths.home}>
-                {'Nefndir'}
-              </Tag>
-              <Tag variant="blue" outlined={false} href={paths.home}>
-                {'Þingmenn'}
-              </Tag>
-              <Tag variant="blue" outlined={false} href={paths.home}>
-                {'Alþjóðastarf'}
-              </Tag>
-              <Tag variant="blue" outlined={false} href={paths.home}>
-                {'Ályktanir Alþingis'}
-              </Tag>
-              <Tag variant="blue" outlined={false} href={paths.home}>
-                {'Þingmálaskrá ríkisstjórnar'}
-              </Tag>
-            </Box>
-          </Box>
-        </section>
-        <Divider />
-        <section>
-          <Box display="flex" justifyContent="spaceBetween" marginBottom={2}>
-            <Text variant="h3" as="h3">
-              Útsending
-            </Text>
-            <Box display="flex" flexDirection="row">
-              <Button
-                variant="text"
-                icon="arrowForward"
-                iconType="outline"
-                size="small"
-                onClick={() => router.push(paths.thingfundir)}
-              >
-                Sjá upptökur
-              </Button>
-            </Box>
-          </Box>
-
-          <Video
-            url={
-              'http://vod.althingi.is/player/?type=vod&width=512&height=288&icons=yes&file=20250506T131300&start=1004&duration=20669&autoplay=true'
-            }
-            tags={videoTag}
-            transcript={{
-              items: videoTranscript,
-              contentLabel: 'Dagskrá 35. þingfundar',
-              title: 'þriðjudaginn 6. maí kl. 13:30',
-            }}
-          />
-        </section>
-        <section>
-          <Stack space={3}>
-            <GridRow rowGap={3}>
-              <GridColumn span={['1/1', '1/1', '1/1', '1/1', '1/2']}>
-                <CategoryCard
-                  heading={'Þingstörf'}
-                  text={
-                    'Starfsemi yfirstandandi þings; þingmál, umsagnir, skýrslur, þingfundir og ræður'
-                  }
-                  href={paths.thingstorf}
-                />
-              </GridColumn>
-              <GridColumn span={['1/1', '1/1', '1/1', '1/1', '1/2']}>
-                <CategoryCard
-                  heading={'Þingmenn'}
-                  text={
-                    'Sitjandi aðal- og varaþingmenn, þingflokkar, hagsmunaskrá og sögulegar upplýsingar'
-                  }
-                  href={paths.thingmenn}
-                />
-              </GridColumn>
-              <GridColumn span={['1/1', '1/1', '1/1', '1/1', '1/2']}>
-                <CategoryCard
-                  heading={'Lagasafn'}
-                  text={
-                    'Öll gildandi lög ásamt upplýsingum um lagabreytingar og brottfallin lög'
-                  }
-                  href={paths.home}
-                />
-              </GridColumn>
-              <GridColumn span={['1/1', '1/1', '1/1', '1/1', '1/2']}>
-                <CategoryCard
-                  heading={'Um Alþingi'}
-                  text={
-                    'Upplýsingar um vinnustaðinn, ályktanir, alþjóðastarf og fræðsluefni'
-                  }
-                  href={paths.home}
-                />
-              </GridColumn>
-            </GridRow>
-          </Stack>
         </section>
       </Stack>
-    </Layout>
+    </FullWidthLayout>
   )
 }
 
@@ -400,10 +459,10 @@ interface FrontpageProps {
   title: string
 }
 
-Frontpage.getProps = async () => {
+FrontpageFullWidth.getProps = async () => {
   return {
     title: 'Alþingi',
   }
 }
 
-export default withMainLayout(Frontpage, { showFooter: false })
+export default withMainLayout(FrontpageFullWidth, { showFooter: false })

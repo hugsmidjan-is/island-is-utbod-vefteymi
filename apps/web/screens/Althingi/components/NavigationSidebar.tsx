@@ -1,18 +1,18 @@
-import {
-  Box,
-  Navigation,
-  NavigationItem,
-  ProfileCard,
-  Stack,
-  Text,
-  Link,
-} from '@island.is/island-ui/core'
-import { theme } from '@island.is/island-ui/theme'
-import { paths } from '@island.is/web/utils/mockData'
-import { useRouter } from 'next/router'
 import React from 'react'
 import { useWindowSize } from 'react-use'
 import NextLink from 'next/link'
+import { useRouter } from 'next/router'
+
+import {
+  Box,
+  Link,
+  Navigation,
+  NavigationItem,
+  Stack,
+  Text,
+} from '@island.is/island-ui/core'
+import { theme } from '@island.is/island-ui/theme'
+import { paths } from '@island.is/web/utils/mockData'
 
 interface NavigationSidebarProps {
   title?: string
@@ -27,7 +27,6 @@ const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
 }) => {
   const router = useRouter()
   const { width } = useWindowSize()
-  const isMobile = width < theme.breakpoints.md
 
   const defaultItems = [
     {
@@ -126,7 +125,7 @@ const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
           items={items ?? defaultItems}
           title={title ?? 'Efnisyfirlit'}
           activeItemTitle="ACTIVE TITLE"
-          expand
+          expandOnActivation
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-expect-error make web strict
           renderLink={(link, { href }) => {

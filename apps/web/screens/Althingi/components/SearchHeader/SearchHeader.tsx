@@ -54,6 +54,10 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ title, onSearch }) => {
                 {
                   title: 'Þingstörf',
                   href: paths.thingstorf,
+                },
+                {
+                  title: 'Þingmál',
+                  href: paths.thingmal,
                   isCurrentPage: true,
                 },
               ]}

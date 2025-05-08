@@ -38,8 +38,6 @@ const Thingstorf: Screen<ThingstorfProps> = ({ title }) => {
               {
                 title: 'Þingfundir og ræður',
                 href: paths.thingfundir,
-                accordion: true,
-
                 active: router.pathname === paths.thingfundir,
                 items: [
                   {
@@ -47,7 +45,31 @@ const Thingstorf: Screen<ThingstorfProps> = ({ title }) => {
                     href: paths.upptokur,
                     active: router.pathname === paths.upptokur,
                   },
+                  {
+                    title: 'Ræður',
+                    href: 'https://mbl.is',
+                  },
+                  {
+                    title: 'Dagskrá þingfundar',
+                    href: '/',
+                  },
+                  {
+                    title: 'Starfsáætlun Alþingis',
+                    href: '/',
+                  },
+                  {
+                    title: 'Mælendaskrá',
+                    href: '/',
+                  },
                 ],
+              },
+              {
+                title: 'Yfirlit og úttektir',
+                href: '/',
+              },
+              {
+                title: 'Tilkynningar',
+                href: '/',
               },
             ]}
           />
