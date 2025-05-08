@@ -60,6 +60,7 @@ const FullWidthLayout: React.FC<LayoutProps> = ({
           title={'Alþingi'}
           titleColor="white"
           image={image}
+          logoAltText="Alþingi logo"
           background="linear-gradient(180deg, #3D6BA2 0%, #315584 100%)"
           imagePadding="20px"
           logoHref="/s/althingi"

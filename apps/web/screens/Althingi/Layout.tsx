@@ -174,6 +174,7 @@ const Layout: React.FC<LayoutProps> = ({
       <Box>
         <DefaultHeader
           title={'Alþingi'}
+          logoAltText="Alþingi logo"
           titleColor="white"
           image={'/assets/althingi-new-logo.svg'}
           background="linear-gradient(180deg, #3D6BA2 0%, #315584 100%)"

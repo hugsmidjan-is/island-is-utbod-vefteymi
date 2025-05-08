@@ -91,7 +91,7 @@ export const DefaultHeader: React.FC<
                 justifyContent={['spaceBetween', 'spaceBetween', 'flexStart']}
                 width="full"
               >
-                <LinkWrapper href={logoHref as string}>
+                <LinkWrapper href={logoHref as string} alt="Forsíða">
                   <img
                     className={
                       logoImageClassName ? logoImageClassName : styles.logo

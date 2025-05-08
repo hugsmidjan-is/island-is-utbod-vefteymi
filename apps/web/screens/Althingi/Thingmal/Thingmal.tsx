@@ -83,6 +83,7 @@ const Thingmal: Screen<ThingmalProps> = ({ data }) => {
           background="#174C97"
           imagePadding="20px"
           logoHref="/s/althingi"
+          logoAltText='"Alþingi logo"'
           isSubpage
           logo="https://www.althingi.is/skin/basic9k/i/sitelogo-new.svg"
         />
